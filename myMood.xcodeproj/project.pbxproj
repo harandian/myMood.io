@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		40DB3C1F5F66819AEA1A7A4B /* Pods_myMoodTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 593A9845255E58BFD1AC101A /* Pods_myMoodTests.framework */; };
 		5B2209451F5F39CD00243717 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B2209441F5F39CD00243717 /* GoogleService-Info.plist */; };
+		6A5EB1531F5F626F00D1375A /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5EB1521F5F626F00D1375A /* Photo.swift */; };
 		723BC5201F5F26000022ADF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723BC51F1F5F26000022ADF8 /* AppDelegate.swift */; };
 		723BC5221F5F26000022ADF8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723BC5211F5F26000022ADF8 /* ViewController.swift */; };
 		723BC5251F5F26000022ADF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 723BC5231F5F26000022ADF8 /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		593A9845255E58BFD1AC101A /* Pods_myMoodTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_myMoodTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B2209441F5F39CD00243717 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6A5EB1521F5F626F00D1375A /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		723BC51C1F5F26000022ADF8 /* myMood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myMood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		723BC51F1F5F26000022ADF8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		723BC5211F5F26000022ADF8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			children = (
 				723BC51F1F5F26000022ADF8 /* AppDelegate.swift */,
 				723BC5211F5F26000022ADF8 /* ViewController.swift */,
+				6A5EB1521F5F626F00D1375A /* Photo.swift */,
 				723BC5231F5F26000022ADF8 /* Main.storyboard */,
 				723BC5291F5F26000022ADF8 /* Assets.xcassets */,
 				723BC52B1F5F26000022ADF8 /* LaunchScreen.storyboard */,
@@ -352,6 +355,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A5EB1531F5F626F00D1375A /* Photo.swift in Sources */,
 				723BC5221F5F26000022ADF8 /* ViewController.swift in Sources */,
 				723BC5201F5F26000022ADF8 /* AppDelegate.swift in Sources */,
 				723BC5281F5F26000022ADF8 /* myMood.xcdatamodeld in Sources */,
