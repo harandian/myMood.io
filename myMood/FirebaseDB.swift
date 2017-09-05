@@ -37,8 +37,16 @@ final class FirebaseDBController {
     
     //TODO 
     //Insert Entry
-    func insertEntry() -> Bool {
-        return true
+    func insertEntry(date:Date, description:String, listOfPhotos:[Photo], mood:Int) {
+        let dateFormatter = dateFormatter()
+        
+        
+        ref.child("Entries").child("Entry_1").updateChildValues(["Date":"Sample",
+                                                                 "Description":"Sample",
+                                                                 "ListofPhotos":"Sample",
+                                                                 "Location":"Sample",
+                                                                 "Mood":"Sample"])
+        
     }
     
     //TOOD
