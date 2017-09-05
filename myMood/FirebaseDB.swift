@@ -13,7 +13,7 @@ final class FirebaseDBController {
     var ref:DatabaseReference!
     
     //Shared instance
-    static let shared = FirebaseDB()
+    static let shared = FirebaseDBController()
     
     init() {
         ref = Database.database().reference()
@@ -38,6 +38,7 @@ final class FirebaseDBController {
     //TODO 
     //Insert Entry
     func insertEntry() -> Bool {
+        return true
     }
     
     //TOOD
