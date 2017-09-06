@@ -59,19 +59,30 @@ final class FirebaseDBController {
         let userID = Auth.auth().currentUser?.uid
         //var dict:Dictionary<String,Any>?
         ref.child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-            completion(snapshot.value as! NSDictionary)
+            if snapshot.hasChild(userID!){
+                completion(snapshot.value as! NSDictionary)
+            } else {
+                let error:NSDictionary = ["Error":"Problem Finding User's data"]
+                completion(error)
+            }
         })
     }
     
     //GET specific entry
     func getEntry(eID:String, completion: @escaping (NSDictionary) -> Void) {
-        ref.child("Entries").child(eID).observeSingleEvent(of: .value) { (snapshot) in
-            completion(snapshot.value as! NSDictionary)
-        }
+        ref.child("Entries").child(eID).observeSingleEvent(of: .value, with: { (snapshot) in
+            if snapshot.hasChild(eID) {
+                completion(snapshot.value as! NSDictionary)
+            } else {
+                let error:NSDictionary = ["Error":"Problem Finding User's data"]
+                completion(error)
+            }
+            
+        })
     }
     
     
-    //TODO  - Change to receive one entry model object
+    //TODO  - Handle Photo Objects
     //Insert Entry
     func insertEntry(entry:Entry) {
         let userId = Auth.auth().currentUser?.uid
@@ -80,7 +91,7 @@ final class FirebaseDBController {
         let date:String = DateFormatter().string(from: entry.date)
         
         //TODO  Get Photo URL
-        //Add current Photos
+        let url = entry.photo?.photoURL ?? ""
         
         
         //Change location to string
@@ -95,8 +106,8 @@ final class FirebaseDBController {
         let newRef = ref.child("Entries").childByAutoId()
         
         newRef.setValue(["Date":date,
-                         "Description":entry.description,
-                         "PhotoURL":entry.photo!.photoURL,
+                         "Description":entry.entryDescription ?? "You should write something today",
+                         "PhotoURL":url,
                          "Location":location,
                          "Mood":entry.mood])
         
@@ -114,7 +125,6 @@ final class FirebaseDBController {
     func updateEventProperty(entry:Entry) {
         //TODO - get photo URL
         
-        
         //Change location to string
         var location:String
         if let loc = entry.location {
@@ -123,7 +133,7 @@ final class FirebaseDBController {
             location = ""
         }
         
-        ref.child("Entries").child(entry.ID).updateChildValues(["Description":entry.description,
+        ref.child("Entries").child(entry.ID).updateChildValues(["Description":entry.entryDescription ?? "You should write something today",
                                                                       "PhotoURL":entry.photo!.photoURL,
                                                                       "Location":location,
                                                                       "Mood":entry.mood])

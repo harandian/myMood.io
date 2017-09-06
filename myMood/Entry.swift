@@ -13,7 +13,7 @@ import MapKit
 class Entry:NSObject {
     var ID:String
     var date:Date!
-    var descr:String?
+    var entryDescription:String?
     var photo:Photo?
     var mood:Int!
     var location:CLLocation?
@@ -21,7 +21,7 @@ class Entry:NSObject {
     init(date:Date, descr:String, photo:Photo, mood:Int, location:CLLocation) {
         self.ID = ""
         self.date = date
-        self.descr = descr
+        self.entryDescription = descr
         self.photo = photo
         self.mood = mood
         self.location = location
@@ -30,7 +30,7 @@ class Entry:NSObject {
     init(date:Date, descr:String, photo:Photo, mood:Int) {
         self.ID = ""
         self.date = date
-        self.descr = descr
+        self.entryDescription = descr
         self.photo = photo
         self.mood = mood
     }
