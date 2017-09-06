@@ -21,13 +21,14 @@ final class FirebaseDBController {
         ref = Database.database().reference()
         
         //Sample code + Firebase Setup
-        ref.child("Users").child("User_1").updateChildValues(["Name":"Sample",
+        ref.child("Users").child("User_id").updateChildValues(["Name":"Sample",
                                                               "Email":"Sample",
                                                               "Password":"Sample",
-                                                              "ListofEntries":"Sample"
+                                                              "Entries":""
             ])
+        ref.child("Users").child("User_id").child("Entries").updateChildValues(["Entry_id":"Sample"])
         
-        ref.child("Entries").child("Entry_1").updateChildValues(["Date":"Sample",
+        ref.child("Entries").child("Entry_id").updateChildValues(["Date":"Sample",
                                                                  "Description":"Sample",
                                                                  "PhotoURL":"Sample",
                                                                  "Location":"Sample",
@@ -78,7 +79,7 @@ final class FirebaseDBController {
         let entryID = newRef.key
         
         //insert entry to list of entry in user
-        ref.child("Users").child(userId!).child("ListofEntries").updateChildValues([entryID:true])
+        ref.child("Users").child(userId!).child("Entries").updateChildValues([entryID:true])
         
     }
     
