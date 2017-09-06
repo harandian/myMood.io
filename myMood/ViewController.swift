@@ -55,8 +55,12 @@ class ViewController: UIViewController {
                 print(error!)
                 return
             }
-            //            self.dismiss(animated: true, completion: nil)
-            self.navigationController?.show(ViewController(), sender: self)
+            
+//            self.dismiss(animated: true, completion: nil)
+            let sliderController = SliderMoodViewController()
+        //    self.navigationController?.show(SliderMoodViewController(), sender: self)
+            self.navigationController?.pushViewController(sliderController, animated: true)
+            print(123)
         }
     }
     
@@ -156,7 +160,7 @@ class ViewController: UIViewController {
     
     func handleLoginRegisterChange() {
         
-        let title = loginOrRegisterSegmentedControl.titleForSegment(at: loginOrRegisterSegmentedControl.selectedSegmentIndex)
+        _ = loginOrRegisterSegmentedControl.titleForSegment(at: loginOrRegisterSegmentedControl.selectedSegmentIndex)
         
         //Changing heigh of inputscontainer if we change to login
         inputsContainerViewHeightAnchor?.constant = loginOrRegisterSegmentedControl.selectedSegmentIndex == 0 ? 100 : 150
