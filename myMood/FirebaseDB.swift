@@ -26,6 +26,7 @@ final class FirebaseDBController {
                                                               "Password":"Sample",
                                                               "Entries":""
             ])
+        //TODO - Each Entry Id needs some sort of detail e.g. title, date, some sort of string
         ref.child("Users").child("User_id").child("Entries").updateChildValues(["Entry_id":"Sample"])
         
         ref.child("Entries").child("Entry_id").updateChildValues(["Date":"Sample",
@@ -52,58 +53,79 @@ final class FirebaseDBController {
         return dict!
     }
     
-    //TODO 
+    //TODO  - Change to receive one entry model object
     //Insert Entry
-    func insertEntry(date:Date, description:String, photo:Photo, mood:Int, location:CLLocation) {
+    func insertEntry(entry:Entry) {
         let userId = Auth.auth().currentUser?.uid
         
         //Date
-        let dateFormatter = DateFormatter()
-        let date:String = dateFormatter.string(from: date)
+        let date:String = DateFormatter().string(from: entry.date)
         
         //TODO  Get Photo URL
         //Add current Photos
         
+        
         //Change location to string
-        let location:String = "\(location.coordinate.latitude),\(location.coordinate.longitude)"
+        var location:String
+        if let loc = entry.location {
+            location = "\(loc.coordinate.latitude),\(loc.coordinate.longitude)"
+        } else {
+            location = ""
+        }
         
         //Auto generate entry id
         let newRef = ref.child("Entries").childByAutoId()
         
         newRef.setValue(["Date":date,
-                         "Description":description,
-                         "PhotoURL":"Sample URL",
+                         "Description":entry.description,
+                         "PhotoURL":entry.photo!.photoURL,
                          "Location":location,
-                         "Mood":mood])
+                         "Mood":entry.mood])
         
+        //Set entryID on entry Object
         let entryID = newRef.key
+        entry.ID = entryID
         
         //insert entry to list of entry in user
+        //TODO - entryID:some sort of string to represent the entry to display
         ref.child("Users").child(userId!).child("Entries").updateChildValues([entryID:true])
         
     }
     
-    //TOOD
     //Update specific properties in entry
-    func updateEventProperty() {
-        return
+    func updateEventProperty(entry:Entry) {
+        //TODO - get photo URL
+        
+        
+        //Change location to string
+        var location:String
+        if let loc = entry.location {
+            location = "\(loc.coordinate.latitude),\(loc.coordinate.longitude)"
+        } else {
+            location = ""
+        }
+        
+        ref.child("Entries").child(entry.ID).updateChildValues(["Description":entry.description,
+                                                                      "PhotoURL":entry.photo!.photoURL,
+                                                                      "Location":location,
+                                                                      "Mood":entry.mood])
     }
     
     //TODO
     //Delete Specific Entry
-    func deleteEvent() {
+    func deleteEntry() {
         
     }
     
     //TODO
-    //Insert Photo
-    func insertPhoto() {
+    //Insert Photo into Storage
+    func insertPhoto(photo:Photo) {
         
     }
     
     //TODO
     //Delete specific photo
-    func deletePhoto(){
+    func deletePhoto(entry:Entry){
         
     }
     

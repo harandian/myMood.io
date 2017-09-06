@@ -6,15 +6,16 @@
 //  Copyright © 2017 Hirad. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 class Photo: NSObject {
-    let photoOTD: UIImage
-    let photoName: String
+    var photoOTD: UIImage
+    var photoURL:String
     
-    init(photoOTD: UIImage, photoName: String) {
+    init(photoOTD: UIImage, photoURL: String) {
         self.photoOTD = photoOTD
-        self.photoName = photoName
+        self.photoURL = photoURL
     }
 
 }
