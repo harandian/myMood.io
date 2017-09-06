@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import FirebaseDatabase
-import FirebaseAuth
+import Firebase
 import MapKit
 
 final class FirebaseDBController {
@@ -26,8 +25,8 @@ final class FirebaseDBController {
                                                               "Password":"Sample",
                                                               "Entries":""
             ])
-        //TODO - Each Entry Id needs some sort of detail e.g. title, date, some sort of string
-        ref.child("Users").child("User_id").child("Entries").updateChildValues(["Entry_id":"Sample"])
+        //Each Entry Id needs some sort of detail e.g. title, date, some sort of string
+        ref.child("Users").child("User_id").child("Entries").updateChildValues(["Entry_id":"Mood"])
         
         ref.child("Entries").child("Entry_id").updateChildValues(["Date":"Sample",
                                                                  "Description":"Sample",
@@ -39,19 +38,38 @@ final class FirebaseDBController {
         //ref.child("Photos").child("Photo_1").updateChildValues(["url":"Sample"])
     }
     
-    //TODO
+    
+    /*
+ 
+     Sample code to call each function:
+     
+     FirebaseDBController.shared.getAllEntries() { result in
+        print(result) // result is the NSDictionary object
+     }
+     
+     FirebaseDBController.shared.getEntry(eID: "-KtO4g_VtnCaTZYTKD7Y") { result in
+        print(result)
+     }
+ 
+    */
+    
     //GET all data for the user
-    func getAllEntries() -> NSDictionary {
+    func getAllEntries(completion: @escaping (NSDictionary) -> Void) {
+        //Save shared variables
         let userID = Auth.auth().currentUser?.uid
-        var dict:NSDictionary?
-        ref.child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapShot) in
-            //Get user value
-            dict =  (snapShot.value as! NSDictionary)
-        }) { (error) in
-            print(error.localizedDescription)
-        }
-        return dict!
+        //var dict:Dictionary<String,Any>?
+        ref.child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+            completion(snapshot.value as! NSDictionary)
+        })
     }
+    
+    //GET specific entry
+    func getEntry(eID:String, completion: @escaping (NSDictionary) -> Void) {
+        ref.child("Entries").child(eID).observeSingleEvent(of: .value) { (snapshot) in
+            completion(snapshot.value as! NSDictionary)
+        }
+    }
+    
     
     //TODO  - Change to receive one entry model object
     //Insert Entry
@@ -87,10 +105,10 @@ final class FirebaseDBController {
         entry.ID = entryID
         
         //insert entry to list of entry in user
-        //TODO - entryID:some sort of string to represent the entry to display
-        ref.child("Users").child(userId!).child("Entries").updateChildValues([entryID:true])
+        ref.child("Users").child(userId!).child("Entries").updateChildValues([entryID:entry.mood])
         
     }
+    
     
     //Update specific properties in entry
     func updateEventProperty(entry:Entry) {
@@ -111,15 +129,15 @@ final class FirebaseDBController {
                                                                       "Mood":entry.mood])
     }
     
-    //TODO
-    //Delete Specific Entry
-    func deleteEntry() {
-        
-    }
     
     //TODO
     //Insert Photo into Storage
     func insertPhoto(photo:Photo) {
+        
+    }
+    
+    //TODO
+    func updatePhoto(entry:Entry){
         
     }
     
