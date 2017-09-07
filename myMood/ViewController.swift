@@ -83,8 +83,8 @@ class ViewController: UIViewController {
             
             //SUCCESSFULLY AUTHENTICATED USER
             let ref = Database.database().reference(fromURL:"https://mymood-io.firebaseio.com/" )
-            let usersRef = ref.child("users").child(uid)
-            let values = ["name": name, "email" :email]
+            let usersRef = ref.child("Users").child(uid)
+            let values = ["Name": name, "Email" :email]
             usersRef.updateChildValues(values, withCompletionBlock: { (err, ref) in
                 if error != nil{
                     return
