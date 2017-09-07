@@ -43,7 +43,7 @@ class testViewController: UIViewController, UITextViewDelegate {
         let words:Array = myString.components(separatedBy: .whitespaces).map { (word) -> String in
             return word.trimmingCharacters(in: .punctuationCharacters)
         }
-        let wordToIngore:Array = ["is","your", "a","i","in","to","it", "as", "on", "blah", "had", "the", "am"]
+        let wordToIngore:Array = ["is","your", "a","i","in","to","it", "as", "on", "blah", "had", "the", "am", "of"]
         let filterdWords = words.filter { (string) -> Bool in
             if wordToIngore.contains(string) {
                 return false
@@ -83,6 +83,7 @@ class testViewController: UIViewController, UITextViewDelegate {
             if tempArray.count < 5
             {
                 throwAllert(alertTitle: "Alert", alertMessage: "Please type at least 20 characters")
+                throwAllert(alertTitle: "Alert", alertMessage: "Please type at least 20 words")
                 return true
             }
             wordCloudLayout.setupLabel(word: tempArray)
