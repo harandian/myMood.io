@@ -87,6 +87,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5BD7FC421F63403B00314DA1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5B7AC8881F5F659C008A70DE /* FirebaseDB.swift */,
+				5BAAC1EE1F607C2B00A8D331 /* Entry.swift */,
+				6A5EB1521F5F626F00D1375A /* Photo.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		6A4006841F6246B00086BE7E /* Graph */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,12 +128,10 @@
 		723BC51E1F5F26000022ADF8 /* myMood */ = {
 			isa = PBXGroup;
 			children = (
-				5BAAC1EE1F607C2B00A8D331 /* Entry.swift */,
+				5BD7FC421F63403B00314DA1 /* Model */,
 				723BC51F1F5F26000022ADF8 /* AppDelegate.swift */,
 				728CF32C1F60923D0080405B /* WordCLoudGenerator */,
 				723BC5211F5F26000022ADF8 /* ViewController.swift */,
-				5B7AC8881F5F659C008A70DE /* FirebaseDB.swift */,
-				6A5EB1521F5F626F00D1375A /* Photo.swift */,
 				11A90A6D1F5F6DF1009F524F /* SliderMoodViewController.swift */,
 				723BC5231F5F26000022ADF8 /* Main.storyboard */,
 				6A4006841F6246B00086BE7E /* Graph */,
