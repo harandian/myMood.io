@@ -51,6 +51,7 @@ final class FirebaseDBController {
      FirebaseDBController.shared.getEntry(eID: "-KtO4g_VtnCaTZYTKD7Y") { result in
         print(result)
      }
+     
  
     */
     
@@ -125,8 +126,8 @@ final class FirebaseDBController {
         ref.child("Entries").child(entry.ID!).updateChildValues(properties)
     }
     
-
     //Insert & Update Photo into Storage
+    //Takes in entry containing photo
     func insertPhoto(entry:Entry) {
         let userId = Auth.auth().currentUser?.uid
         
@@ -160,7 +161,6 @@ final class FirebaseDBController {
         }
     }
 
-    //TODO
     //Delete specific photo
     func deletePhoto(entry:Entry){
         let userId = Auth.auth().currentUser?.uid
