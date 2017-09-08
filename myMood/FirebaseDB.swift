@@ -163,7 +163,15 @@ final class FirebaseDBController {
     //TODO
     //Delete specific photo
     func deletePhoto(entry:Entry){
-        
+        let userId = Auth.auth().currentUser?.uid
+        let imageRef = storage.child("Users").child(userId!).child(entry.ID!)
+        imageRef.delete { (error) in
+            if let err = error {
+                print("Error: \(err.localizedDescription)")
+            } else {
+                print("Success deleting image")
+            }
+        }
     }
     
 }
