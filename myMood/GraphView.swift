@@ -7,19 +7,60 @@
 //
 
 import UIKit
+import Foundation
 
-@IBDesignable class GraphView: UIView {
+
+class GraphView: UIView {
     
     // Hard coded values for now for plotted points
+    
     var graphPoints:[Int] = [4, 2, 6, 4, 5, 8, 3]
+    
+    // create rect property
+//    var rect: CGRect
     
 //    @IBInspectable var startColor: UIColor = UIColor.red
 //    @IBInspectable var endColor: UIColor = UIColor.green
+    
+    override init(frame: CGRect) {
+        //set rect
+//        self.rect = frame
+        super.init(frame: frame)
+
+        // TODO: Get all data from the user from FirebaseDB class
+        FirebaseDBController.shared.getAllEntries { (userMood) in
+            if let error = userMood["error"] {
+                print(error)
+                return
+            }
+            //Fix this so it becomes an array
+//            self.graphPoints = userMood["Entries"]! as! [Int]
+            
+//            print("Graphpoints \(self.graphPoints)")
+            
+            // Clear array in the beginning
+            self.graphPoints.removeAll()
+            
+            for (_, value) in userMood["Entries"] as! NSDictionary {
+                self.graphPoints.append(value as! Int)
+            }
+            
+            self.setNeedsDisplay() // This need to be redrawn
+//            print("Mood \(self.graphPoints)")
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     override func draw(_ rect: CGRect) {
         
         let width = rect.width
         let height = rect.height
+        
+        
         
         //set up background clipping area
 //        let path = UIBezierPath(roundedRect: rect,
@@ -74,8 +115,8 @@ import UIKit
         
         // Draw the line graph
         
-        UIColor.black.setFill()
-        UIColor.black.setStroke()
+        UIColor.red.setFill()
+        UIColor.red.setStroke()
         
         // Set up the points line
         let graphPath = UIBezierPath()

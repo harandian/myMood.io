@@ -87,6 +87,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A4006841F6246B00086BE7E /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				6A7912491F609C3300BFC4FE /* GraphView.swift */,
+			);
+			name = Graph;
+			sourceTree = "<group>";
+		};
 		723BC5131F5F26000022ADF8 = {
 			isa = PBXGroup;
 			children = (
@@ -116,9 +124,9 @@
 				723BC5211F5F26000022ADF8 /* ViewController.swift */,
 				5B7AC8881F5F659C008A70DE /* FirebaseDB.swift */,
 				6A5EB1521F5F626F00D1375A /* Photo.swift */,
-				6A7912491F609C3300BFC4FE /* GraphView.swift */,
 				11A90A6D1F5F6DF1009F524F /* SliderMoodViewController.swift */,
 				723BC5231F5F26000022ADF8 /* Main.storyboard */,
+				6A4006841F6246B00086BE7E /* Graph */,
 				723BC5291F5F26000022ADF8 /* Assets.xcassets */,
 				723BC52B1F5F26000022ADF8 /* LaunchScreen.storyboard */,
 				723BC52E1F5F26000022ADF8 /* Info.plist */,
