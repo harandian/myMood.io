@@ -33,7 +33,6 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         view.layer.cornerRadius = 5
 //      var upPanGesture = UIPanGestureRecognizer(target: self, action: #selector(upGesture))
 //      view.addGestureRecognizer(upPanGesture)
-//      upPanGesture.delegate = self as? UIGestureRecognizerDelegate
         return view
         
     }()
@@ -45,7 +44,6 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         view.layer.cornerRadius = 5
 //      var downPanGesture = UIPanGestureRecognizer(target: self, action: #selector(downGesture))
 //      view.addGestureRecognizer(downPanGesture)
-//      downPanGesture.delegate = self as? UIGestureRecognizerDelegate
         return view
         
     }()
@@ -167,6 +165,14 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         let detailVC = DetailViewController()
         detailVC.happinessIndex = happinessIndex
         navigationController?.pushViewController(detailVC, animated: true)
+
+//        //VIEW HEIRARCHY TO SHOW GRAPH -- CAN MOVE
+//        //        var temp = CGRect()
+//        let graphTemp:GraphView = GraphView(frame: CGRect(x: 100, y: 100, width: 200, height: 200))
+//        graphTemp.backgroundColor = .blue
+//        self.view.addSubview(graphTemp)
+//        //        graphTemp.draw()
+
     
     }
 

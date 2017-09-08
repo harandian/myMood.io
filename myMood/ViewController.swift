@@ -44,9 +44,28 @@ class ViewController: UIViewController {
         }
     }
     func handleLogin() {
-        guard let email = emailTextField.text , let password = passwordTextField.text
+        
+        guard let email = emailTextField.text , let password = passwordTextField.text, !(emailTextField.text?.isEmpty)!
             else {
                 print("form is not valid")
+                
+                // ************ REMOVE BEFORE PUSHING TO STORE **********
+                // Force login if field is empty -> save time to log in.
+                Auth.auth().signIn(withEmail: "sample@gmail.com", password: "123456") { (user: User?,  error) in
+                    
+                    if  error != nil {
+                        print(error!)
+                        return
+                    }
+                    
+                    //            self.dismiss(animated: true, completion: nil)
+                    let sliderController = SliderMoodViewController()
+                    //    self.navigationController?.show(SliderMoodViewController(), sender: self)
+                    self.navigationController?.pushViewController(sliderController, animated: true)
+                    print(123)
+                }
+                
+                
                 return
         }
         Auth.auth().signIn(withEmail: email, password: password) { (user: User?,  error) in
@@ -83,8 +102,8 @@ class ViewController: UIViewController {
             
             //SUCCESSFULLY AUTHENTICATED USER
             let ref = Database.database().reference(fromURL:"https://mymood-io.firebaseio.com/" )
-            let usersRef = ref.child("users").child(uid)
-            let values = ["name": name, "email" :email]
+            let usersRef = ref.child("Users").child(uid)
+            let values = ["Name": name, "Email" :email]
             usersRef.updateChildValues(values, withCompletionBlock: { (err, ref) in
                 if error != nil{
                     return

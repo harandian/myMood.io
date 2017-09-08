@@ -6,9 +6,45 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Test View Controller-->
+        <scene sceneID="liR-x5-dEO">
+            <objects>
+                <viewController id="kfh-pQ-h7L" customClass="testViewController" customModule="myMood" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="A5E-XN-wsh"/>
+                        <viewControllerLayoutGuide type="bottom" id="1RR-Wb-nB4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qEL-ol-bvj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OrG-8O-ap3">
+                                <rect key="frame" x="35" y="20" width="307" height="196"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OrG-8O-ap3" firstAttribute="top" secondItem="A5E-XN-wsh" secondAttribute="bottom" id="DNu-0J-Gm8"/>
+                            <constraint firstItem="OrG-8O-ap3" firstAttribute="leading" secondItem="qEL-ol-bvj" secondAttribute="leadingMargin" constant="19" id="KQZ-WT-LgB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OrG-8O-ap3" secondAttribute="trailing" constant="17" id="ep8-Ty-fuB"/>
+                            <constraint firstItem="1RR-Wb-nB4" firstAttribute="top" secondItem="OrG-8O-ap3" secondAttribute="bottom" constant="451" id="fSF-qE-Zxj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="journalText" destination="OrG-8O-ap3" id="bQm-y2-ftp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cV7-gt-cZd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="408.80000000000001" y="384.55772113943033"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
