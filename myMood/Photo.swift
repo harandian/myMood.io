@@ -10,10 +10,11 @@ import Foundation
 import UIKit
 
 class Photo: NSObject {
-    var photoURL:String
+    var photoURL:String?
+    var photoObject:UIImage
     
-    init(photoURL: String) {
-        self.photoURL = photoURL
+    init(photo: UIImage) {
+        self.photoObject = photo
     }
 
 }
