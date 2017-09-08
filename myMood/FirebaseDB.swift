@@ -6,6 +6,7 @@
 //  Copyright © 2017 Hirad. All rights reserved.
 //
 
+import UIKit
 import Foundation
 import Firebase
 import MapKit
@@ -61,8 +62,8 @@ final class FirebaseDBController {
         let userID = Auth.auth().currentUser?.uid
         //var dict:Dictionary<String,Any>?
         ref.child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-            if snapshot.hasChild(userID!){
-                completion(snapshot.value as! NSDictionary)
+            if let snapshotDict = snapshot.value as? NSDictionary, snapshot.hasChildren(){
+                completion(snapshotDict)
             } else {
                 let error:NSDictionary = ["Error":"Problem Finding User's data"]
                 completion(error)
