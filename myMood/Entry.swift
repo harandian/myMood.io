@@ -33,8 +33,8 @@ class Entry:NSObject {
         self.mood = mood
     }
     
-    init(date:Date, mood:Int){
-        self.date = date
+    init(mood:Int){
+        self.date = Date()
         self.mood = mood
     }
 }

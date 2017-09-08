@@ -90,7 +90,9 @@ final class FirebaseDBController {
         let userId = Auth.auth().currentUser?.uid
         
         //Date
-        let date:String = DateFormatter().string(from: entry.date)
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "dd.MM.yyyy"
+        let date:String = dateFormat.string(from: entry.date)
         
         //Auto generate entry id
         let newRef = ref.child("Entries").childByAutoId()
