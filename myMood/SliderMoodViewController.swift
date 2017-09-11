@@ -31,8 +31,6 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         view.backgroundColor = UIColor.green
         view.isUserInteractionEnabled = true
         view.layer.cornerRadius = 5
-//      var upPanGesture = UIPanGestureRecognizer(target: self, action: #selector(upGesture))
-//      view.addGestureRecognizer(upPanGesture)
         return view
         
     }()
@@ -42,8 +40,6 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         view.backgroundColor = UIColor.blue
         view.isUserInteractionEnabled = true
         view.layer.cornerRadius = 5
-//      var downPanGesture = UIPanGestureRecognizer(target: self, action: #selector(downGesture))
-//      view.addGestureRecognizer(downPanGesture)
         return view
         
     }()
@@ -69,11 +65,15 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         view.addSubview(containerView)
         view.addSubview(saveButton)
         
-        makeCoolSlider()
+        let swipe = UIPanGestureRecognizer(target: self, action: #selector(panGesture))
+        containerView.addGestureRecognizer(swipe)
+        
         containerViewContraints()
         topColoredViewConstraints()
         bottomColoredViewConstraints()
         setButtonConstraints()
+        
+        self.view.backgroundColor = UIColor.white
         
     }
     
@@ -81,22 +81,6 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     var containerViewHeight : NSLayoutConstraint?
     var topViewHeightConstraint : NSLayoutConstraint?
     var bottomViewHeightContraint: NSLayoutConstraint?
-  
-
-    
-    func makeCoolSlider() {
-        let frame = CGRect(x: 125, y: view.center.y/2, width: view.bounds.width-20, height: (view.bounds.height-100)/2)
-        let moodSlider = UISlider(frame: frame)
-        view.addSubview(moodSlider)
-        view.backgroundColor = UIColor.white
-        moodSlider.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
-        moodSlider.minimumValue = 0
-        moodSlider.maximumValue = 100
-        moodSlider.value = 50
-        moodSlider.minimumTrackTintColor = UIColor.gray
-        moodSlider.maximumTrackTintColor = UIColor.gray
-        moodSlider.addTarget(self, action: #selector(SliderMoodViewController.sliderValueDidChange(_:)), for: .valueChanged)
-    }
 
 
     func containerViewContraints(){
@@ -138,28 +122,6 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         
     }
     
-// SLIDER VALUE CHANGED 
-    
-    func sliderValueDidChange(_ sender:UISlider!) {
-        let roundedStepValue = round(sender.value / step) * step
-         sender.value = roundedStepValue
-       
-        if sender.value > 50 {
-            topViewHeightConstraint?.constant = CGFloat(sender.value)*((containerViewHeight?.constant)!/100) - (containerViewHeight?.constant)!/2
-            topColoredView.setNeedsDisplay()
-        }
-        else if sender.value < 50 {
-            bottomViewHeightContraint?.constant = (containerViewHeight?.constant)!/2 - CGFloat(sender.value)*((containerViewHeight?.constant)!/100)
-            bottomColoredView.setNeedsDisplay()
-        }
-        
-        else if sender.value == 50 {
-            bottomViewHeightContraint?.constant  = 0
-            topViewHeightConstraint?.constant = 0
-        }
-        print("Slider step value \(Int(roundedStepValue))")
-        happinessIndex = sender.value
-    }
 
     func saveButtonPressed () {
         let detailVC = DetailViewController()
@@ -176,18 +138,36 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     
     }
 
-//    
-//// GESTURE RECGONIZERS 
-//    
-//    func upGesture (sender: UIPanGestureRecognizer) {
-//
-//        
-//    }
-//    
-//    func downGesture (sender: UIPanGestureRecognizer) {
-//        
-//        
-//    }
-//    
+    
+// GESTURE RECGONIZERS 
+    
+    func panGesture (sender: UIPanGestureRecognizer) {
+        let velocity:CGPoint = sender.velocity(in: containerView)
+        
+        let translationInView = sender.translation(in: containerView)
+        let yHeight = abs(translationInView.y)
+        
+        //If movement is too much
+        if (yHeight > 70) {return}
+        
+        if velocity.y > 0{
+            print("Swipe down")
+            if ((bottomViewHeightContraint?.constant)! <= containerView.frame.height/2){
+                bottomViewHeightContraint?.constant += yHeight
+                topViewHeightConstraint?.constant -= yHeight
+            }
+        } else {
+            print ("Swipe up")
+            if ((topViewHeightConstraint?.constant)! <= containerView.frame.height/2){
+                topViewHeightConstraint?.constant += yHeight
+                bottomViewHeightContraint?.constant -= yHeight
+            }
+        }
+        sender.setTranslation(CGPoint.zero, in: containerView)
+        
+        //TODO - GET THE VALUE OF THE MEASUREMENT
+    }
+    
+    
 
 }
