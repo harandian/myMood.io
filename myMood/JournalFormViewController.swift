@@ -9,9 +9,13 @@
 import UIKit
 
 class JournalFormViewController: UIViewController {
+    
+      var journalTextEntryView = Bundle.main.loadNibNamed("textEntry", owner: nil, options: nil)?.first! as! TextEntry
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewSetup()
 
         // Do any additional setup after loading the view.
         
@@ -21,6 +25,17 @@ class JournalFormViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func viewSetup()  {
+        view.addSubview(journalTextEntryView)
+        journalTextEntryView.translatesAutoresizingMaskIntoConstraints = false
+        journalTextEntryView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        journalTextEntryView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        journalTextEntryView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 5).isActive = true
+        journalTextEntryView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        journalTextEntryView.labelHeaderSetup()
+
     }
     
 
