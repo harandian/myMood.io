@@ -11,10 +11,16 @@ import MapKit
 import CoreLocation
 import UIKit
 
+protocol MapControllerDelegate {
+    func updateEventWithLocation(location: CLLocation)
+}
+
 class MapController:UIView, CLLocationManagerDelegate{
     
     @IBOutlet weak var mapView: MKMapView!
     let manager = CLLocationManager()
+    
+    let delegate:MapControllerDelegate?
     
     //Setup pin onto map and zoom
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -29,6 +35,7 @@ class MapController:UIView, CLLocationManagerDelegate{
         let annotation = MKPointAnnotation()
         annotation.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude:  location.coordinate.longitude)
         mapView.addAnnotation(annotation)
+        updateEventWithLocation(location)
     }
     
     
@@ -52,4 +59,5 @@ class MapController:UIView, CLLocationManagerDelegate{
         manager.startUpdatingLocation()
     }
     
+    //SEND LOCATION TO EVENT
 }
