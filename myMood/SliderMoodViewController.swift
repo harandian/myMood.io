@@ -68,6 +68,9 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         let swipe = UIPanGestureRecognizer(target: self, action: #selector(panGesture))
         containerView.addGestureRecognizer(swipe)
         
+        let touch = UITapGestureRecognizer(target: self, action: #selector(touchGesture))
+        containerView.addGestureRecognizer(touch)
+        
         containerViewContraints()
         topColoredViewConstraints()
         bottomColoredViewConstraints()
@@ -147,25 +150,52 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         let translationInView = sender.translation(in: containerView)
         let yHeight = abs(translationInView.y)
         
-        //If movement is too much
-        if (yHeight > 70) {return}
         
-        //Swipe Down
-        if velocity.y > 0{
-            if ((bottomViewHeightContraint?.constant)! <= containerView.frame.height/2){
-                bottomViewHeightContraint?.constant += yHeight
-                topViewHeightConstraint?.constant -= yHeight
+        let tapLocation:CGFloat = sender.location(in: containerView).y
+        
+//        //If movement is too much
+//        if (yHeight > 70) {return}
+//        
+//        //Swipe Down
+//        if velocity.y > 0{
+//            if ((bottomViewHeightContraint?.constant)! <= containerView.frame.height/2){
+//                bottomViewHeightContraint?.constant += yHeight
+//                topViewHeightConstraint?.constant -= yHeight
+//            }
+//        } else {
+//            //Swipe Up
+//            if ((topViewHeightConstraint?.constant)! <= containerView.frame.height/2){
+//                topViewHeightConstraint?.constant += yHeight
+//                bottomViewHeightContraint?.constant -= yHeight
+//            }
+//        }
+        
+        //Bottom Section
+        if tapLocation > containerView.frame.size.height/2 {
+            topViewHeightConstraint?.constant = 0
+            if (bottomViewHeightContraint?.constant)! <= containerView.frame.height/2 {
+                bottomViewHeightContraint?.constant = abs(tapLocation - (containerView.frame.size.height/2))
             }
         } else {
-            //Swipe Up
-            if ((topViewHeightConstraint?.constant)! <= containerView.frame.height/2){
-                topViewHeightConstraint?.constant += yHeight
-                bottomViewHeightContraint?.constant -= yHeight
+            //Top Section
+            bottomViewHeightContraint?.constant = 0
+             if ((topViewHeightConstraint?.constant)! <= containerView.frame.height/2){
+                topViewHeightConstraint?.constant = abs(tapLocation - (containerView.frame.size.height/2))
+             } else {
+                topViewHeightConstraint?.constant = containerView.frame.size.height/2
             }
         }
-        sender.setTranslation(CGPoint.zero, in: containerView)
         
-        //TODO - GET THE VALUE OF THE MEASUREMENT
+        if (bottomViewHeightContraint?.constant)! > containerView.frame.height/2 {
+            bottomViewHeightContraint?.constant = containerView.frame.size.height/2
+        }
+        
+        if (topViewHeightConstraint?.constant)! > containerView.frame.height/2 {
+            topViewHeightConstraint?.constant = containerView.frame.size.height/2
+        }
+        
+
+        //TODO - GET THE VALUE OF THE MEASUREMENT - DEPENDENT ON HEIGHT OF RECTANGLE
         // Range is -10 -> 10
         let point:CGPoint = sender.location(in: containerView)
         let percentage:CGFloat = point.y/containerView.frame.height
@@ -176,7 +206,22 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
             value = -10
         }
         print (Int(value))
+    }
+    
+    
+    func touchGesture(sender: UITapGestureRecognizer)  {
+        print ("Tap here \(sender.location(in: containerView))")
+        let tapLocation:CGFloat = sender.location(in: containerView).y
         
+            //Bottom Section
+        if tapLocation > containerView.frame.size.height/2 {
+            topViewHeightConstraint?.constant = 0
+            bottomViewHeightContraint?.constant = abs(tapLocation - (containerView.frame.size.height/2))
+        } else {
+            //Top Section
+            bottomViewHeightContraint?.constant = 0
+            topViewHeightConstraint?.constant = abs(tapLocation - (containerView.frame.size.height/2))
+        }
     }
     
     
