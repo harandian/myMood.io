@@ -150,14 +150,14 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         //If movement is too much
         if (yHeight > 70) {return}
         
+        //Swipe Down
         if velocity.y > 0{
-            print("Swipe down")
             if ((bottomViewHeightContraint?.constant)! <= containerView.frame.height/2){
                 bottomViewHeightContraint?.constant += yHeight
                 topViewHeightConstraint?.constant -= yHeight
             }
         } else {
-            print ("Swipe up")
+            //Swipe Up
             if ((topViewHeightConstraint?.constant)! <= containerView.frame.height/2){
                 topViewHeightConstraint?.constant += yHeight
                 bottomViewHeightContraint?.constant -= yHeight
@@ -166,6 +166,17 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         sender.setTranslation(CGPoint.zero, in: containerView)
         
         //TODO - GET THE VALUE OF THE MEASUREMENT
+        // Range is -10 -> 10
+        let point:CGPoint = sender.location(in: containerView)
+        let percentage:CGFloat = point.y/containerView.frame.height
+        var value:CGFloat = -1*((21.0 * percentage)-10.0)
+        if (value > 10 ) {
+            value = 10
+        } else if(value < -10) {
+            value = -10
+        }
+        print (Int(value))
+        
     }
     
     
