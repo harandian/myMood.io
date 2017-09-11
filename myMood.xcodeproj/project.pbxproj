@@ -22,6 +22,7 @@
 		723BC52A1F5F26000022ADF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 723BC5291F5F26000022ADF8 /* Assets.xcassets */; };
 		723BC52D1F5F26000022ADF8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 723BC52B1F5F26000022ADF8 /* LaunchScreen.storyboard */; };
 		723BC5381F5F26000022ADF8 /* myMoodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723BC5371F5F26000022ADF8 /* myMoodTests.swift */; };
+		725C2DD61F6731C600FC279E /* JournalFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725C2DD51F6731C600FC279E /* JournalFormViewController.swift */; };
 		728CF3321F6094B50080405B /* wordCloudLayout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 728CF3311F6094B50080405B /* wordCloudLayout.xib */; };
 		728CF3341F60986F0080405B /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CF3331F60986F0080405B /* testViewController.swift */; };
 		72FD94191F61D0F400391818 /* wordCloudLayoutGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CF32F1F60941F0080405B /* wordCloudLayoutGenerator.swift */; };
@@ -59,6 +60,7 @@
 		723BC5331F5F26000022ADF8 /* myMoodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = myMoodTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		723BC5371F5F26000022ADF8 /* myMoodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myMoodTests.swift; sourceTree = "<group>"; };
 		723BC5391F5F26010022ADF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		725C2DD51F6731C600FC279E /* JournalFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalFormViewController.swift; sourceTree = "<group>"; };
 		728CF32D1F6093DD0080405B /* wordCloudViewGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wordCloudViewGenerator.swift; sourceTree = "<group>"; };
 		728CF32F1F60941F0080405B /* wordCloudLayoutGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wordCloudLayoutGenerator.swift; sourceTree = "<group>"; };
 		728CF3311F6094B50080405B /* wordCloudLayout.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = wordCloudLayout.xib; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				11A90A6D1F5F6DF1009F524F /* SliderMoodViewController.swift */,
 				11A90A6F1F61FD0C009F524F /* DetailViewController.swift */,
 				723BC5231F5F26000022ADF8 /* Main.storyboard */,
+				725C2DD51F6731C600FC279E /* JournalFormViewController.swift */,
 				6A4006841F6246B00086BE7E /* Graph */,
 				723BC5291F5F26000022ADF8 /* Assets.xcassets */,
 				723BC52B1F5F26000022ADF8 /* LaunchScreen.storyboard */,
@@ -411,6 +414,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				725C2DD61F6731C600FC279E /* JournalFormViewController.swift in Sources */,
 				11A90A781F634CBE009F524F /* DetailViewController.swift in Sources */,
 				5BAAC1EF1F607C2B00A8D331 /* Entry.swift in Sources */,
 				6A5EB1531F5F626F00D1375A /* Photo.swift in Sources */,

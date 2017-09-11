@@ -64,10 +64,10 @@
             </objects>
             <point key="canvasLocation" x="1546" y="123"/>
         </scene>
-        <!--Login View Controller-->
+        <!--Slider Mood View Controller-->
         <scene sceneID="Quz-HM-7TZ">
             <objects>
-                <viewController id="vf6-6d-7wp" customClass="LoginViewController" customModule="myMood" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vf6-6d-7wp" customClass="SliderMoodViewController" customModule="myMood" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="T9w-Dn-uXk"/>
                         <viewControllerLayoutGuide type="bottom" id="Vnq-O9-Ufr"/>
@@ -77,10 +77,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="VF4-cc-Qjc" kind="show" identifier="" id="MMS-w0-iYn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fVQ-h6-sjK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2423" y="123"/>
+            <point key="canvasLocation" x="2466" y="123"/>
+        </scene>
+        <!--Journal Form View Controller-->
+        <scene sceneID="zMD-Y9-8Oh">
+            <objects>
+                <viewController id="VF4-cc-Qjc" customClass="JournalFormViewController" customModule="myMood" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="U8M-YS-jzw"/>
+                        <viewControllerLayoutGuide type="bottom" id="JHY-fE-yTL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rQp-MR-iQF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="65H-Xj-yMm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3375" y="123"/>
         </scene>
     </scenes>
 </document>
