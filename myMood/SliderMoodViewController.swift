@@ -222,6 +222,18 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
             bottomViewHeightContraint?.constant = 0
             topViewHeightConstraint?.constant = abs(tapLocation - (containerView.frame.size.height/2))
         }
+        
+        
+        let point:CGPoint = sender.location(in: containerView)
+        let percentage:CGFloat = point.y/containerView.frame.height
+        var value:CGFloat = -1*((21.0 * percentage)-10.0)
+        if (value > 10 ) {
+            value = 10
+        } else if(value < -10) {
+            value = -10
+        }
+        
+        print (Int(value))
     }
     
     
