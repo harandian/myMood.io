@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Test View Controller-->
+        <!--Graph View Controller-->
         <scene sceneID="liR-x5-dEO">
             <objects>
-                <viewController id="kfh-pQ-h7L" customClass="testViewController" customModule="myMood" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="kfh-pQ-h7L" customClass="GraphViewController" customModule="myMood" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="A5E-XN-wsh"/>
                         <viewControllerLayoutGuide type="bottom" id="1RR-Wb-nB4"/>
