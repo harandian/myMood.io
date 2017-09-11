@@ -12,7 +12,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
 
     let step = Float(10)
     
-    var happinessIndex: Float = 0.0
+    var happinessIndex: Int  = 0
     
     
     let containerView : UIView = {
@@ -127,48 +127,17 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     
 
     func saveButtonPressed () {
-        let detailVC = DetailViewController()
-        detailVC.happinessIndex = happinessIndex
-        navigationController?.pushViewController(detailVC, animated: true)
-
-//        //VIEW HEIRARCHY TO SHOW GRAPH -- CAN MOVE
-//        //        var temp = CGRect()
-//        let graphTemp:GraphView = GraphView(frame: CGRect(x: 100, y: 100, width: 200, height: 200))
-//        graphTemp.backgroundColor = .blue
-//        self.view.addSubview(graphTemp)
-//        //        graphTemp.draw()
-
-    
+//        let detailVC = DetailViewController()
+//        detailVC.happinessIndex = happinessIndex
+//        navigationController?.pushViewController(detailVC, animated: true)
     }
 
     
 // GESTURE RECGONIZERS 
     
     func panGesture (sender: UIPanGestureRecognizer) {
-        let velocity:CGPoint = sender.velocity(in: containerView)
-        
-        let translationInView = sender.translation(in: containerView)
-        let yHeight = abs(translationInView.y)
-        
-        
         let tapLocation:CGFloat = sender.location(in: containerView).y
-        
-//        //If movement is too much
-//        if (yHeight > 70) {return}
-//        
-//        //Swipe Down
-//        if velocity.y > 0{
-//            if ((bottomViewHeightContraint?.constant)! <= containerView.frame.height/2){
-//                bottomViewHeightContraint?.constant += yHeight
-//                topViewHeightConstraint?.constant -= yHeight
-//            }
-//        } else {
-//            //Swipe Up
-//            if ((topViewHeightConstraint?.constant)! <= containerView.frame.height/2){
-//                topViewHeightConstraint?.constant += yHeight
-//                bottomViewHeightContraint?.constant -= yHeight
-//            }
-//        }
+
         
         //Bottom Section
         if tapLocation > containerView.frame.size.height/2 {
@@ -205,7 +174,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         } else if(value < -10) {
             value = -10
         }
-        print (Int(value))
+        happinessIndex = Int(value)
     }
     
     
@@ -232,8 +201,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         } else if(value < -10) {
             value = -10
         }
-        
-        print (Int(value))
+        happinessIndex = Int(value)
     }
     
     
