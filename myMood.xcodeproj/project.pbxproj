@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		11A90A6E1F5F6DF1009F524F /* SliderMoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A90A6D1F5F6DF1009F524F /* SliderMoodViewController.swift */; };
-		11A90A781F634CBE009F524F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A90A771F634CBE009F524F /* DetailViewController.swift */; };
 		40DB3C1F5F66819AEA1A7A4B /* Pods_myMoodTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 593A9845255E58BFD1AC101A /* Pods_myMoodTests.framework */; };
 		5B2209451F5F39CD00243717 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B2209441F5F39CD00243717 /* GoogleService-Info.plist */; };
 		5B7AC8891F5F659C008A70DE /* FirebaseDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7AC8881F5F659C008A70DE /* FirebaseDB.swift */; };
 		5BAAC1EF1F607C2B00A8D331 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAAC1EE1F607C2B00A8D331 /* Entry.swift */; };
+		5BE217F01F6724C40009A050 /* map.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE217EF1F6724C40009A050 /* map.xib */; };
+		5BE217F51F6727720009A050 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE217F41F6727720009A050 /* MapController.swift */; };
+		5BE217F91F6728F60009A050 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BE217F81F6728F60009A050 /* MapKit.framework */; };
+		5BE217FC1F672D370009A050 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A90A771F634CBE009F524F /* DetailViewController.swift */; };
 		6A5EB1531F5F626F00D1375A /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5EB1521F5F626F00D1375A /* Photo.swift */; };
 		6A79124A1F609C3300BFC4FE /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7912491F609C3300BFC4FE /* GraphView.swift */; };
 		723BC5201F5F26000022ADF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723BC51F1F5F26000022ADF8 /* AppDelegate.swift */; };
@@ -40,12 +43,14 @@
 
 /* Begin PBXFileReference section */
 		11A90A6D1F5F6DF1009F524F /* SliderMoodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderMoodViewController.swift; sourceTree = "<group>"; };
-		11A90A6F1F61FD0C009F524F /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		11A90A771F634CBE009F524F /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		593A9845255E58BFD1AC101A /* Pods_myMoodTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_myMoodTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B2209441F5F39CD00243717 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5B7AC8881F5F659C008A70DE /* FirebaseDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDB.swift; sourceTree = "<group>"; };
 		5BAAC1EE1F607C2B00A8D331 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
+		5BE217EF1F6724C40009A050 /* map.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = map.xib; sourceTree = "<group>"; };
+		5BE217F41F6727720009A050 /* MapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
+		5BE217F81F6728F60009A050 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		6A5EB1521F5F626F00D1375A /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		6A7912491F609C3300BFC4FE /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		723BC51C1F5F26000022ADF8 /* myMood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myMood.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BE217F91F6728F60009A050 /* MapKit.framework in Frameworks */,
 				AD6E0D3EFC8C1A2D118383BA /* Pods_myMood.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -98,6 +104,15 @@
 				6A5EB1521F5F626F00D1375A /* Photo.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		5BE217F11F6724E50009A050 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				5BE217EF1F6724C40009A050 /* map.xib */,
+				5BE217F41F6727720009A050 /* MapController.swift */,
+			);
+			name = Map;
 			sourceTree = "<group>";
 		};
 		6A4006841F6246B00086BE7E /* Graph */ = {
@@ -131,15 +146,15 @@
 		723BC51E1F5F26000022ADF8 /* myMood */ = {
 			isa = PBXGroup;
 			children = (
+				5BE217F11F6724E50009A050 /* Map */,
+				728CF32C1F60923D0080405B /* WordCLoudGenerator */,
+				6A4006841F6246B00086BE7E /* Graph */,
 				5BD7FC421F63403B00314DA1 /* Model */,
 				723BC51F1F5F26000022ADF8 /* AppDelegate.swift */,
-				728CF32C1F60923D0080405B /* WordCLoudGenerator */,
 				723BC5211F5F26000022ADF8 /* ViewController.swift */,
 				11A90A771F634CBE009F524F /* DetailViewController.swift */,
 				11A90A6D1F5F6DF1009F524F /* SliderMoodViewController.swift */,
-				11A90A6F1F61FD0C009F524F /* DetailViewController.swift */,
 				723BC5231F5F26000022ADF8 /* Main.storyboard */,
-				6A4006841F6246B00086BE7E /* Graph */,
 				723BC5291F5F26000022ADF8 /* Assets.xcassets */,
 				723BC52B1F5F26000022ADF8 /* LaunchScreen.storyboard */,
 				723BC52E1F5F26000022ADF8 /* Info.plist */,
@@ -183,6 +198,7 @@
 		86E2163A42E5653EFA5D20E5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5BE217F81F6728F60009A050 /* MapKit.framework */,
 				BBB96DE7F5F63C268553E4F0 /* Pods_myMood.framework */,
 				593A9845255E58BFD1AC101A /* Pods_myMoodTests.framework */,
 			);
@@ -246,6 +262,14 @@
 					723BC51B1F5F26000022ADF8 = {
 						CreatedOnToolsVersion = 8.3.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					723BC5321F5F26000022ADF8 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -279,6 +303,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BE217F01F6724C40009A050 /* map.xib in Resources */,
 				723BC52D1F5F26000022ADF8 /* LaunchScreen.storyboard in Resources */,
 				728CF3321F6094B50080405B /* wordCloudLayout.xib in Resources */,
 				5B2209451F5F39CD00243717 /* GoogleService-Info.plist in Resources */,
@@ -411,10 +436,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11A90A781F634CBE009F524F /* DetailViewController.swift in Sources */,
+				5BE217FC1F672D370009A050 /* DetailViewController.swift in Sources */,
 				5BAAC1EF1F607C2B00A8D331 /* Entry.swift in Sources */,
 				6A5EB1531F5F626F00D1375A /* Photo.swift in Sources */,
 				728CF3341F60986F0080405B /* testViewController.swift in Sources */,
+				5BE217F51F6727720009A050 /* MapController.swift in Sources */,
 				723BC5221F5F26000022ADF8 /* ViewController.swift in Sources */,
 				6A79124A1F609C3300BFC4FE /* GraphView.swift in Sources */,
 				11A90A6E1F5F6DF1009F524F /* SliderMoodViewController.swift in Sources */,
@@ -566,7 +592,7 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = myMood/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Hirad.myMood;
+				PRODUCT_BUNDLE_IDENTIFIER = io.mymood;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -580,7 +606,7 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = myMood/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Hirad.myMood;
+				PRODUCT_BUNDLE_IDENTIFIER = io.mymood;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
