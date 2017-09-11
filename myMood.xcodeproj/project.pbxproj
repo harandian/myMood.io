@@ -16,7 +16,7 @@
 		6A5EB1531F5F626F00D1375A /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5EB1521F5F626F00D1375A /* Photo.swift */; };
 		6A79124A1F609C3300BFC4FE /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7912491F609C3300BFC4FE /* GraphView.swift */; };
 		723BC5201F5F26000022ADF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723BC51F1F5F26000022ADF8 /* AppDelegate.swift */; };
-		723BC5221F5F26000022ADF8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723BC5211F5F26000022ADF8 /* ViewController.swift */; };
+		723BC5221F5F26000022ADF8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723BC5211F5F26000022ADF8 /* LoginViewController.swift */; };
 		723BC5251F5F26000022ADF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 723BC5231F5F26000022ADF8 /* Main.storyboard */; };
 		723BC5281F5F26000022ADF8 /* myMood.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 723BC5261F5F26000022ADF8 /* myMood.xcdatamodeld */; };
 		723BC52A1F5F26000022ADF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 723BC5291F5F26000022ADF8 /* Assets.xcassets */; };
@@ -50,7 +50,7 @@
 		6A7912491F609C3300BFC4FE /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		723BC51C1F5F26000022ADF8 /* myMood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myMood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		723BC51F1F5F26000022ADF8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		723BC5211F5F26000022ADF8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		723BC5211F5F26000022ADF8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		723BC5241F5F26000022ADF8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		723BC5271F5F26000022ADF8 /* myMood.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = myMood.xcdatamodel; sourceTree = "<group>"; };
 		723BC5291F5F26000022ADF8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 				5BD7FC421F63403B00314DA1 /* Model */,
 				723BC51F1F5F26000022ADF8 /* AppDelegate.swift */,
 				728CF32C1F60923D0080405B /* WordCLoudGenerator */,
-				723BC5211F5F26000022ADF8 /* ViewController.swift */,
+				723BC5211F5F26000022ADF8 /* LoginViewController.swift */,
 				11A90A771F634CBE009F524F /* DetailViewController.swift */,
 				11A90A6D1F5F6DF1009F524F /* SliderMoodViewController.swift */,
 				11A90A6F1F61FD0C009F524F /* DetailViewController.swift */,
@@ -415,7 +415,7 @@
 				5BAAC1EF1F607C2B00A8D331 /* Entry.swift in Sources */,
 				6A5EB1531F5F626F00D1375A /* Photo.swift in Sources */,
 				728CF3341F60986F0080405B /* testViewController.swift in Sources */,
-				723BC5221F5F26000022ADF8 /* ViewController.swift in Sources */,
+				723BC5221F5F26000022ADF8 /* LoginViewController.swift in Sources */,
 				6A79124A1F609C3300BFC4FE /* GraphView.swift in Sources */,
 				11A90A6E1F5F6DF1009F524F /* SliderMoodViewController.swift in Sources */,
 				723BC5201F5F26000022ADF8 /* AppDelegate.swift in Sources */,
