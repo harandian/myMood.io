@@ -10,7 +10,7 @@ import UIKit
 
 class BarGraphView: UIView {
     
-    var graphArray: [(height: CGFloat, color: UIColor)] = [(height: CGFloat, color: UIColor)]()
+    var graphArray: [CGFloat] = []
     
     var centerY: CGFloat = 0.0
     
@@ -22,13 +22,13 @@ class BarGraphView: UIView {
     override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
         FirebaseDBController.shared.getAllEntries {entries in
-            for bars in entries ["Entries"] as! NSDictionary {
-                let tuple = (height: bars.value as! CGFloat, color: UIColor.red)
-                self.graphArray.append(tuple)
+            for bars in entries.value(forKey: "Entries") as! Dictionary<String, Int>
+            {
+                self.graphArray.append(CGFloat(bars.value))
             }
             self.setNeedsDisplay()
         }
-        //self.view.addSubview(lineGraphView)
+       // self.graphArray = [4,5,6,7,-10,-9,-8,-7,-6]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,37 +42,37 @@ class BarGraphView: UIView {
         //TODO - range is -10 to 10 = 21 values
         
         for barItems in graphArray {
-            addGraph(height: CGFloat(barItems.height), wColor: barItems.color)
+            addGraph(height: barItems )
         }  
         
     }
     
-    func addGraph(height:CGFloat, wColor:UIColor) {
+    func addGraph(height:CGFloat) {
         // Draws next bar
-        let nextXOrigin = CGFloat(self.subviews.count - 2) * chartWidth
+        let nextXOrigin = CGFloat(self.subviews.count+1) * chartWidth
         
         //Mid point - line in middle
-        let heightFrame = self.frame.size.height / 2
-        let normalizedHeight: CGFloat = (height / 100 * heightFrame)
+        let heightFrame:CGFloat = self.frame.size.height / 2
+
+        let normalizedHeight = (height / 10) * heightFrame
+  
+        let graphButton: UIButton = UIButton()
+        graphButton.backgroundColor = UIColor.green
+        graphButton.frame = CGRect(x: 0, y: 0, width: chartWidth, height: normalizedHeight)
         
-        let graphButton: UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: chartWidth, height: normalizedHeight))
-        graphButton.backgroundColor = wColor
-        graphButton.frame.size = CGSize(width: graphButton.frame.size.width - chartMargin, height: graphButton.frame.size.height)
-        
-        graphButton.setTitle("\(height)", for: UIControlState.normal)
+        graphButton.setTitle("\(Int(height))", for: UIControlState.normal)
         
         //graphButton.addTarget(self, action: #selector(clickAction(_:)), for: UIControlEvents.touchUpInside)
         
-        //graphArray.add(graphButton)
-        
+        //Change the Y position
         var centY: CGFloat!
-        if (wColor == UIColor.green) {
-            centY = centerY - (graphButton.frame.size.height/2)
+        if (height < 0) {
+            centY = centerY + (graphButton.frame.size.height/2)
         } else {
-            centY = centerY + (graphButton.frame.size.height / 2)
+            centY = centerY - (graphButton.frame.size.height / 2)
         }
         
-        let center: CGPoint = CGPoint(x: nextXOrigin, y: centY)
+        let center: CGPoint = CGPoint(x: nextXOrigin, y: centY+(self.frame.size.height/2))
         graphButton.center = center
         
         self.addSubview(graphButton)
