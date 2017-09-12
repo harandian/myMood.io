@@ -1,9 +1,7 @@
 import UIKit
 
-class DetailViewController: UIViewController, UIImagePickerControllerDelegate , UINavigationControllerDelegate {
-    
-    var happinessIndex : Float = 0.0
-    
+class ImagePicker: UIViewController, UIImagePickerControllerDelegate , UINavigationControllerDelegate {
+ 
     let addImageButton : UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor.darkGray
