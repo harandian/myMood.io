@@ -18,6 +18,7 @@ class DetailViewController: UIViewController {
         view.backgroundColor = UIColor.lightGray
         navigationController?.setNavigationBarHidden(false, animated: true)
         
+        
     }
 
 }

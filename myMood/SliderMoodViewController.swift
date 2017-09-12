@@ -78,6 +78,9 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         
         self.view.backgroundColor = UIColor.white
         
+        var graphView = Bundle.main.loadNibNamed("GraphView", owner: nil, options: nil)?.first! as! UIView
+        self.view.addSubview(graphView)
+        
     }
     
     

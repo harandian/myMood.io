@@ -15,7 +15,6 @@
 		5BAAC1EF1F607C2B00A8D331 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAAC1EE1F607C2B00A8D331 /* Entry.swift */; };
 		6A330BFC1F63293600D8906B /* GraphView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A330BFB1F63293600D8906B /* GraphView.xib */; };
 		6A330BFE1F6329A100D8906B /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A330BFD1F6329A100D8906B /* GraphViewController.swift */; };
-		6A330C001F63486E00D8906B /* GraphCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A330BFF1F63486E00D8906B /* GraphCollectionViewCell.swift */; };
 		6A5EB1531F5F626F00D1375A /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5EB1521F5F626F00D1375A /* Photo.swift */; };
 		6A79124A1F609C3300BFC4FE /* LineGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7912491F609C3300BFC4FE /* LineGraphView.swift */; };
 		6A9A83311F673EDC0018AB7F /* BarGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9A83301F673EDB0018AB7F /* BarGraphView.swift */; };
@@ -52,7 +51,6 @@
 		5BAAC1EE1F607C2B00A8D331 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		6A330BFB1F63293600D8906B /* GraphView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GraphView.xib; sourceTree = "<group>"; };
 		6A330BFD1F6329A100D8906B /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
-		6A330BFF1F63486E00D8906B /* GraphCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A5EB1521F5F626F00D1375A /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		6A7912491F609C3300BFC4FE /* LineGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineGraphView.swift; sourceTree = "<group>"; };
 		6A9A83301F673EDB0018AB7F /* BarGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarGraphView.swift; sourceTree = "<group>"; };
@@ -113,7 +111,6 @@
 			children = (
 				6A7912491F609C3300BFC4FE /* LineGraphView.swift */,
 				6A9A83301F673EDB0018AB7F /* BarGraphView.swift */,
-				6A330BFF1F63486E00D8906B /* GraphCollectionViewCell.swift */,
 				6A330BFB1F63293600D8906B /* GraphView.xib */,
 				6A330BFD1F6329A100D8906B /* GraphViewController.swift */,
 			);
@@ -426,7 +423,6 @@
 			files = (
 				11A90A781F634CBE009F524F /* DetailViewController.swift in Sources */,
 				5BAAC1EF1F607C2B00A8D331 /* Entry.swift in Sources */,
-				6A330C001F63486E00D8906B /* GraphCollectionViewCell.swift in Sources */,
 				6A5EB1531F5F626F00D1375A /* Photo.swift in Sources */,
 				728CF3341F60986F0080405B /* testViewController.swift in Sources */,
 				723BC5221F5F26000022ADF8 /* ViewController.swift in Sources */,

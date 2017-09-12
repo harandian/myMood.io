@@ -10,7 +10,7 @@ import UIKit
 
 class BarGraphView: UIView {
     
-    var graphArray: NSMutableArray = [(height: CGFloat, color: UIColor)]() as! NSMutableArray
+    var graphArray: [(height: CGFloat, color: UIColor)] = [(height: CGFloat, color: UIColor)]()
     
     var centerY: CGFloat = 0.0
     
@@ -18,17 +18,17 @@ class BarGraphView: UIView {
     var chartMargin: CGFloat = 5
     
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+    
+    override func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: newWindow)
         FirebaseDBController.shared.getAllEntries {entries in
             for bars in entries ["Entries"] as! NSDictionary {
-                let tuple = [(height: bars.value as! CGFloat, color: UIColor.red)] as [Any]
-                self.graphArray.addObjects(from: tuple)
+                let tuple = (height: bars.value as! CGFloat, color: UIColor.red)
+                self.graphArray.append(tuple)
             }
             self.setNeedsDisplay()
         }
-        
+        //self.view.addSubview(lineGraphView)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,39 +39,23 @@ class BarGraphView: UIView {
     
     override func draw(_ rect: CGRect) {
         
-        let width = rect.width
-        let height = rect.height
+        //TODO - range is -10 to 10 = 21 values
         
-        graphArray =
-                    [addGraph(height: 60, wColor: UIColor.green),
-                      addGraph(height: 70, wColor: UIColor.red),
-                      addGraph(height: 90, wColor: UIColor.red),
-                      addGraph(height: 20, wColor: UIColor.red),
-                      addGraph(height: 10, wColor: UIColor.green),
-                      addGraph(height: 70, wColor: UIColor.red),
-                      addGraph(height: 60, wColor: UIColor.green),
-                      addGraph(height: 70, wColor: UIColor.red),
-                      addGraph(height: 90, wColor: UIColor.red),
-                      addGraph(height: 20, wColor: UIColor.red),
-                      addGraph(height: 10, wColor: UIColor.red),
-                      addGraph(height: 70, wColor: UIColor.red),
-                      addGraph(height: 95, wColor: UIColor.green),
-        ]
-        
+        for barItems in graphArray {
+            addGraph(height: CGFloat(barItems.height), wColor: barItems.color)
+        }  
         
     }
     
     func addGraph(height:CGFloat, wColor:UIColor) {
         // Draws next bar
         let nextXOrigin = CGFloat(self.subviews.count - 2) * chartWidth
-        self.frame.size = CGSize(width:300, height: 300)
-        //graphScrollView.contentSize = CGSize(width: nextXOrigin + chartWidth, height: graphScrollView.frame.size.height)
-        
         
         //Mid point - line in middle
-        let normalizedHeight: CGFloat = height / 100 * (self.frame.size.height / 2)
+        let heightFrame = self.frame.size.height / 2
+        let normalizedHeight: CGFloat = (height / 100 * heightFrame)
         
-        let graphButton: UIButton = UIButton(frame: CGRect(x: nextXOrigin, y: 0, width: chartWidth, height: normalizedHeight))
+        let graphButton: UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: chartWidth, height: normalizedHeight))
         graphButton.backgroundColor = wColor
         graphButton.frame.size = CGSize(width: graphButton.frame.size.width - chartMargin, height: graphButton.frame.size.height)
         
@@ -88,7 +72,7 @@ class BarGraphView: UIView {
             centY = centerY + (graphButton.frame.size.height / 2)
         }
         
-        let center: CGPoint = CGPoint(x: graphButton.center.x, y: centY)
+        let center: CGPoint = CGPoint(x: nextXOrigin, y: centY)
         graphButton.center = center
         
         self.addSubview(graphButton)
