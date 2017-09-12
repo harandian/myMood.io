@@ -50,6 +50,9 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         button.backgroundColor = UIColor.darkGray
         button.translatesAutoresizingMaskIntoConstraints =  false
         button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
+
+        
+  
         return button
         
     }()
@@ -127,9 +130,11 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     
 
     func saveButtonPressed () {
-//        let detailVC = DetailViewController()
-//        detailVC.happinessIndex = happinessIndex
-//        navigationController?.pushViewController(detailVC, animated: true)
+
+        let journalFormViewController = JournalFormViewController()
+     //   self.navigationController?.show(JournalFormViewController(), sender: self)
+        self.navigationController?.pushViewController(journalFormViewController, animated: true)
+        print(123)
     }
 
     
@@ -191,8 +196,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
             bottomViewHeightContraint?.constant = 0
             topViewHeightConstraint?.constant = abs(tapLocation - (containerView.frame.size.height/2))
         }
-        
-        
+                
         let point:CGPoint = sender.location(in: containerView)
         let percentage:CGFloat = point.y/containerView.frame.height
         var value:CGFloat = -1*((21.0 * percentage)-10.0)
@@ -205,5 +209,11 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     }
     
     
+
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        performSegue(withIdentifier: "formSeg", sender: sender)
+    }
 
 }
