@@ -13,80 +13,78 @@ import Foundation
 class LineGraphView: UIView {
     
     // Hard coded values for now for plotted points
-    
     var graphPoints:[Int] = [4, 2, 6, 4, 5, 8, 3]
     
-    // create rect property
-//    var rect: CGRect
+    //Graph Height
+    var graphHeight:CGFloat!
     
-//    @IBInspectable var startColor: UIColor = UIColor.red
-//    @IBInspectable var endColor: UIColor = UIColor.green
+    //Increment Values
+    var incrementVal:CGFloat!
     
+    //Axis measurement values
+    let topBottomMargins:CGFloat = 20
+    let leftMargin:CGFloat = 40
+    let rightMargin:CGFloat = 20
+    let textPositionRightMargin:CGFloat = 20
+    let textLabelWidth:CGFloat = 20
+    var textLabelHeight:CGFloat = 10
     
-    override init(frame: CGRect) {
-        //set rect
-//        self.rect = frame
-        super.init(frame: frame)
+    override func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: newWindow)
+        graphHeight = (self.frame.height - (topBottomMargins*2))
+        incrementVal = graphHeight / 10.0
         
         FirebaseDBController.shared.getAllEntries {entries in
-        
-        // Clear array in the beginning
-        self.graphPoints.removeAll()
-        
-        for plots in entries ["Entries"] as! NSDictionary {
-            self.graphPoints.append(plots.value as! Int)
-        }
+            
+            // Clear array in the beginning
+            self.graphPoints.removeAll()
+            
+            for plots in entries ["Entries"] as! NSDictionary {
+                self.graphPoints.append(plots.value as! Int)
+            }
             self.setNeedsDisplay()
         }
-        
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        
-        super.init(coder: aDecoder)
-//        fatalError("init(coder:) has not been implemented")
-//        firebaseSetup()
-    }
-    
-    
+
     
     override func draw(_ rect: CGRect) {
+        
+        drawAxis()
+        drawBackgroundLayer()
         
         let width = rect.width
         let height = rect.height
         
-        
-        
-        //set up background clipping area
-        let path = UIBezierPath(roundedRect: rect,
-                                byRoundingCorners: UIRectCorner.allCorners,
-                                cornerRadii: CGSize(width: 8.0, height: 8.0))
-        path.addClip()
-        
-        let startColor = UIColor.white
-        let endColor = UIColor.black
-        // Get the current context
-        let context = UIGraphicsGetCurrentContext()
-        let colors = [startColor.cgColor, endColor.cgColor]
-        
-        // Set up the color space
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
-        
-        //4 - set up the color stops
-        let colorLocations:[CGFloat] = [0.0, 1.0]
-        
-        //5 - create the gradient
-        let gradient = CGGradient(colorsSpace: colorSpace,
-                                  colors: colors as CFArray,
-                                  locations: colorLocations)
-        
-        // Draw the gradient
-        let startPoint = CGPoint.zero
-        let endPoint = CGPoint(x:0, y:self.bounds.height)
-        context?.drawLinearGradient(gradient!,
-                                    start: startPoint,
-                                    end: endPoint,
-                                    options: CGGradientDrawingOptions(rawValue: 0))
+        /*
+ 
+         Draw background Color
+ 
+        */
+//        let startColor = UIColor.blue
+//        let endColor = UIColor.white
+//
+//        // Get the current context
+//        let context = UIGraphicsGetCurrentContext()
+//        let colors = [startColor.cgColor, endColor.cgColor]
+//        
+//        // Set up the color space
+//        let colorSpace = CGColorSpaceCreateDeviceRGB()
+//        
+//        //4 - set up the color stops
+//        let colorLocations:[CGFloat] = [0.0, 1.0]
+//        
+//        //5 - create the gradient
+//        let gradient = CGGradient(colorsSpace: colorSpace,
+//                                  colors: colors as CFArray,
+//                                  locations: colorLocations)
+//        
+//        // Draw the gradient
+//        let startPoint = CGPoint.zero
+//        let endPoint = CGPoint(x:0, y:self.bounds.height)
+//        context?.drawLinearGradient(gradient!,
+//                                    start: startPoint,
+//                                    end: endPoint,
+//                                    options: CGGradientDrawingOptions(rawValue: 0))
         
         // Calculate the x point
         let margin: CGFloat = 20.0
@@ -99,7 +97,6 @@ class LineGraphView: UIView {
         }
         
         // Calculate the y point
-        
         let topBorder: CGFloat = 60
         let bottomBorder: CGFloat = 50
         let graphHeight = height - topBorder - bottomBorder
@@ -110,10 +107,7 @@ class LineGraphView: UIView {
             return y
         }
         
-        // Draw the line graph
-        
-        UIColor.red.setFill()
-        UIColor.red.setStroke()
+
         
         // Set up the points line
         let graphPath = UIBezierPath()
@@ -141,33 +135,87 @@ class LineGraphView: UIView {
             
             let circle = UIBezierPath(ovalIn:
                 CGRect(origin: point,
-                       size: CGSize(width: 5.0, height: 5.0)))
+                       size: CGSize(width: 10.0, height: 10.0)))
+            
             circle.fill()
         }
+    }
+    
+    func drawBackgroundLayer() {
+        let linePath = UIBezierPath()
         
+        //Draw horizontal
+        for h in 0...10 {
+            let yPoint = topBottomMargins + (CGFloat(h) * incrementVal)
+        
+            //Drawing chart
+            linePath.move(to: CGPoint(x: leftMargin, y: yPoint))
+            linePath.addLine(to: CGPoint(x: self.frame.width - rightMargin, y: yPoint))
+            
+            linePath.setLineDash([5.0,5.0], count: 2, phase: 1)
+            linePath.lineWidth = 1
+            linePath.stroke()
+        }
+        
+        //Draw Vertical
+        for h in 1...10 {
+            let xPoint = leftMargin + (CGFloat(h) * incrementVal)
+            
+            //Drawing Chart
+            linePath.move(to: CGPoint(x: xPoint, y: topBottomMargins))
+            linePath.addLine(to: CGPoint(x: xPoint,
+                                         y: self.frame.height - topBottomMargins))
+            
+            linePath.setLineDash([5.0,5.0], count: 2, phase: 1)
+            linePath.lineWidth = 1
+            linePath.stroke()
+        }
+        
+    }
+    
+    
+    func drawAxis() {
         // Draw horizontal graph lines on the top of everything
         let linePath = UIBezierPath()
         
         // Center line
-        linePath.move(to: CGPoint(x:margin,
-                                  y: graphHeight/2))
-        linePath.addLine(to: CGPoint(x:width - margin,
-                                     y:graphHeight/2))
-        
-        let color = UIColor(white: 1.0, alpha: 0.5)
-        color.setStroke()
-        
+        linePath.move(to: CGPoint(x:leftMargin,
+                                  y: self.frame.size.height/2))
+        linePath.addLine(to: CGPoint(x:self.frame.size.width - rightMargin,
+                                     y: self.frame.size.height/2))
+
         linePath.lineWidth = 1.0
         linePath.stroke()
         
         //Vertical Line
-        linePath.move(to: CGPoint(x:margin,
-                                  y: 0))
-        linePath.addLine(to: CGPoint(x:margin,
-                                     y:graphHeight))
+        linePath.move(to: CGPoint(x:leftMargin,
+                                  y: topBottomMargins))
+        linePath.addLine(to: CGPoint(x:leftMargin,
+                                     y:self.frame.size.height - topBottomMargins))
         linePath.stroke()
         
+        
+        
+        //Set the labels
+        var label:Int = 10
+        for i in 0 ... 10{
+            
+            //Position of label
+            let yCenter = topBottomMargins + CGFloat(i) * incrementVal!
+            let xCenter = textPositionRightMargin
+            
+            //Create the text label
+            let text = UILabel()
+            text.frame = CGRect(x: xCenter, y: yCenter, width: textLabelWidth, height: textLabelHeight)
+            text.center = CGPoint(x: xCenter, y: yCenter)
+            text.text = "\(label)"
+            text.font = UIFont.boldSystemFont(ofSize: 10)
+            self.addSubview(text)
+            label -= 2
+        }
     }
+    
+    
     
     
 }
