@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         FirebaseApp.configure()
-        self.window?.rootViewController = UINavigationController(rootViewController: ViewController())
+        self.window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
         Auth.auth().addStateDidChangeListener{ [weak self] (_, user) in
             if let _ = user {
                 //user already logged in
