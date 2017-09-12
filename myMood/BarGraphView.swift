@@ -12,15 +12,26 @@ class BarGraphView: UIView {
     
     var graphArray: [CGFloat] = []
     
-    var centerY: CGFloat = 0.0
-    
     var chartWidth: CGFloat = 40
-    var chartMargin: CGFloat = 5
     
+    //increment values
+    var incrementVal:CGFloat!
+    
+    //Axis measurement values
+    let topBottomMargins:CGFloat = 20
+    let leftMargin:CGFloat = 40
+    let rightMargin:CGFloat = 20
+    let textPositionRightMargin:CGFloat = 10
+    let textLabelWidth:CGFloat = 20
+    var textLabelHeight:CGFloat = 10
 
     
     override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
+        incrementVal = (self.frame.height - (topBottomMargins*2)) / 10.0
+        textLabelHeight = incrementVal
+        
+        self.graphArray = [4,5,6,7,-10,-9,-8]
         FirebaseDBController.shared.getAllEntries {entries in
             for bars in entries.value(forKey: "Entries") as! Dictionary<String, Int>
             {
@@ -28,7 +39,6 @@ class BarGraphView: UIView {
             }
             self.setNeedsDisplay()
         }
-       // self.graphArray = [4,5,6,7,-10,-9,-8,-7,-6]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,31 +49,11 @@ class BarGraphView: UIView {
     
     override func draw(_ rect: CGRect) {
         
-        // Draw horizontal graph lines on the top of everything
-        let linePath = UIBezierPath()
-        
-        // Center line
-        linePath.move(to: CGPoint(x:0,
-                                  y: self.frame.size.height / 2))
-        linePath.addLine(to: CGPoint(x:self.frame.size.width,
-                                     y:self.frame.size.height/2))
-        
-        let color = UIColor.blue
-        color.setStroke()
-        
-        linePath.lineWidth = 2.0
-        linePath.stroke()
-        
-        //Vertical line
-        linePath.move(to: CGPoint(x:5,
-                                  y:0))
-        linePath.addLine(to: CGPoint(x:5,
-                                     y:self.frame.size.height))
-        linePath.stroke()
-        
         for barItems in graphArray {
             addGraph(height: barItems )
-        }  
+        }
+        //self.chartLayer()
+        self.chartAxis()
         
     }
     
@@ -74,7 +64,7 @@ class BarGraphView: UIView {
         //Mid point - line in middle
         let heightFrame:CGFloat = self.frame.size.height / 2
 
-        let normalizedHeight = ((height / 10) * heightFrame)+5
+        let normalizedHeight = ((height / 10) * heightFrame)
   
         let graphButton: UIButton = UIButton()
         graphButton.backgroundColor = UIColor.green
@@ -87,9 +77,9 @@ class BarGraphView: UIView {
         //Change the Y position
         var centY: CGFloat!
         if (height < 0) {
-            centY = centerY + (graphButton.frame.size.height/2)
+            centY = graphButton.frame.size.height/2
         } else {
-            centY = centerY - (graphButton.frame.size.height / 2)
+            centY = -graphButton.frame.size.height / 2
         }
         
         let center: CGPoint = CGPoint(x: nextXOrigin, y: centY+(self.frame.size.height/2))
@@ -101,6 +91,81 @@ class BarGraphView: UIView {
     func clickAction() {
         print("Click")
         
+    }
+    
+    func chartAxis() {
+        // Draw horizontal graph lines on the top of everything
+        let linePath = UIBezierPath()
+        let color = UIColor.blue
+        
+        // Center line
+        linePath.move(to: CGPoint(x:leftMargin,y: self.frame.size.height / 2))
+        linePath.addLine(to: CGPoint(x:self.frame.size.width-rightMargin,y:self.frame.size.height/2))
+        
+        color.setStroke()
+        
+        linePath.lineWidth = 1.0
+        linePath.stroke()
+        
+        //Vertical line
+        linePath.move(to: CGPoint(x:leftMargin,
+                                  y:topBottomMargins))
+        linePath.addLine(to: CGPoint(x:leftMargin,
+                                     y:self.frame.size.height-topBottomMargins))
+        linePath.stroke()
+        
+        //Set the labels
+        var label:Int = 10
+        for i in 0 ... 10{
+            
+            //Position of label
+            let yCenter = topBottomMargins + CGFloat(i) * incrementVal!
+            let xCenter = textPositionRightMargin
+            
+            //Create the text label
+            let text = UILabel()
+            text.frame = CGRect(x: xCenter, y: yCenter, width: textLabelWidth, height: textLabelHeight)
+            text.center = CGPoint(x: xCenter, y: yCenter)
+            text.text = "\(label)"
+            text.font = UIFont.boldSystemFont(ofSize: 10)
+            self.addSubview(text)
+            label -= 2
+        }
+        
+        
+
+        
+    }
+    
+    func chartLayer() {
+        
+        for h in 1...10 {
+            let barWidth:CGFloat = 40
+            let linePath = UIBezierPath()
+            let xPoint:CGFloat = barWidth * CGFloat(h)
+            
+            linePath.move(to: CGPoint(x: xPoint, y: 0))
+            linePath.addLine(to: CGPoint(x: xPoint, y: self.frame.height))
+            
+            linePath.setLineDash([5.0,5.0], count: 2, phase: 1)
+            linePath.lineWidth = 1
+            //linePath.stroke(with: CGBlendMode, alpha: 0.5)
+            linePath.stroke()
+        }
+        
+        for h in 1...10 {
+            let barWidth:CGFloat = 40
+            let linePath = UIBezierPath()
+            let yPoint:CGFloat = barWidth * CGFloat(h)
+            
+            linePath.move(to: CGPoint(x: 0, y: yPoint))
+            linePath.addLine(to: CGPoint(x: self.frame.width, y: yPoint))
+            
+            linePath.setLineDash([5.0,5.0], count: 2, phase: 1)
+            linePath.lineWidth = 1
+            linePath.stroke()
+            
+        }
     }
     
     
