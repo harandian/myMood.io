@@ -13,18 +13,19 @@ import MapKit
 
 final class FirebaseDBController {
     var ref:DatabaseReference!
+    var storage:StorageReference!
     
     //Shared instance
     static let shared = FirebaseDBController()
     
     init() {
         ref = Database.database().reference()
+        storage = Storage.storage().reference()
         
         //Sample code + Firebase Setup
         ref.child("Users").child("User_id").updateChildValues(["Name":"Sample",
                                                               "Email":"Sample",
                                                               "Password":"Sample",
-                                                              "Entries":""
             ])
         //Each Entry Id needs some sort of detail e.g. title, date, some sort of string
         ref.child("Users").child("User_id").child("Entries").updateChildValues(["Entry_id":"Mood"])
@@ -51,6 +52,7 @@ final class FirebaseDBController {
      FirebaseDBController.shared.getEntry(eID: "-KtO4g_VtnCaTZYTKD7Y") { result in
         print(result)
      }
+     
  
     */
     
@@ -83,33 +85,18 @@ final class FirebaseDBController {
     }
     
     
-    //TODO  - Handle Photo Objects
-    //Insert Entry
+    //Insert into Entry
     func insertEntry(entry:Entry) {
         let userId = Auth.auth().currentUser?.uid
         
         //Date
-        let date:String = DateFormatter().string(from: entry.date)
-        
-        //TODO  Get Photo URL
-        let url = entry.photo?.photoURL ?? ""
-        
-        
-        //Change location to string
-        var location:String
-        if let loc = entry.location {
-            location = "\(loc.coordinate.latitude),\(loc.coordinate.longitude)"
-        } else {
-            location = ""
-        }
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "dd.MM.yyyy"
+        let date:String = dateFormat.string(from: entry.date)
         
         //Auto generate entry id
         let newRef = ref.child("Entries").childByAutoId()
-        
         newRef.setValue(["Date":date,
-                         "Description":entry.entryDescription ?? "You should write something today",
-                         "PhotoURL":url,
-                         "Location":location,
                          "Mood":entry.mood])
         
         //Set entryID on entry Object
@@ -118,44 +105,76 @@ final class FirebaseDBController {
         
         //insert entry to list of entry in user
         ref.child("Users").child(userId!).child("Entries").updateChildValues([entryID:entry.mood])
-        
     }
     
-    
-    //Update specific properties in entry
-    func updateEventProperty(entry:Entry) {
-        //TODO - get photo URL
+    //Update the given Properties
+    func updateEntry(entry:Entry) {
+        var properties = Dictionary<String,Any>()
         
         //Change location to string
-        var location:String
         if let loc = entry.location {
-            location = "\(loc.coordinate.latitude),\(loc.coordinate.longitude)"
-        } else {
-            location = ""
+            properties["Location"] = "\(loc.coordinate.latitude),\(loc.coordinate.longitude)"
         }
         
-        ref.child("Entries").child(entry.ID).updateChildValues(["Description":entry.entryDescription ?? "You should write something today",
-                                                                      "PhotoURL":entry.photo!.photoURL,
-                                                                      "Location":location,
-                                                                      "Mood":entry.mood])
-    }
-    
-    
-    //TODO
-    //Insert Photo into Storage
-    func insertPhoto(photo:Photo) {
+        //Mood
+        properties["Mood"] = entry.mood
         
-    }
-    
-    //TODO
-    func updatePhoto(entry:Entry){
+        //Description
+        if let descr = entry.entryDescription {
+            properties["Description"] = descr
+        } else {
+            properties["Description"] = "Start your journey now! Go Do Something"
+        }
         
+        ref.child("Entries").child(entry.ID!).updateChildValues(properties)
     }
     
-    //TODO
+    //Insert & Update Photo into Storage
+    //Takes in entry containing photo
+    func insertPhoto(entry:Entry) {
+        let userId = Auth.auth().currentUser?.uid
+        
+        //Check if a photo exist in this entry
+        let photoImg:UIImage
+        if let img = entry.photo {
+            photoImg = img.photoObject
+        } else {
+            return
+        }
+        
+        //Setup image
+        let data = UIImageJPEGRepresentation(photoImg, 0.8)! as NSData
+    
+        //Set upload path
+        //File path: User/userID/entryID
+        let filePath = "Users/\(userId!)/\(entry.ID!)"
+        let metaData = StorageMetadata()
+        metaData.contentType = "image/jpg"
+    
+        self.storage.child(filePath).putData(data as Data, metadata: metaData){(metaData,error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            } else {
+                //store downloadURL into entry object
+                let downloadLink:String = metaData!.downloadURL()!.absoluteString
+                entry.photo!.photoURL = metaData!.downloadURL()!.absoluteString
+                self.ref.child("Entries").child(entry.ID!).updateChildValues(["PhotoURL":downloadLink])
+            }
+        }
+    }
+
     //Delete specific photo
     func deletePhoto(entry:Entry){
-        
+        let userId = Auth.auth().currentUser?.uid
+        let imageRef = storage.child("Users").child(userId!).child(entry.ID!)
+        imageRef.delete { (error) in
+            if let err = error {
+                print("Error: \(err.localizedDescription)")
+            } else {
+                print("Success deleting image")
+            }
+        }
     }
     
 }
