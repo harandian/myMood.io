@@ -148,6 +148,12 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
      //   self.navigationController?.show(JournalFormViewController(), sender: self)
         self.navigationController?.pushViewController(journalFormViewController, animated: true)
         print(123)
+        saveNewMood()
+    }
+    
+    func saveNewMood() {
+        let myEntry: Entry = Entry.init(mood: happinessIndex)
+        FirebaseDBController.shared.insertEntry(entry: myEntry)
     }
 
     
