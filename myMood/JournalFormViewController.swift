@@ -15,7 +15,7 @@ class JournalFormViewController: UIViewController {
     let saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("SAVE", for: .normal)
-        button.backgroundColor = UIColor.green
+        button.backgroundColor = UIColor.cyan
         button.translatesAutoresizingMaskIntoConstraints =  false
         button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
         return button

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreGraphics
+import QuartzCore
 
 class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
 
@@ -19,6 +21,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor.lightGray
+        view.alpha = 0.5
         view.layer.cornerRadius = 5
         return view
         
@@ -30,7 +33,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor.green
         view.isUserInteractionEnabled = true
-        view.layer.cornerRadius = 5
+        view.layer.cornerRadius = 3
         return view
         
     }()
@@ -39,7 +42,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor.blue
         view.isUserInteractionEnabled = true
-        view.layer.cornerRadius = 5
+        view.layer.cornerRadius = 3
         return view
         
     }()
@@ -47,7 +50,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     let saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("SAVE", for: .normal)
-        button.backgroundColor = UIColor.darkGray
+        button.backgroundColor = UIColor.cyan
         button.translatesAutoresizingMaskIntoConstraints =  false
         button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
 
@@ -58,15 +61,17 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     }()
     
     
+    
 // VIEW DID LOAD 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationController?.setNavigationBarHidden(false, animated: true)
-        
         view.addSubview(containerView)
         view.addSubview(saveButton)
+        
+        
         
         let swipe = UIPanGestureRecognizer(target: self, action: #selector(panGesture))
         containerView.addGestureRecognizer(swipe)
@@ -78,9 +83,14 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         topColoredViewConstraints()
         bottomColoredViewConstraints()
         setButtonConstraints()
-        
+        drawDashLine()
         self.view.backgroundColor = UIColor.white
         
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        dashBoarder()
     }
     
     
@@ -92,11 +102,13 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     func containerViewContraints(){
         containerView.addSubview(topColoredView)
         containerView.addSubview(bottomColoredView)
-        containerView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        containerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150).isActive = true
-        containerView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+        containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
+        containerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150).isActive = false
+        containerView.widthAnchor.constraint(equalToConstant: view.bounds.width/5).isActive = true
         containerViewHeight = containerView.heightAnchor.constraint(equalToConstant: 385)
         containerViewHeight?.isActive = true
+
     }
     
 
@@ -121,10 +133,11 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     
     func setButtonConstraints () {
         
-        saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.bounds.width/2 - saveButton.bounds.width).isActive = true
+        saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         saveButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         saveButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        saveButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
+        saveButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         
     }
     
@@ -208,12 +221,55 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         happinessIndex = Int(value)
     }
     
-    
+    func drawDashLine() {
+        let layer = CAShapeLayer()
+        let path:UIBezierPath = UIBezierPath.init()
+        let p0 = CGPoint(x: view.frame.width/4,
+                         y: view.center.y)
+        let  p1 = CGPoint(x: view.frame.width * 0.75,
+                          y: view.center.y)
 
+        path.move(to:p0)
+        path.addLine(to:p1)
+        
+        let  dashes: [ CGFloat ] = [ 16.0, 32.0 ]
+        path.setLineDash(dashes, count: dashes.count, phase: 0.0)
+    
+       // path.lineWidth = 12.0
+       // path.lineCapStyle = .butt
+        UIColor.black.setStroke()
+        path.stroke()
+        UIColor.black.setFill()
+        path.fill()
+        layer.path = path.cgPath
+        layer.strokeColor = UIColor.lightGray.cgColor
+        layer.lineDashPattern = [15,15,15,15]
+        layer.lineWidth = 2.5
+        layer.lineCap = kCALineCapSquare
+        layer.backgroundColor = UIColor.red.cgColor
+        self.view.layer.addSublayer(layer)
+
+    }
+  
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         performSegue(withIdentifier: "formSeg", sender: sender)
+    }
+    
+ 
+    
+    func dashBoarder (){
+        
+        let yourViewBorder = CAShapeLayer()
+        yourViewBorder.strokeColor = UIColor.black.cgColor
+        yourViewBorder.frame = containerView.bounds
+        yourViewBorder.fillColor = nil
+        yourViewBorder.path = UIBezierPath(rect: containerView.bounds).cgPath
+       // yourViewBorder.lineDashPattern = [10,2]
+        yourViewBorder.lineWidth = 3
+        containerView.layer.addSublayer(yourViewBorder)
+        
     }
 
 }
