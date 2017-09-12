@@ -1,5 +1,5 @@
 //
-//  GraphView.swift
+//  LineGraphView.swift
 //  myMood
 //
 //  Created by Elle Ti on 2017-09-06.
@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 
 
-class GraphView: UIView {
+class LineGraphView: UIView {
     
     // Hard coded values for now for plotted points
     
@@ -22,37 +22,32 @@ class GraphView: UIView {
 //    @IBInspectable var startColor: UIColor = UIColor.red
 //    @IBInspectable var endColor: UIColor = UIColor.green
     
+    
     override init(frame: CGRect) {
         //set rect
 //        self.rect = frame
         super.init(frame: frame)
-
-        // TODO: Get all data from the user from FirebaseDB class
-        FirebaseDBController.shared.getAllEntries { (userMood) in
-            if let error = userMood["error"] {
-                print(error)
-                return
-            }
-            //Fix this so it becomes an array
-//            self.graphPoints = userMood["Entries"]! as! [Int]
-            
-//            print("Graphpoints \(self.graphPoints)")
-            
-            // Clear array in the beginning
-            self.graphPoints.removeAll()
-            
-            for (_, value) in userMood["Entries"] as! NSDictionary {
-                self.graphPoints.append(value as! Int)
-            }
-            
-            self.setNeedsDisplay() // This need to be redrawn
-//            print("Mood \(self.graphPoints)")
+        
+        FirebaseDBController.shared.getAllEntries {entries in
+        
+        // Clear array in the beginning
+        self.graphPoints.removeAll()
+        
+        for plots in entries ["Entries"] as! NSDictionary {
+            self.graphPoints.append(plots.value as! Int)
         }
+            self.setNeedsDisplay()
+        }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        
+        super.init(coder: aDecoder)
+//        fatalError("init(coder:) has not been implemented")
+//        firebaseSetup()
     }
+    
     
     
     override func draw(_ rect: CGRect) {
@@ -153,11 +148,11 @@ class GraphView: UIView {
         
         // Center line
         linePath.move(to: CGPoint(x:margin,
-                                  y: graphHeight/2 + topBorder))
+                                  y: graphHeight/2))
         linePath.addLine(to: CGPoint(x:width - margin,
-                                     y:graphHeight/2 + topBorder))
+                                     y:graphHeight/2))
         
-        let color = UIColor(white: 1.0, alpha: 0.3)
+        let color = UIColor(white: 1.0, alpha: 0.5)
         color.setStroke()
         
         linePath.lineWidth = 1.0
