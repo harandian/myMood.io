@@ -10,18 +10,27 @@ import UIKit
 
 class JournalFormViewController: UIViewController {
     
-      var journalTextEntryView = Bundle.main.loadNibNamed("textEntry", owner: nil, options: nil)?.first! as! TextEntry
-
+    var journalTextEntryView = Bundle.main.loadNibNamed("textEntry", owner: nil, options: nil)?.first! as! TextEntry
+    
+    let saveButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("SAVE", for: .normal)
+        button.backgroundColor = UIColor.green
+        button.translatesAutoresizingMaskIntoConstraints =  false
+        button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         viewSetup()
-
+        buttonSaveButtonSetup()
         // Do any additional setup after loading the view.
         
         self.view.backgroundColor = UIColor.lightGray
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -35,18 +44,34 @@ class JournalFormViewController: UIViewController {
         journalTextEntryView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 5).isActive = true
         journalTextEntryView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         journalTextEntryView.labelHeaderSetup()
+        
+    }
+    
+    func buttonSaveButtonSetup(){
+        view.addSubview(saveButton)
+        saveButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        saveButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        saveButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        saveButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
 
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    func saveButtonPressed(){
+        
+        let historyViewController = HistoryViewController()
+        //   self.navigationController?.show(JournalFormViewController(), sender: self)
+        self.navigationController?.pushViewController(historyViewController, animated: true)        
+        
     }
-    */
-
+    
 }

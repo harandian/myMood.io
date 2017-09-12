@@ -25,6 +25,8 @@
 		725C2DD91F673ACC00FC279E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725C2DD81F673ACC00FC279E /* DetailViewController.swift */; };
 		725C2DDC1F673B6700FC279E /* TextEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725C2DDB1F673B6700FC279E /* TextEntry.swift */; };
 		725C2DDE1F673B9D00FC279E /* textEntry.xib in Resources */ = {isa = PBXBuildFile; fileRef = 725C2DDD1F673B9D00FC279E /* textEntry.xib */; };
+		725C2DE01F675F5800FC279E /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725C2DDF1F675F5700FC279E /* HistoryViewController.swift */; };
+		725C2DE21F6764F000FC279E /* HistoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725C2DE11F6764F000FC279E /* HistoryListViewController.swift */; };
 		728CF3321F6094B50080405B /* wordCloudLayout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 728CF3311F6094B50080405B /* wordCloudLayout.xib */; };
 		728CF3341F60986F0080405B /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CF3331F60986F0080405B /* testViewController.swift */; };
 		72FD94191F61D0F400391818 /* wordCloudLayoutGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CF32F1F60941F0080405B /* wordCloudLayoutGenerator.swift */; };
@@ -64,6 +66,8 @@
 		725C2DD81F673ACC00FC279E /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		725C2DDB1F673B6700FC279E /* TextEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextEntry.swift; path = myMood/TextEntry.swift; sourceTree = "<group>"; };
 		725C2DDD1F673B9D00FC279E /* textEntry.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = textEntry.xib; sourceTree = "<group>"; };
+		725C2DDF1F675F5700FC279E /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		725C2DE11F6764F000FC279E /* HistoryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryListViewController.swift; sourceTree = "<group>"; };
 		728CF32F1F60941F0080405B /* wordCloudLayoutGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wordCloudLayoutGenerator.swift; sourceTree = "<group>"; };
 		728CF3311F6094B50080405B /* wordCloudLayout.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = wordCloudLayout.xib; sourceTree = "<group>"; };
 		728CF3331F60986F0080405B /* testViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +146,8 @@
 				725C2DD81F673ACC00FC279E /* DetailViewController.swift */,
 				11A90A6D1F5F6DF1009F524F /* SliderMoodViewController.swift */,
 				723BC5231F5F26000022ADF8 /* Main.storyboard */,
+				725C2DDF1F675F5700FC279E /* HistoryViewController.swift */,
+				725C2DE11F6764F000FC279E /* HistoryListViewController.swift */,
 				725C2DDA1F673B3900FC279E /* JournalFormViews */,
 				6A4006841F6246B00086BE7E /* Graph */,
 				723BC5291F5F26000022ADF8 /* Assets.xcassets */,
@@ -428,6 +434,7 @@
 			files = (
 				725C2DD61F6731C600FC279E /* JournalFormViewController.swift in Sources */,
 				5BAAC1EF1F607C2B00A8D331 /* Entry.swift in Sources */,
+				725C2DE01F675F5800FC279E /* HistoryViewController.swift in Sources */,
 				6A5EB1531F5F626F00D1375A /* Photo.swift in Sources */,
 				725C2DD91F673ACC00FC279E /* DetailViewController.swift in Sources */,
 				728CF3341F60986F0080405B /* testViewController.swift in Sources */,
@@ -436,6 +443,7 @@
 				11A90A6E1F5F6DF1009F524F /* SliderMoodViewController.swift in Sources */,
 				723BC5201F5F26000022ADF8 /* AppDelegate.swift in Sources */,
 				5B7AC8891F5F659C008A70DE /* FirebaseDB.swift in Sources */,
+				725C2DE21F6764F000FC279E /* HistoryListViewController.swift in Sources */,
 				723BC5281F5F26000022ADF8 /* myMood.xcdatamodeld in Sources */,
 				72FD94191F61D0F400391818 /* wordCloudLayoutGenerator.swift in Sources */,
 				725C2DDC1F673B6700FC279E /* TextEntry.swift in Sources */,
