@@ -58,33 +58,35 @@ class LineGraphView: UIView {
         
         
         //set up background clipping area
-//        let path = UIBezierPath(roundedRect: rect,
-//                                byRoundingCorners: UIRectCorner.allCorners,
-//                                cornerRadii: CGSize(width: 8.0, height: 8.0))
-//        path.addClip()
-//        
-//        // Get the current context
-//        let context = UIGraphicsGetCurrentContext()
-//        let colors = [startColor.cgColor, endColor.cgColor]
-//        
-//        // Set up the color space
-//        let colorSpace = CGColorSpaceCreateDeviceRGB()
-//        
-//        //4 - set up the color stops
-//        let colorLocations:[CGFloat] = [0.0, 1.0]
-//        
-//        //5 - create the gradient
-//        let gradient = CGGradient(colorsSpace: colorSpace,
-//                                  colors: colors as CFArray,
-//                                  locations: colorLocations)
-//        
-//        // Draw the gradient
-//        let startPoint = CGPoint.zero
-//        let endPoint = CGPoint(x:0, y:self.bounds.height)
-//        context?.drawLinearGradient(gradient!,
-//                                    start: startPoint,
-//                                    end: endPoint,
-//                                    options: CGGradientDrawingOptions(rawValue: 0))
+        let path = UIBezierPath(roundedRect: rect,
+                                byRoundingCorners: UIRectCorner.allCorners,
+                                cornerRadii: CGSize(width: 8.0, height: 8.0))
+        path.addClip()
+        
+        let startColor = UIColor.white
+        let endColor = UIColor.black
+        // Get the current context
+        let context = UIGraphicsGetCurrentContext()
+        let colors = [startColor.cgColor, endColor.cgColor]
+        
+        // Set up the color space
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        
+        //4 - set up the color stops
+        let colorLocations:[CGFloat] = [0.0, 1.0]
+        
+        //5 - create the gradient
+        let gradient = CGGradient(colorsSpace: colorSpace,
+                                  colors: colors as CFArray,
+                                  locations: colorLocations)
+        
+        // Draw the gradient
+        let startPoint = CGPoint.zero
+        let endPoint = CGPoint(x:0, y:self.bounds.height)
+        context?.drawLinearGradient(gradient!,
+                                    start: startPoint,
+                                    end: endPoint,
+                                    options: CGGradientDrawingOptions(rawValue: 0))
         
         // Calculate the x point
         let margin: CGFloat = 20.0
@@ -157,6 +159,14 @@ class LineGraphView: UIView {
         
         linePath.lineWidth = 1.0
         linePath.stroke()
+        
+        //Vertical Line
+        linePath.move(to: CGPoint(x:margin,
+                                  y: 0))
+        linePath.addLine(to: CGPoint(x:margin,
+                                     y:graphHeight))
+        linePath.stroke()
+        
     }
     
     

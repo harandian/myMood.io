@@ -39,7 +39,27 @@ class BarGraphView: UIView {
     
     override func draw(_ rect: CGRect) {
         
-        //TODO - range is -10 to 10 = 21 values
+        // Draw horizontal graph lines on the top of everything
+        let linePath = UIBezierPath()
+        
+        // Center line
+        linePath.move(to: CGPoint(x:0,
+                                  y: self.frame.size.height / 2))
+        linePath.addLine(to: CGPoint(x:self.frame.size.width,
+                                     y:self.frame.size.height/2))
+        
+        let color = UIColor.blue
+        color.setStroke()
+        
+        linePath.lineWidth = 2.0
+        linePath.stroke()
+        
+        //Vertical line
+        linePath.move(to: CGPoint(x:5,
+                                  y:0))
+        linePath.addLine(to: CGPoint(x:5,
+                                     y:self.frame.size.height))
+        linePath.stroke()
         
         for barItems in graphArray {
             addGraph(height: barItems )
@@ -54,7 +74,7 @@ class BarGraphView: UIView {
         //Mid point - line in middle
         let heightFrame:CGFloat = self.frame.size.height / 2
 
-        let normalizedHeight = (height / 10) * heightFrame
+        let normalizedHeight = ((height / 10) * heightFrame)+5
   
         let graphButton: UIButton = UIButton()
         graphButton.backgroundColor = UIColor.green
@@ -62,7 +82,7 @@ class BarGraphView: UIView {
         
         graphButton.setTitle("\(Int(height))", for: UIControlState.normal)
         
-        //graphButton.addTarget(self, action: #selector(clickAction(_:)), for: UIControlEvents.touchUpInside)
+        graphButton.addTarget(self, action: #selector(clickAction), for: UIControlEvents.touchUpInside)
         
         //Change the Y position
         var centY: CGFloat!
@@ -76,6 +96,11 @@ class BarGraphView: UIView {
         graphButton.center = center
         
         self.addSubview(graphButton)
+    }
+    
+    func clickAction() {
+        print("Click")
+        
     }
     
     
