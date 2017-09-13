@@ -80,7 +80,6 @@ class JournalFormViewController: UIViewController {
         let myEntry = journalTextEntryView.journalText.text
 //        entry.entryDescription = journalTextEntryView.journalText.text
         entry?.entryDescription = myEntry
-        print("This is my entry \(String(describing: entry?.entryDescription))")
         if let entry = self.entry {
             FirebaseDBController.shared.updateEntry(entry: entry)
         }
