@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MapController" customModule="myMood" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap To Save Location" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rCl-SO-DpJ">
+                    <rect key="frame" x="83.5" y="320.5" width="208.5" height="26.5"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="26.5" id="fWl-zf-wlx"/>
+                        <constraint firstAttribute="width" constant="208.5" id="ngY-NK-TYM"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IBg-7P-qSe">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </mapView>
+            </subviews>
+            <color key="backgroundColor" red="0.40000000600000002" green="1" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="IBg-7P-qSe" secondAttribute="bottom" id="2Yu-pu-S78"/>
+                <constraint firstItem="IBg-7P-qSe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hSB-ac-ecj"/>
+                <constraint firstItem="rCl-SO-DpJ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="s1h-15-c5k"/>
+                <constraint firstItem="rCl-SO-DpJ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="sjt-ki-ZjM"/>
+                <constraint firstItem="IBg-7P-qSe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="uBw-7P-9JJ"/>
+                <constraint firstAttribute="trailing" secondItem="IBg-7P-qSe" secondAttribute="trailing" id="xjt-tM-qct"/>
+            </constraints>
+            <connections>
+                <outlet property="mapView" destination="IBg-7P-qSe" id="Oy5-Bx-ENn"/>
+            </connections>
+            <point key="canvasLocation" x="42.5" y="89.5"/>
+        </view>
+    </objects>
+</document>
