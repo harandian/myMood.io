@@ -29,6 +29,9 @@ class LineGraphView: UIView {
     let textLabelWidth:CGFloat = 20
     var textLabelHeight:CGFloat = 10
     
+    //Dot Size
+    let dotSize:CGFloat = 20
+    
     override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
         graphHeight = (self.frame.height - (topBottomMargins*2))
@@ -42,8 +45,8 @@ class LineGraphView: UIView {
             for plots in entries ["Entries"] as! NSDictionary {
                 self.graphPoints.append(plots.value as! Int)
             }
-            self.setNeedsDisplay()
         }
+        
     }
 
     
@@ -51,92 +54,85 @@ class LineGraphView: UIView {
         
         drawAxis()
         drawBackgroundLayer()
+        drawDots()
+        drawLines()
+    }
+    
+    func drawLines() {
+        let linePath = UIBezierPath()
         
-        let width = rect.width
-        let height = rect.height
-        
-        /*
- 
-         Draw background Color
- 
-        */
-//        let startColor = UIColor.blue
-//        let endColor = UIColor.white
-//
-//        // Get the current context
-//        let context = UIGraphicsGetCurrentContext()
-//        let colors = [startColor.cgColor, endColor.cgColor]
-//        
-//        // Set up the color space
-//        let colorSpace = CGColorSpaceCreateDeviceRGB()
-//        
-//        //4 - set up the color stops
-//        let colorLocations:[CGFloat] = [0.0, 1.0]
-//        
-//        //5 - create the gradient
-//        let gradient = CGGradient(colorsSpace: colorSpace,
-//                                  colors: colors as CFArray,
-//                                  locations: colorLocations)
-//        
-//        // Draw the gradient
-//        let startPoint = CGPoint.zero
-//        let endPoint = CGPoint(x:0, y:self.bounds.height)
-//        context?.drawLinearGradient(gradient!,
-//                                    start: startPoint,
-//                                    end: endPoint,
-//                                    options: CGGradientDrawingOptions(rawValue: 0))
-        
-        // Calculate the x point
-        let margin: CGFloat = 20.0
-        let columnXPoint = {(column: Int) -> CGFloat in
-            // Calculate gap between points
-            let spacer = (width - margin*2 - 4) / CGFloat((self.graphPoints.count - 1))
-            var x:CGFloat = CGFloat(column) * spacer
-            x += margin + 2
-            return x
-        }
-        
-        // Calculate the y point
-        let topBorder: CGFloat = 60
-        let bottomBorder: CGFloat = 50
-        let graphHeight = height - topBorder - bottomBorder
-        let maxValue = graphPoints.max()
-        
-        let columnYPoint = {(graphPoint:Int) -> CGFloat in
-            let y: CGFloat = CGFloat(graphPoint) / CGFloat(maxValue!) * graphHeight
-            return y
-        }
-        
+        //Move path to first Point
+        //Y Position
+        let pointPercentage:CGFloat = abs(CGFloat(graphPoints[0]))/10.0
+        var yPoint:CGFloat = (pointPercentage * (graphHeight/2))
 
-        
-        // Set up the points line
-        let graphPath = UIBezierPath()
-        
-        // Go to start of line
-        graphPath.move(to: CGPoint(x:columnXPoint(0),
-                                   y:columnYPoint(graphPoints[0])))
-        
-        // Add points for each item in the graphPoints array at the correct (x, y) for the point
-        for i in 1..<graphPoints.count {
-            let nextPoint = CGPoint(x:columnXPoint(i),
-                                    y:columnYPoint(graphPoints[i]))
-            graphPath.addLine(to: nextPoint)
+        //Y Position : Up or Down depending on neg/pos
+        yPoint = topBottomMargins+graphHeight/2 - yPoint
+        if (graphPoints[0] < 0) {
+            yPoint = topBottomMargins+graphHeight/2 + yPoint
         }
         
-        // Draw the line on top of the gradient
-        graphPath.lineWidth = 2.0
-        graphPath.stroke()
+        //First Position
+        let firstPoint = CGPoint(x: leftMargin, y: yPoint)
         
-        // Draw the circles at each point
-        for i in 0..<graphPoints.count {
-            var point = CGPoint(x:columnXPoint(i), y:columnYPoint(graphPoints[i]))
-            point.x -= 5.0/2
-            point.y -= 5.0/2
+        linePath.move(to: firstPoint)
+        
+        //loop through the rest of the points
+        for circlePoint in 1..<graphPoints.count {
+            // Set up the points line
+            //percentage + / - depending plus/minus
+            let pointPercentage:CGFloat = abs(CGFloat(graphPoints[circlePoint]))/10.0
+            let yPointOffset:CGFloat = (pointPercentage * (graphHeight/2))
             
-            let circle = UIBezierPath(ovalIn:
-                CGRect(origin: point,
-                       size: CGSize(width: 10.0, height: 10.0)))
+            //Y Position : Up or Down depending on neg/pos
+            var yPoint:CGFloat = topBottomMargins + graphHeight/2 - yPointOffset
+            if (circlePoint < 0) {
+                yPoint = topBottomMargins + graphHeight/2 + yPointOffset
+            }
             
+            //TODO - DESIGN - HOW SPARSE
+            //X Position
+            let xPoint:CGFloat = leftMargin + (CGFloat(circlePoint)*incrementVal)
+            
+            //Setup Point
+            let point = CGPoint(x:xPoint,
+                                y:yPoint)
+            
+            //Add Line
+            linePath.addLine(to: point)
+            linePath.stroke()
+        }
+        
+    }
+    
+    func drawDots() {
+        for index in 0..<graphPoints.count {
+            // Set up the points line
+            //percentage + / - depending plus/minus
+            let yPointOffset:CGFloat = (abs(CGFloat(graphPoints[index]))/10.0) * (graphHeight/2)
+            
+            //Y Position : Up or Down depending on neg/pos
+            var yPoint:CGFloat = graphHeight/2 - yPointOffset
+            if (index < 0) {
+                yPoint = graphHeight/2 + yPointOffset
+            }
+            
+            
+            //TODO - DESIGN - HOW SPARSE
+            //X Position
+            var xPoint:CGFloat = leftMargin + (CGFloat(index)*incrementVal)
+            
+            //Normalize to dot center
+            yPoint += dotSize/2
+            xPoint -= dotSize/2
+            
+            //Setup Point
+            let point = CGPoint(x:xPoint,
+                                y:yPoint)
+            
+            //Set Circle
+            let circle = UIBezierPath(ovalIn: CGRect(origin: point,
+                                                     size: CGSize(width: dotSize, height: dotSize)))
             circle.fill()
         }
     }
