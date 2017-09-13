@@ -56,9 +56,16 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         button.backgroundColor = UIColor.cyan
         button.translatesAutoresizingMaskIntoConstraints =  false
         button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
-
+        return button
         
-  
+    }()
+    
+    let cancelButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("CANCEL", for: .normal)
+        button.backgroundColor = UIColor.red
+        button.translatesAutoresizingMaskIntoConstraints =  false
+        button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
         return button
         
     }()
@@ -73,6 +80,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         navigationController?.setNavigationBarHidden(false, animated: true)
         view.addSubview(containerView)
         view.addSubview(saveButton)
+        view.addSubview(cancelButton)
         
         
         
@@ -136,11 +144,14 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     
     func setButtonConstraints () {
         
-        saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        saveButton.leadingAnchor.constraint(equalTo: cancelButton.trailingAnchor, constant: 0).isActive = true
         saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         saveButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        saveButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         saveButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        cancelButton.widthAnchor.constraint(equalToConstant: view.frame.width/2).isActive = true
+        cancelButton.heightAnchor.constraint(equalTo: saveButton.heightAnchor, constant: 0).isActive = true
+        cancelButton.bottomAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 0).isActive = true
         
     }
     
