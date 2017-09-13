@@ -27,17 +27,13 @@ final class FirebaseDBController {
                                                               "Email":"Sample",
                                                               "Password":"Sample",
             ])
-        //Each Entry Id needs some sort of detail e.g. title, date, some sort of string
-        ref.child("Users").child("User_id").child("Entries").updateChildValues(["Entry_id":"Mood"])
         
-        ref.child("Entries").child("Entry_id").updateChildValues(["Date":"Sample",
+        ref.child("Entries").child("Entry_id").updateChildValues(["UserID":"Sample",
+                                                                 "Date":"Sample",
                                                                  "Description":"Sample",
                                                                  "PhotoURL":"Sample",
                                                                  "Location":"Sample",
                                                                  "Mood":"Sample"])
-        
-        
-        //ref.child("Photos").child("Photo_1").updateChildValues(["url":"Sample"])
     }
     
     
@@ -60,8 +56,8 @@ final class FirebaseDBController {
     func getAllEntries(completion: @escaping (NSDictionary) -> Void) {
         //Save shared variables
         let userID = Auth.auth().currentUser?.uid
-        //var dict:Dictionary<String,Any>?
-        ref.child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+        let query = ref.child("Entries").queryEqual(toValue: userID, childKey: "userID").queryOrdered(byChild: "Date")
+        query.observeSingleEvent(of: .value, with: { (snapshot) in
             if let snapshotDict = snapshot.value as? NSDictionary, snapshot.hasChildren(){
                 completion(snapshotDict)
             } else {
@@ -91,20 +87,19 @@ final class FirebaseDBController {
         
         //Date
         let dateFormat = DateFormatter()
-        dateFormat.dateFormat = "dd.MM.yyyy"
+        dateFormat.dateFormat = "dd.MM.yyyy.hh.mm.ss"
         let date:String = dateFormat.string(from: entry.date)
         
         //Auto generate entry id
         let newRef = ref.child("Entries").childByAutoId()
-        newRef.setValue(["Date":date,
+        newRef.setValue(["UserID":userId!,
+                         "Date":date,
                          "Mood":entry.mood])
         
         //Set entryID on entry Object
         let entryID = newRef.key
         entry.ID = entryID
         
-        //insert entry to list of entry in user
-        ref.child("Users").child(userId!).child("Entries").updateChildValues([entryID:entry.mood])
     }
     
     //Update the given Properties
@@ -125,7 +120,6 @@ final class FirebaseDBController {
         } else {
             properties["Description"] = "Start your journey now! Go Do Something"
         }
-        
         ref.child("Entries").child(entry.ID!).updateChildValues(properties)
     }
     
