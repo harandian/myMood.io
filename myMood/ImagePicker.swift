@@ -28,7 +28,6 @@ class ImagePicker: UIViewController, UIImagePickerControllerDelegate , UINavigat
     }()
     
     // View Did Load
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Details"
