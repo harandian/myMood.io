@@ -10,7 +10,7 @@ import UIKit
 
 class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
     
-    let moodLineGraph = GraphView()
+    let moodLineGraph = GraphViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()

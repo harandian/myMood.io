@@ -12,6 +12,8 @@ class JournalFormViewController: UIViewController {
     
     var journalTextEntryView = Bundle.main.loadNibNamed("textEntry", owner: nil, options: nil)?.first! as! TextEntry
     
+    var entry: Entry?
+    
     let saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("SAVE", for: .normal)
@@ -71,7 +73,16 @@ class JournalFormViewController: UIViewController {
         let historyViewController = HistoryViewController()
         //   self.navigationController?.show(JournalFormViewController(), sender: self)
         self.navigationController?.pushViewController(historyViewController, animated: true)        
-        
+        saveMoodDescription()
+    }
+    
+    func saveMoodDescription() {
+        let myEntry = journalTextEntryView.journalText.text
+//        entry.entryDescription = journalTextEntryView.journalText.text
+        entry?.entryDescription = myEntry
+        if let entry = self.entry {
+            FirebaseDBController.shared.updateEntry(entry: entry)
+        }
     }
     
 }

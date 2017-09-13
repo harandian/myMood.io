@@ -24,7 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Auth.auth().addStateDidChangeListener{ [weak self] (_, user) in
             if let _ = user {
                 //user already logged in
-                self?.window?.rootViewController = UINavigationController(rootViewController: SliderMoodViewController())
+                let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+                let viewController = storyboard.instantiateViewController(withIdentifier: "SliderMoodViewController")
+                self?.window?.rootViewController = UINavigationController(rootViewController: viewController)
             }
         }
         return true

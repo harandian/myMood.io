@@ -16,6 +16,9 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     
     var happinessIndex: Int  = 0
     
+    var entry: Entry = Entry.init(mood: 0)
+    
+    var tapLocation = CGFloat()
     
     let containerView : UIView = {
         let view = UIView()
@@ -53,23 +56,44 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         button.backgroundColor = UIColor.cyan
         button.translatesAutoresizingMaskIntoConstraints =  false
         button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
-
-        
-  
         return button
         
     }()
     
+    let cancelButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("CANCEL", for: .normal)
+        button.backgroundColor = UIColor.red
+        button.translatesAutoresizingMaskIntoConstraints =  false
+        button.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
+        return button
+        
+    }()
+    
+    let topNumberLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let botNumberLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     
 // VIEW DID LOAD 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         navigationController?.setNavigationBarHidden(false, animated: true)
         view.addSubview(containerView)
         view.addSubview(saveButton)
+        view.addSubview(cancelButton)
+        view.addSubview(topNumberLabel)
+        view.addSubview(botNumberLabel)
         
         
         
@@ -84,8 +108,10 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         bottomColoredViewConstraints()
         setButtonConstraints()
         drawDashLine()
-        self.view.backgroundColor = UIColor.white
+        labelSetup()
         
+        self.view.backgroundColor = UIColor.white
+
         
     }
     
@@ -133,30 +159,80 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     
     func setButtonConstraints () {
         
-        saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        saveButton.leadingAnchor.constraint(equalTo: cancelButton.trailingAnchor, constant: 0).isActive = true
         saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         saveButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        saveButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         saveButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        cancelButton.widthAnchor.constraint(equalToConstant: view.frame.width/2).isActive = true
+        cancelButton.heightAnchor.constraint(equalTo: saveButton.heightAnchor, constant: 0).isActive = true
+        cancelButton.bottomAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 0).isActive = true
         
+    }
+    
+    func labelSetup () {
+        
+        topNumberLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
+        topNumberLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: -100).isActive = true
+        topNumberLabel.isHidden = true
+        botNumberLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
+        botNumberLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 100).isActive = true
+        botNumberLabel.isHidden = true
+        
+        topNumberLabel.font = UIFont.boldSystemFont(ofSize: 60)
+        topNumberLabel.textColor = UIColor.white
+        botNumberLabel.font = UIFont.boldSystemFont(ofSize: 60)
+        botNumberLabel.textColor = UIColor.white
+
     }
     
 
     func saveButtonPressed () {
-
-        let journalFormViewController = JournalFormViewController()
+//        let journalFormViewController = JournalFormViewController()
      //   self.navigationController?.show(JournalFormViewController(), sender: self)
-        self.navigationController?.pushViewController(journalFormViewController, animated: true)
+//        self.navigationController?.pushViewController(journalFormViewController, animated: true)
         print(123)
+        saveNewMood()
+        performSegue(withIdentifier: "Journal", sender: self)
+    }
+    
+    
+    func saveNewMood() {
+        let myEntry: Entry = Entry.init(mood: happinessIndex)
+        entry = myEntry
+        FirebaseDBController.shared.insertEntry(entry: myEntry)
+    }
+    
+    func cancelButtonPressed() {
+        
+        tapLocation = CGFloat(containerView.frame.height/2)
+        setupSliders(tapLocation: tapLocation)
+        happinessIndex = 0
+        labelTextSetup(happinessIndex: happinessIndex)
+        print("this is the tap location",tapLocation,"happiness index is",happinessIndex)
     }
 
     
 // GESTURE RECGONIZERS 
     
     func panGesture (sender: UIPanGestureRecognizer) {
-        let tapLocation:CGFloat = sender.location(in: containerView).y
-
         
+        tapLocation = sender.location(in: containerView).y
+        setupSliders(tapLocation: tapLocation)
+        
+        let point:CGPoint = sender.location(in: containerView)
+        let percentage:CGFloat = point.y/containerView.frame.height
+        var value:CGFloat = -1*((21.0 * percentage)-10.0)
+        if (value > 10 ) {
+            value = 10
+        } else if(value < -10) {
+            value = -10
+        }
+        
+        happinessIndex = valueSetToOne(value: value)
+        labelTextSetup(happinessIndex: happinessIndex)
+    }
+        func setupSliders(tapLocation: CGFloat) {
         //Bottom Section
         if tapLocation > containerView.frame.size.height/2 {
             topViewHeightConstraint?.constant = 0
@@ -184,15 +260,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
 
         //TODO - GET THE VALUE OF THE MEASUREMENT - DEPENDENT ON HEIGHT OF RECTANGLE
         // Range is -10 -> 10
-        let point:CGPoint = sender.location(in: containerView)
-        let percentage:CGFloat = point.y/containerView.frame.height
-        var value:CGFloat = -1*((21.0 * percentage)-10.0)
-        if (value > 10 ) {
-            value = 10
-        } else if(value < -10) {
-            value = -10
-        }
-        happinessIndex = Int(value)
+       
     }
     
     
@@ -218,7 +286,11 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         } else if(value < -10) {
             value = -10
         }
-        happinessIndex = Int(value)
+        
+      
+        happinessIndex = valueSetToOne(value: value)
+        labelTextSetup(happinessIndex: happinessIndex)
+
     }
     
     func drawDashLine() {
@@ -254,7 +326,12 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        performSegue(withIdentifier: "formSeg", sender: sender)
+//        performSegue(withIdentifier: "formSeg", sender: sender)
+        
+        if segue.identifier == "Journal" {
+            let journal = segue.destination as? JournalFormViewController
+            journal?.entry = entry
+        }
     }
     
  
@@ -270,6 +347,43 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         yourViewBorder.lineWidth = 3
         containerView.layer.addSublayer(yourViewBorder)
         
+    }
+    
+    func labelTextSetup (happinessIndex: Int) {
+        
+        let hText = String(abs(happinessIndex))
+        
+        if happinessIndex > 0 {
+            topNumberLabel.isHidden = false
+            botNumberLabel.isHidden = true
+            topNumberLabel.text = hText
+        } else if happinessIndex == 0 {
+            topNumberLabel.isHidden = true
+            botNumberLabel.isHidden = true
+            topNumberLabel.text = hText
+            botNumberLabel.text = hText
+        } else {
+            topNumberLabel.isHidden = true
+            botNumberLabel.isHidden = false
+            botNumberLabel.text = hText
+
+        }
+        
+    }
+    
+    func valueSetToOne(value:CGFloat) -> Int {
+        
+        var newValue = value
+        
+        if value > 0 && value < 1 {
+            newValue = 1
+        }
+        
+        if value < 0 && value > -1 {
+            newValue = -1
+        }
+        
+        return Int(newValue)
     }
 
 }
