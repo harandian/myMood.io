@@ -11,6 +11,8 @@ import UIKit
 class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
     
     let moodLineGraph = GraphView()
+    
+    var entries: [Entry] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,16 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
         tapGesture.delegate = self
         view.addSubview(moodLineGraph)
         moodLineGraphSetup()
+        
+        FirebaseDBController.shared.getAllEntries { (snapshot) in
+            for (_, value) in snapshot["Entries"] as! NSDictionary {
+                if let value = value as? NSDictionary {
+                    print(value["Date"] ?? "Could not find date")
+                } else {
+                    print(value)
+                }
+            }
+        }
         
         // Do any additional setup after loading the view.
     }
@@ -52,9 +64,9 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func goToTable() {
-        let historyListViewController = HistoryListViewController()
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let historyListViewController =  storyboard.instantiateViewController(withIdentifier: "historyViewController")//HistoryListViewController()
         self.navigationController?.pushViewController(historyListViewController, animated: true)
-        
     }
     
     

@@ -17,6 +17,7 @@
 		5BE217F91F6728F60009A050 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BE217F81F6728F60009A050 /* MapKit.framework */; };
 		6A5EB1531F5F626F00D1375A /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5EB1521F5F626F00D1375A /* Photo.swift */; };
 		6A79124A1F609C3300BFC4FE /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7912491F609C3300BFC4FE /* GraphView.swift */; };
+		6AF38C1C1F68D6AB008B8E42 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF38C1B1F68D6AB008B8E42 /* HistoryTableViewCell.swift */; };
 		723BC5201F5F26000022ADF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723BC51F1F5F26000022ADF8 /* AppDelegate.swift */; };
 		723BC5221F5F26000022ADF8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723BC5211F5F26000022ADF8 /* LoginViewController.swift */; };
 		723BC5251F5F26000022ADF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 723BC5231F5F26000022ADF8 /* Main.storyboard */; };
@@ -58,6 +59,7 @@
 		5BE217F81F6728F60009A050 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		6A5EB1521F5F626F00D1375A /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		6A7912491F609C3300BFC4FE /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		6AF38C1B1F68D6AB008B8E42 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		723BC51C1F5F26000022ADF8 /* myMood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myMood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		723BC51F1F5F26000022ADF8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		723BC5211F5F26000022ADF8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				723BC5231F5F26000022ADF8 /* Main.storyboard */,
 				725C2DDF1F675F5700FC279E /* HistoryViewController.swift */,
 				725C2DE11F6764F000FC279E /* HistoryListViewController.swift */,
+				6AF38C1B1F68D6AB008B8E42 /* HistoryTableViewCell.swift */,
 				725C2DDA1F673B3900FC279E /* JournalFormViews */,
 				6A4006841F6246B00086BE7E /* Graph */,
 				723BC5291F5F26000022ADF8 /* Assets.xcassets */,
@@ -480,6 +483,7 @@
 				6A79124A1F609C3300BFC4FE /* GraphView.swift in Sources */,
 				11A90A6E1F5F6DF1009F524F /* SliderMoodViewController.swift in Sources */,
 				723BC5201F5F26000022ADF8 /* AppDelegate.swift in Sources */,
+				6AF38C1C1F68D6AB008B8E42 /* HistoryTableViewCell.swift in Sources */,
 				5B7AC8891F5F659C008A70DE /* FirebaseDB.swift in Sources */,
 				725C2DE21F6764F000FC279E /* HistoryListViewController.swift in Sources */,
 				723BC5281F5F26000022ADF8 /* myMood.xcdatamodeld in Sources */,

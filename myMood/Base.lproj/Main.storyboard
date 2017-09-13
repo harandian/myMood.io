@@ -99,17 +99,17 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="A5h-BO-PMw" kind="show" id="Bbb-tQ-bCA"/>
+                        <segue destination="A5h-BO-PMw" kind="show" identifier="HistoryList" id="Bbb-tQ-bCA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="65H-Xj-yMm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3375" y="123"/>
         </scene>
-        <!--History View Controller-->
+        <!--History List View Controller-->
         <scene sceneID="8xb-YA-PJI">
             <objects>
-                <viewController id="A5h-BO-PMw" customClass="HistoryViewController" customModule="myMood" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="historyViewController" id="A5h-BO-PMw" customClass="HistoryListViewController" customModule="myMood" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bZE-Ug-GIY"/>
                         <viewControllerLayoutGuide type="bottom" id="xm7-Px-2bZ"/>
@@ -117,12 +117,60 @@
                     <view key="view" contentMode="scaleToFill" id="LuP-DD-i75">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HLW-sa-1tv">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="90" id="K3H-G4-YsS" customClass="HistoryTableViewCell" customModule="myMood" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K3H-G4-YsS" id="Lte-Rm-grU">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4DY-Vk-PxU">
+                                                    <rect key="frame" x="8" y="8" width="82" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOd-ZX-Kc9">
+                                                    <rect key="frame" x="8" y="49" width="134" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="4DY-Vk-PxU" id="AZo-P6-cpA"/>
+                                            <outlet property="descriptionLabel" destination="bOd-ZX-Kc9" id="A1Y-O1-9Bp"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="A5h-BO-PMw" id="5UJ-M4-fHt"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="HLW-sa-1tv" secondAttribute="trailing" id="Mvt-g3-e5t"/>
+                            <constraint firstItem="HLW-sa-1tv" firstAttribute="leading" secondItem="LuP-DD-i75" secondAttribute="leading" id="ZA4-Wz-d2x"/>
+                            <constraint firstItem="HLW-sa-1tv" firstAttribute="top" secondItem="bZE-Ug-GIY" secondAttribute="bottom" id="ZHN-wh-Jt7"/>
+                            <constraint firstItem="xm7-Px-2bZ" firstAttribute="top" secondItem="HLW-sa-1tv" secondAttribute="bottom" id="jDZ-lX-elD"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="historyListTableView" destination="HLW-sa-1tv" id="x8M-42-fpm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fXf-Fs-VrQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4265" y="123"/>
+            <point key="canvasLocation" x="4264.8000000000002" y="122.78860569715144"/>
         </scene>
     </scenes>
 </document>
