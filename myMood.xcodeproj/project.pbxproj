@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		110045D51F68B58E00D6AA60 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110045D41F68B58E00D6AA60 /* RegisterViewController.swift */; };
 		11A90A6E1F5F6DF1009F524F /* SliderMoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A90A6D1F5F6DF1009F524F /* SliderMoodViewController.swift */; };
 		40DB3C1F5F66819AEA1A7A4B /* Pods_myMoodTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 593A9845255E58BFD1AC101A /* Pods_myMoodTests.framework */; };
 		5B2209451F5F39CD00243717 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B2209441F5F39CD00243717 /* GoogleService-Info.plist */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		110045D41F68B58E00D6AA60 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		11A90A6D1F5F6DF1009F524F /* SliderMoodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderMoodViewController.swift; sourceTree = "<group>"; };
 		593A9845255E58BFD1AC101A /* Pods_myMoodTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_myMoodTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B2209441F5F39CD00243717 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				723BC51F1F5F26000022ADF8 /* AppDelegate.swift */,
 				728CF32C1F60923D0080405B /* WordCLoudGenerator */,
 				723BC5211F5F26000022ADF8 /* LoginViewController.swift */,
+				110045D41F68B58E00D6AA60 /* RegisterViewController.swift */,
 				11A90A6D1F5F6DF1009F524F /* SliderMoodViewController.swift */,
 				723BC5231F5F26000022ADF8 /* Main.storyboard */,
 				725C2DDF1F675F5700FC279E /* HistoryViewController.swift */,
@@ -491,6 +494,7 @@
 				11A90A6E1F5F6DF1009F524F /* SliderMoodViewController.swift in Sources */,
 				723BC5201F5F26000022ADF8 /* AppDelegate.swift in Sources */,
 				5B7AC8891F5F659C008A70DE /* FirebaseDB.swift in Sources */,
+				110045D51F68B58E00D6AA60 /* RegisterViewController.swift in Sources */,
 				725C2DE21F6764F000FC279E /* HistoryListViewController.swift in Sources */,
 				723BC5281F5F26000022ADF8 /* myMood.xcdatamodeld in Sources */,
 				72FD94191F61D0F400391818 /* wordCloudLayoutGenerator.swift in Sources */,
