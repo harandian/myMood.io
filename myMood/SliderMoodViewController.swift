@@ -70,6 +70,17 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         
     }()
     
+    let topNumberLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let botNumberLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     
 // VIEW DID LOAD 
@@ -81,6 +92,8 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         view.addSubview(containerView)
         view.addSubview(saveButton)
         view.addSubview(cancelButton)
+        view.addSubview(topNumberLabel)
+        view.addSubview(botNumberLabel)
         
         
         
@@ -95,6 +108,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         bottomColoredViewConstraints()
         setButtonConstraints()
         drawDashLine()
+        labelSetup()
         
         self.view.backgroundColor = UIColor.white
 
@@ -156,6 +170,22 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         
     }
     
+    func labelSetup () {
+        
+        topNumberLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
+        topNumberLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: -100).isActive = true
+        topNumberLabel.isHidden = true
+        botNumberLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
+        botNumberLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 100).isActive = true
+        botNumberLabel.isHidden = true
+        
+        topNumberLabel.font = UIFont.boldSystemFont(ofSize: 60)
+        topNumberLabel.textColor = UIColor.white
+        botNumberLabel.font = UIFont.boldSystemFont(ofSize: 60)
+        botNumberLabel.textColor = UIColor.white
+
+    }
+    
 
     func saveButtonPressed () {
 //        let journalFormViewController = JournalFormViewController()
@@ -178,7 +208,8 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         tapLocation = CGFloat(containerView.frame.height/2)
         setupSliders(tapLocation: tapLocation)
         happinessIndex = 0
-        print("this is the tap location",tapLocation,"happiness index is",happinessIndex)        
+        labelTextSetup(happinessIndex: happinessIndex)
+        print("this is the tap location",tapLocation,"happiness index is",happinessIndex)
     }
 
     
@@ -197,7 +228,9 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         } else if(value < -10) {
             value = -10
         }
-        happinessIndex = Int(value)
+        
+        happinessIndex = valueSetToOne(value: value)
+        labelTextSetup(happinessIndex: happinessIndex)
     }
         func setupSliders(tapLocation: CGFloat) {
         //Bottom Section
@@ -253,7 +286,11 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         } else if(value < -10) {
             value = -10
         }
-        happinessIndex = Int(value)
+        
+      
+        happinessIndex = valueSetToOne(value: value)
+        labelTextSetup(happinessIndex: happinessIndex)
+
     }
     
     func drawDashLine() {
@@ -310,6 +347,43 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         yourViewBorder.lineWidth = 3
         containerView.layer.addSublayer(yourViewBorder)
         
+    }
+    
+    func labelTextSetup (happinessIndex: Int) {
+        
+        let hText = String(abs(happinessIndex))
+        
+        if happinessIndex > 0 {
+            topNumberLabel.isHidden = false
+            botNumberLabel.isHidden = true
+            topNumberLabel.text = hText
+        } else if happinessIndex == 0 {
+            topNumberLabel.isHidden = true
+            botNumberLabel.isHidden = true
+            topNumberLabel.text = hText
+            botNumberLabel.text = hText
+        } else {
+            topNumberLabel.isHidden = true
+            botNumberLabel.isHidden = false
+            botNumberLabel.text = hText
+
+        }
+        
+    }
+    
+    func valueSetToOne(value:CGFloat) -> Int {
+        
+        var newValue = value
+        
+        if value > 0 && value < 1 {
+            newValue = 1
+        }
+        
+        if value < 0 && value > -1 {
+            newValue = -1
+        }
+        
+        return Int(newValue)
     }
 
 }
