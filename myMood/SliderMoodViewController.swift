@@ -16,6 +16,9 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     
     var happinessIndex: Int  = 0
     
+    var entry: Entry = Entry.init(mood: 0)
+    
+    
     
     let containerView : UIView = {
         let view = UIView()
@@ -143,16 +146,17 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     
 
     func saveButtonPressed () {
-
-        let journalFormViewController = JournalFormViewController()
+//        let journalFormViewController = JournalFormViewController()
      //   self.navigationController?.show(JournalFormViewController(), sender: self)
-        self.navigationController?.pushViewController(journalFormViewController, animated: true)
+//        self.navigationController?.pushViewController(journalFormViewController, animated: true)
         print(123)
         saveNewMood()
+        performSegue(withIdentifier: "Journal", sender: self)
     }
     
     func saveNewMood() {
         let myEntry: Entry = Entry.init(mood: happinessIndex)
+        entry = myEntry
         FirebaseDBController.shared.insertEntry(entry: myEntry)
     }
 
@@ -260,7 +264,12 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        performSegue(withIdentifier: "formSeg", sender: sender)
+//        performSegue(withIdentifier: "formSeg", sender: sender)
+        
+        if segue.identifier == "Journal" {
+            let journal = segue.destination as? JournalFormViewController
+            journal?.entry = entry
+        }
     }
     
  
