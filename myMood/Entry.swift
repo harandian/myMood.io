@@ -12,29 +12,26 @@ import MapKit
 
 class Entry:NSObject {
     var ID:String?
-    var date:Date!
+    var date:Double!
     var entryDescription:String?
     var photo:Photo?
+    var photoURL:String?
     var mood:Int!
     var location:CLLocation?
 
-    init(date:Date, descr:String, photo:Photo, mood:Int, location:CLLocation) {
+    init(date:Double, id: String, mood:Int) {
         self.date = date
-        self.entryDescription = descr
-        self.photo = photo
+        self.ID = id
         self.mood = mood
-        self.location = location
     }
     
-    init(date:Date, descr:String, photo:Photo, mood:Int) {
+    init(date:Double, mood:Int){
         self.date = date
-        self.entryDescription = descr
-        self.photo = photo
         self.mood = mood
     }
     
     init(mood:Int){
-        self.date = Date()
+        self.date = floor(Date().timeIntervalSince1970)
         self.mood = mood
     }
 }

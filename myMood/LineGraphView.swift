@@ -30,23 +30,17 @@ class LineGraphView: UIView {
     var textLabelHeight:CGFloat = 10
     
     //Dot Size
-    let dotSize:CGFloat = 20
+    let dotSize:CGFloat = 10
     
     override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
         graphHeight = (self.frame.height - (topBottomMargins*2))
         incrementVal = graphHeight / 10.0
         
-        FirebaseDBController.shared.getAllEntries {entries in
-            
-            // Clear array in the beginning
-            self.graphPoints.removeAll()
-            
-            for plots in entries ["Entries"] as! NSDictionary {
-                self.graphPoints.append(plots.value as! Int)
-            }
+        self.graphPoints.removeAll()
+        for plots in FirebaseDBController.shared.get_allEntries() {
+            self.graphPoints.append(plots.mood)
         }
-        
     }
 
     

@@ -17,51 +17,49 @@ final class FirebaseDBController {
     
     //Shared instance
     static let shared = FirebaseDBController()
+    private var allEntries:[Entry] = []
     
-    init() {
+    private init() {
         ref = Database.database().reference()
         storage = Storage.storage().reference()
         
         //Sample code + Firebase Setup
         ref.child("Users").child("User_id").updateChildValues(["Name":"Sample",
                                                               "Email":"Sample",
-                                                              "Password":"Sample",
             ])
-        //Each Entry Id needs some sort of detail e.g. title, date, some sort of string
-        ref.child("Users").child("User_id").child("Entries").updateChildValues(["Entry_id":"Mood"])
         
-        ref.child("Entries").child("Entry_id").updateChildValues(["Date":"Sample",
+        ref.child("Entries").child("Entry_id").updateChildValues(["UserID":"Sample",
+                                                                 "Date":"Sample",
                                                                  "Description":"Sample",
                                                                  "PhotoURL":"Sample",
                                                                  "Location":"Sample",
                                                                  "Mood":"Sample"])
         
+        ref.child("Entries").child("Entry_id").child("Location").updateChildValues(["Longitude":"Sample",
+                                                                                    "Latitude":"Sample"])
         
-        //ref.child("Photos").child("Photo_1").updateChildValues(["url":"Sample"])
+        loadAllEntries()
     }
     
     
     /*
  
-     Sample code to call each function:
+     Sample code to get all entries
      
-     FirebaseDBController.shared.getAllEntries() { result in
-        print(result) // result is the NSDictionary object
-     }
+     get_allEntries()
      
-     FirebaseDBController.shared.getEntry(eID: "-KtO4g_VtnCaTZYTKD7Y") { result in
-        print(result)
-     }
-     
- 
     */
+    //Call this to get all the entries
+    func get_allEntries() ->[Entry] {
+        return self.allEntries
+    }
     
-    //GET all data for the user
-    func getAllEntries(completion: @escaping (NSDictionary) -> Void) {
+    //GET all data for the user UNORDERED
+    private func getAllEntries(completion: @escaping (NSDictionary) -> Void) {
         //Save shared variables
         let userID = Auth.auth().currentUser?.uid
-        //var dict:Dictionary<String,Any>?
-        ref.child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+        let query = ref.child("Entries").queryOrdered(byChild: "UserID").queryEqual(toValue: userID)
+        query.observeSingleEvent(of: .value, with: { (snapshot) in
             if let snapshotDict = snapshot.value as? NSDictionary, snapshot.hasChildren(){
                 completion(snapshotDict)
             } else {
@@ -72,7 +70,7 @@ final class FirebaseDBController {
     }
     
     //GET specific entry
-    func getEntry(eID:String, completion: @escaping (NSDictionary) -> Void) {
+    private func getEntry(eID:String, completion: @escaping (NSDictionary) -> Void) {
         ref.child("Entries").child(eID).observeSingleEvent(of: .value, with: { (snapshot) in
             if snapshot.hasChild(eID) {
                 completion(snapshot.value as! NSDictionary)
@@ -89,32 +87,21 @@ final class FirebaseDBController {
     func insertEntry(entry:Entry) {
         let userId = Auth.auth().currentUser?.uid
         
-        //Date
-        let dateFormat = DateFormatter()
-        dateFormat.dateFormat = "dd.MM.yyyy"
-        let date:String = dateFormat.string(from: entry.date)
-        
         //Auto generate entry id
         let newRef = ref.child("Entries").childByAutoId()
-        newRef.setValue(["Date":date,
+        newRef.setValue(["UserID":userId!,
+                         "Date":entry.date,
                          "Mood":entry.mood])
         
         //Set entryID on entry Object
         let entryID = newRef.key
         entry.ID = entryID
         
-        //insert entry to list of entry in user
-        ref.child("Users").child(userId!).child("Entries").updateChildValues([entryID:entry.mood])
     }
     
     //Update the given Properties
     func updateEntry(entry:Entry) {
         var properties = Dictionary<String,Any>()
-        
-        //Change location to string
-        if let loc = entry.location {
-            properties["Location"] = "\(loc.coordinate.latitude),\(loc.coordinate.longitude)"
-        }
         
         //Mood
         properties["Mood"] = entry.mood
@@ -127,6 +114,13 @@ final class FirebaseDBController {
         }
         
         ref.child("Entries").child(entry.ID!).updateChildValues(properties)
+        
+        
+        //Change location to string
+        if let loc = entry.location {
+            ref.child("Entries").child(entry.ID!).child("Location").updateChildValues(["Latitude":loc.coordinate.latitude,
+                                                                                       "Longitude":loc.coordinate.longitude])
+        }
     }
     
     //Insert & Update Photo into Storage
@@ -177,4 +171,51 @@ final class FirebaseDBController {
         }
     }
     
+    
+    
+    func loadAllEntries(){
+        if self.allEntries.count > 0 {return}
+        var temp:[Entry] = []
+        self.getAllEntries { (result) in
+            for entry in result {
+                let dict:NSDictionary  = entry.value as! NSDictionary
+                
+                //Date, mood and ID are a must
+                //Convert UNIX time to date property
+                let newDate = dict["Date"] as! Double
+    
+                //Create new Entry
+                let e:Entry = Entry(date: newDate,
+                              id: entry.key as! String,
+                              mood: dict["Mood"] as! Int)
+                
+                //Check Description
+                if dict["Description"] != nil {
+                    e.entryDescription = dict["Description"] as? String
+                }
+                
+                //Check if Photo is made
+                if dict["PhotoURL"] != nil {
+                    e.photoURL = dict["PhotoURL"] as? String
+                }
+                
+                if dict["Location"] != nil {
+                    let loc:NSDictionary = dict["Location"] as! NSDictionary
+                    let location:CLLocation = CLLocation(latitude: loc["Latitude"] as! Double, longitude: loc["longitude"] as! Double)
+                    e.location = location
+                }
+                
+                temp.append(e)
+                
+            }
+            
+            self.allEntries = temp.sorted(by: { (e1, e2) -> Bool in
+                if e1.date > e2.date {
+                    return true
+                } else {
+                    return false
+                }
+            })
+        }
+    }
 }

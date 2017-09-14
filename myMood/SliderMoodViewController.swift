@@ -18,7 +18,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     
     var entry: Entry = Entry.init(mood: 0)
     
-    
+    var tapLocation = CGFloat()
     
     let containerView : UIView = {
         let view = UIView()
@@ -53,16 +53,59 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     let saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("SAVE", for: .normal)
-        button.backgroundColor = UIColor.cyan
+        button.backgroundColor = UIColor.green
         button.translatesAutoresizingMaskIntoConstraints =  false
         button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
-
-        
-  
+        button.alpha = 0.5
         return button
         
     }()
     
+    let cancelButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("CANCEL", for: .normal)
+        button.backgroundColor = UIColor.blue
+        button.translatesAutoresizingMaskIntoConstraints =  false
+        button.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
+        button.alpha = 0.5
+        return button
+        
+    }()
+    
+    let topNumberLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let botNumberLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let mainLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "myMood"
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = UIColor.black.withAlphaComponent(0.3)
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 60)
+        return label
+    }()
+    
+    let discLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.text = "Please Swipe Up or Down\nto Rate your Mood"
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = UIColor.black.withAlphaComponent(0.5)
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        return label
+    } ()
     
     
 // VIEW DID LOAD 
@@ -73,7 +116,18 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         navigationController?.setNavigationBarHidden(false, animated: true)
         view.addSubview(containerView)
         view.addSubview(saveButton)
-        
+        view.addSubview(cancelButton)
+        view.addSubview(topNumberLabel)
+        view.addSubview(botNumberLabel)
+        view.addSubview(mainLabel)
+        view.addSubview(discLabel)
+   
+        labelSetup()
+        containerViewContraints()
+        topColoredViewConstraints()
+        bottomColoredViewConstraints()
+        setButtonConstraints()
+        drawDashLine()
         
         
         let swipe = UIPanGestureRecognizer(target: self, action: #selector(panGesture))
@@ -82,14 +136,12 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         let touch = UITapGestureRecognizer(target: self, action: #selector(touchGesture))
         containerView.addGestureRecognizer(touch)
         
-        containerViewContraints()
-        topColoredViewConstraints()
-        bottomColoredViewConstraints()
-        setButtonConstraints()
-        drawDashLine()
         self.view.backgroundColor = UIColor.white
+<<<<<<< HEAD
         
         
+=======
+>>>>>>> master
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -136,12 +188,42 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     
     func setButtonConstraints () {
         
-        saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        saveButton.leadingAnchor.constraint(equalTo: cancelButton.trailingAnchor, constant: 0).isActive = true
         saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         saveButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        saveButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         saveButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        cancelButton.widthAnchor.constraint(equalToConstant: view.frame.width/2).isActive = true
+        cancelButton.heightAnchor.constraint(equalTo: saveButton.heightAnchor, constant: 0).isActive = true
+        cancelButton.bottomAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 0).isActive = true
         
+    }
+    
+    func labelSetup () {
+        
+        topNumberLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
+        topNumberLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: -100).isActive = true
+        topNumberLabel.isHidden = true
+        botNumberLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
+        botNumberLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 100).isActive = true
+        botNumberLabel.isHidden = true
+        
+        topNumberLabel.font = UIFont.boldSystemFont(ofSize: 60)
+        topNumberLabel.textColor = UIColor.white
+        botNumberLabel.font = UIFont.boldSystemFont(ofSize: 60)
+        botNumberLabel.textColor = UIColor.white
+        
+        mainLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
+        mainLabel.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: 0)
+        mainLabel.bottomAnchor.constraint(equalTo: containerView.topAnchor, constant: -30).isActive = true
+        mainLabel.widthAnchor.constraint(equalToConstant: self.view.frame.width/2).isActive = true
+        
+        discLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
+        discLabel.bottomAnchor.constraint(equalTo: self.saveButton.topAnchor, constant: 30).isActive = true
+        discLabel.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10).isActive = true
+     //   discLabel.widthAnchor.constraint(equalToConstant: self.view.frame.width/2).isActive = true
+        
+
     }
     
 
@@ -154,19 +236,43 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         performSegue(withIdentifier: "Journal", sender: self)
     }
     
+    
     func saveNewMood() {
         let myEntry: Entry = Entry.init(mood: happinessIndex)
         entry = myEntry
         FirebaseDBController.shared.insertEntry(entry: myEntry)
+    }
+    
+    func cancelButtonPressed() {
+        
+        tapLocation = CGFloat(containerView.frame.height/2)
+        setupSliders(tapLocation: tapLocation)
+        happinessIndex = 0
+        labelTextSetup(happinessIndex: happinessIndex)
+        print("this is the tap location",tapLocation,"happiness index is",happinessIndex)
     }
 
     
 // GESTURE RECGONIZERS 
     
     func panGesture (sender: UIPanGestureRecognizer) {
-        let tapLocation:CGFloat = sender.location(in: containerView).y
-
         
+        tapLocation = sender.location(in: containerView).y
+        setupSliders(tapLocation: tapLocation)
+        
+        let point:CGPoint = sender.location(in: containerView)
+        let percentage:CGFloat = point.y/containerView.frame.height
+        var value:CGFloat = -1*((21.0 * percentage)-10.0)
+        if (value > 10 ) {
+            value = 10
+        } else if(value < -10) {
+            value = -10
+        }
+        
+        happinessIndex = valueSetToOne(value: value)
+        labelTextSetup(happinessIndex: happinessIndex)
+    }
+        func setupSliders(tapLocation: CGFloat) {
         //Bottom Section
         if tapLocation > containerView.frame.size.height/2 {
             topViewHeightConstraint?.constant = 0
@@ -194,15 +300,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
 
         //TODO - GET THE VALUE OF THE MEASUREMENT - DEPENDENT ON HEIGHT OF RECTANGLE
         // Range is -10 -> 10
-        let point:CGPoint = sender.location(in: containerView)
-        let percentage:CGFloat = point.y/containerView.frame.height
-        var value:CGFloat = -1*((21.0 * percentage)-10.0)
-        if (value > 10 ) {
-            value = 10
-        } else if(value < -10) {
-            value = -10
-        }
-        happinessIndex = Int(value)
+       
     }
     
     
@@ -228,7 +326,11 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         } else if(value < -10) {
             value = -10
         }
-        happinessIndex = Int(value)
+        
+      
+        happinessIndex = valueSetToOne(value: value)
+        labelTextSetup(happinessIndex: happinessIndex)
+
     }
     
     func drawDashLine() {
@@ -285,6 +387,43 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         yourViewBorder.lineWidth = 3
         containerView.layer.addSublayer(yourViewBorder)
         
+    }
+    
+    func labelTextSetup (happinessIndex: Int) {
+        
+        let hText = String(abs(happinessIndex))
+        
+        if happinessIndex > 0 {
+            topNumberLabel.isHidden = false
+            botNumberLabel.isHidden = true
+            topNumberLabel.text = hText
+        } else if happinessIndex == 0 {
+            topNumberLabel.isHidden = true
+            botNumberLabel.isHidden = true
+            topNumberLabel.text = hText
+            botNumberLabel.text = hText
+        } else {
+            topNumberLabel.isHidden = true
+            botNumberLabel.isHidden = false
+            botNumberLabel.text = hText
+
+        }
+        
+    }
+    
+    func valueSetToOne(value:CGFloat) -> Int {
+        
+        var newValue = value
+        
+        if value > 0 && value < 1 {
+            newValue = 1
+        }
+        
+        if value < 0 && value > -1 {
+            newValue = -1
+        }
+        
+        return Int(newValue)
     }
 
 }
