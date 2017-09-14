@@ -39,9 +39,16 @@ class LineGraphView: UIView {
         super.willMove(toWindow: newWindow)
         
         self.graphPoints.removeAll()
-        for plots in FirebaseDBController.shared.get_allEntries() {
-            print("Line :\(plots.mood)")
-            self.graphPoints.append(plots.mood)
+        var weekAverge:CGFloat = 0
+        var weekDay:Int = 0
+        for plots in FirebaseDBController.shared.get_allEntries().reversed() {
+            weekAverge += CGFloat(plots.mood)
+            
+            if weekDay == 7 {
+                weekAverge /= 7
+                self.graphPoints.append(Int(weekAverge))
+                weekDay = 0
+            }
         }
         
         graphHeight = (self.frame.height - (topBottomMargins*2))
@@ -162,20 +169,6 @@ class LineGraphView: UIView {
             linePath.stroke()
         }
         
-//        //Draw Vertical
-//        for h in 1...10 {
-//            let xPoint = leftMargin + (CGFloat(h) * incrementVal)
-//            
-//            //Drawing Chart
-//            linePath.move(to: CGPoint(x: xPoint, y: topBottomMargins))
-//            linePath.addLine(to: CGPoint(x: xPoint,
-//                                         y: self.frame.height - topBottomMargins))
-//            
-//            linePath.setLineDash([5.0,5.0], count: 2, phase: 1)
-//            linePath.lineWidth = 1
-//            linePath.stroke()
-//        }
-        
     }
     
     
@@ -192,32 +185,31 @@ class LineGraphView: UIView {
         linePath.lineWidth = 1.0
         linePath.stroke()
         
-        //Vertical Line
-        linePath.move(to: CGPoint(x:leftMargin,
-                                  y: topBottomMargins))
-        linePath.addLine(to: CGPoint(x:leftMargin,
-                                     y:self.frame.size.height - topBottomMargins))
-        linePath.stroke()
-        
+//        //Vertical Line
+//        linePath.move(to: CGPoint(x:leftMargin,
+//                                  y: topBottomMargins))
+//        linePath.addLine(to: CGPoint(x:leftMargin,
+//                                     y:self.frame.size.height - topBottomMargins))
+//        linePath.stroke()
         
         
         //Set the labels
-        var label:Int = 10
-        for i in 0 ... 10{
-            
-            //Position of label
-            let yCenter = topBottomMargins + CGFloat(i) * incrementVal!
-            let xCenter = textPositionRightMargin
-            
-            //Create the text label
-            let text = UILabel()
-            text.frame = CGRect(x: xCenter, y: yCenter, width: textLabelWidth, height: textLabelHeight)
-            text.center = CGPoint(x: xCenter, y: yCenter)
-            text.text = "\(label)"
-            text.font = UIFont.boldSystemFont(ofSize: 10)
-            self.addSubview(text)
-            label -= 2
-        }
+//        var label:Int = 10
+//        for i in 0 ... 10{
+//            
+//            //Position of label
+//            let yCenter = topBottomMargins + CGFloat(i) * incrementVal!
+//            let xCenter = textPositionRightMargin
+//            
+//            //Create the text label
+//            let text = UILabel()
+//            text.frame = CGRect(x: xCenter, y: yCenter, width: textLabelWidth, height: textLabelHeight)
+//            text.center = CGPoint(x: xCenter, y: yCenter)
+//            text.text = "\(label)"
+//            text.font = UIFont.boldSystemFont(ofSize: 10)
+//            self.addSubview(text)
+//            label -= 2
+//        }
     }
     
     
