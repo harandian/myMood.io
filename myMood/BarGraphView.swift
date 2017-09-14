@@ -38,26 +38,14 @@ class BarGraphView: UIView {
         textLabelHeight = incrementVal
         chartWidth = incrementVal
         
-        //Draw Graph
-        //self.graphArray = [4,5,6,7,-10,-9,-8]
-        FirebaseDBController.shared.getAllEntries {entries in
-            for bars in entries.value(forKey: "Entries") as! Dictionary<String, Int>
-            {
-                self.graphArray.append(CGFloat(bars.value))
-                //Only Grab 7
-                if self.graphArray.count == 7 {
-                    break
-                }
+        let temp:[Entry] = FirebaseDBController.shared.get_allEntries()
+        for item in temp {
+            self.graphArray.append(CGFloat(item.mood))
+            if self.graphArray.count > 7 {
+                break
             }
-            self.setNeedsDisplay()
         }
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        //fatalError("init(coder:) has not been implemented")
-    }
-    
+    }    
     
     override func draw(_ rect: CGRect) {
         

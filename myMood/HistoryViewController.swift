@@ -10,7 +10,10 @@ import UIKit
 
 class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
     
-    let moodLineGraph = GraphViewController()
+    let moodLineGraph = GraphView()
+    
+    var entries: [Entry] = []
+    var dateString = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +24,31 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
         tapGesture.delegate = self
         view.addSubview(moodLineGraph)
         moodLineGraphSetup()
+        
+        
+//        FirebaseDBController.shared.getAllEntries { (snapshot) in
+//            for (_, value) in snapshot["Entries"] as! NSDictionary {
+//                if let value = value as? NSDictionary {
+//                    print(value["Date"] ?? "Could not find date")
+//                } else {
+//                    print(value)
+//                }
+//            }
+//            
+//            
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "M/dd/yyyy"
+//            
+//            for (_, value) in result["Entries"] {
+//                
+//                // Array of dictionaries (Entry)
+//                // there's a variable called dateString that hasn't been set yet
+//                // x
+//                
+//                //dateFormatter.string(from: date)
+//            }
+        
+//        }
         
         // Do any additional setup after loading the view.
     }
@@ -52,11 +80,9 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func goToTable() {
-        let historyListViewController = HistoryListViewController()
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let historyListViewController =  storyboard.instantiateViewController(withIdentifier: "historyViewController")//HistoryListViewController()
         self.navigationController?.pushViewController(historyListViewController, animated: true)
-        
     }
-    
-    
 
 }

@@ -112,7 +112,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         navigationController?.setNavigationBarHidden(false, animated: true)
         view.addSubview(containerView)
         view.addSubview(saveButton)
@@ -137,6 +137,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         containerView.addGestureRecognizer(touch)
         
         self.view.backgroundColor = UIColor.white
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
