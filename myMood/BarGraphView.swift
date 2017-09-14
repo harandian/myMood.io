@@ -36,20 +36,14 @@ class BarGraphView: UIView {
         graphHeight = (self.frame.height - (topBottomMargins*2))
         incrementVal = graphHeight / 10.0
         textLabelHeight = incrementVal
-        chartWidth = incrementVal
+        chartWidth = (self.frame.width - leftMargin - rightMargin-1)/7
         
-        //Draw Graph
-        //self.graphArray = [4,5,6,7,-10,-9,-8]
-        FirebaseDBController.shared.getAllEntries {entries in
-            for bars in entries.value(forKey: "Entries") as! Dictionary<String, Int>
-            {
-                self.graphArray.append(CGFloat(bars.value))
-                //Only Grab 7
-                if self.graphArray.count == 7 {
-                    break
-                }
+
+        for item in FirebaseDBController.shared.get_allEntries() {
+            self.graphArray.append(CGFloat(item.mood))
+            if self.graphArray.count > 7 {
+                break
             }
-            self.setNeedsDisplay()
         }
     }
     
@@ -72,7 +66,7 @@ class BarGraphView: UIView {
     func addGraph(height:CGFloat) {
         // Draws next bar
         //left margin + width of graph bar + barwidth/2 + (subviewCount * incrementalVal) + border
-        let nextXOrigin = leftMargin + 1.0 + (incrementVal/2) + (CGFloat(barsOnGraph) * incrementVal)
+        let nextXOrigin = leftMargin + 1.0 + (chartWidth/2) + (CGFloat(barsOnGraph) * chartWidth)
         
         //Height of the bar
         let normalizedHeight = ((height / 10) * (graphHeight / 2))
@@ -82,7 +76,7 @@ class BarGraphView: UIView {
         
         //bar properties
         graphButton.backgroundColor = UIColor.green
-        graphButton.frame = CGRect(x: 0, y: 0, width: chartWidth, height: normalizedHeight)
+        graphButton.frame = CGRect(x: 0, y: 0, width: chartWidth, height: 0)
         graphButton.layer.borderColor = UIColor.black.cgColor
         graphButton.layer.borderWidth = 1.0
         graphButton.setTitle("\(Int(height))", for: UIControlState.normal)
@@ -97,10 +91,16 @@ class BarGraphView: UIView {
             centY = -graphButton.frame.size.height / 2
         }
         
-        let center: CGPoint = CGPoint(x: nextXOrigin, y: centY+(self.frame.size.height/2))
+                let center: CGPoint = CGPoint(x: nextXOrigin, y: centY+(self.frame.size.height/2))
         graphButton.center = center
         
         self.addSubview(graphButton)
+        
+        UIView.animate(withDuration: 1.0) {
+            graphButton.frame.size.height = normalizedHeight
+        }
+
+        
         barsOnGraph += 1
     }
     

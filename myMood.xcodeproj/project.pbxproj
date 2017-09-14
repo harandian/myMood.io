@@ -304,6 +304,7 @@
 				TargetAttributes = {
 					723BC51B1F5F26000022ADF8 = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = HC9D6ZVXMN;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -640,7 +641,7 @@
 			baseConfigurationReference = DB14DF0CFB57582D8BB3B52A /* Pods-myMood.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = HC9D6ZVXMN;
 				INFOPLIST_FILE = myMood/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.mymood;
@@ -654,7 +655,7 @@
 			baseConfigurationReference = F6A9B725F402016C068CEFD5 /* Pods-myMood.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = HC9D6ZVXMN;
 				INFOPLIST_FILE = myMood/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.mymood;
