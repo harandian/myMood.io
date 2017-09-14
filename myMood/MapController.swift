@@ -15,12 +15,19 @@ protocol MapControllerDelegate {
     func updateEventWithLocation(location: CLLocation)
 }
 
-class MapController:UIView, CLLocationManagerDelegate{
+class MapController:UIView, CLLocationManagerDelegate, MapControllerDelegate{
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        self.delegate = nil
+        print("hello")
+    }
     
     @IBOutlet weak var mapView: MKMapView!
     let manager = CLLocationManager()
     
-    let delegate:MapControllerDelegate?
+    var delegate:MapControllerDelegate?
     
     //Setup pin onto map and zoom
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -35,7 +42,7 @@ class MapController:UIView, CLLocationManagerDelegate{
         let annotation = MKPointAnnotation()
         annotation.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude:  location.coordinate.longitude)
         mapView.addAnnotation(annotation)
-        updateEventWithLocation(location)
+        updateEventWithLocation(location: location)
     }
     
     
@@ -52,11 +59,14 @@ class MapController:UIView, CLLocationManagerDelegate{
     //Make map appear and update map
     func createMap(sender: UIGestureRecognizer) {
         mapView.isHidden = false
-
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
+    }
+    
+    func updateEventWithLocation(location: CLLocation) {
+        
     }
     
     //SEND LOCATION TO EVENT
