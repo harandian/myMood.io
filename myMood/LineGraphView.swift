@@ -21,6 +21,9 @@ class LineGraphView: UIView {
     //Increment Values
     var incrementVal:CGFloat!
     
+    //Graph Incremental Dot Width
+    var incrementWidth:CGFloat!
+    
     //Axis measurement values
     let topBottomMargins:CGFloat = 20
     let leftMargin:CGFloat = 40
@@ -30,21 +33,27 @@ class LineGraphView: UIView {
     var textLabelHeight:CGFloat = 10
     
     //Dot Size
-    let dotSize:CGFloat = 10
+    let dotSize:CGFloat = 5
     
     override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
-        graphHeight = (self.frame.height - (topBottomMargins*2))
-        incrementVal = graphHeight / 10.0
         
         self.graphPoints.removeAll()
         for plots in FirebaseDBController.shared.get_allEntries() {
+            print("Line :\(plots.mood)")
             self.graphPoints.append(plots.mood)
         }
+        
+        graphHeight = (self.frame.height - (topBottomMargins*2))
+        incrementVal = graphHeight / 10.0
+        let graphWidth = self.frame.width - (leftMargin + rightMargin)
+        incrementWidth = graphWidth/CGFloat(self.graphPoints.count)
+        
     }
 
     
     override func draw(_ rect: CGRect) {
+        
         
         drawAxis()
         drawBackgroundLayer()
@@ -86,7 +95,7 @@ class LineGraphView: UIView {
             
             //TODO - DESIGN - HOW SPARSE
             //X Position
-            let xPoint:CGFloat = leftMargin + (CGFloat(circlePoint)*incrementVal)
+            let xPoint:CGFloat = leftMargin + (CGFloat(circlePoint)*incrementWidth)
             
             //Setup Point
             let point = CGPoint(x:xPoint,
@@ -94,6 +103,10 @@ class LineGraphView: UIView {
             
             //Add Line
             linePath.addLine(to: point)
+            
+            let color = UIColor(red: 105/255, green: 105/255, blue: 105/255, alpha: 0.5)
+            color.setStroke()
+            
             linePath.stroke()
         }
         
@@ -114,7 +127,7 @@ class LineGraphView: UIView {
             
             //TODO - DESIGN - HOW SPARSE
             //X Position
-            var xPoint:CGFloat = leftMargin + (CGFloat(index)*incrementVal)
+            var xPoint:CGFloat = leftMargin + (CGFloat(index)*incrementWidth)
             
             //Normalize to dot center
             yPoint += dotSize/2
@@ -144,22 +157,24 @@ class LineGraphView: UIView {
             
             linePath.setLineDash([5.0,5.0], count: 2, phase: 1)
             linePath.lineWidth = 1
+            let color = UIColor(red: 211/255, green: 211/255, blue: 211/255, alpha: 0.25)
+            color.setStroke()
             linePath.stroke()
         }
         
-        //Draw Vertical
-        for h in 1...10 {
-            let xPoint = leftMargin + (CGFloat(h) * incrementVal)
-            
-            //Drawing Chart
-            linePath.move(to: CGPoint(x: xPoint, y: topBottomMargins))
-            linePath.addLine(to: CGPoint(x: xPoint,
-                                         y: self.frame.height - topBottomMargins))
-            
-            linePath.setLineDash([5.0,5.0], count: 2, phase: 1)
-            linePath.lineWidth = 1
-            linePath.stroke()
-        }
+//        //Draw Vertical
+//        for h in 1...10 {
+//            let xPoint = leftMargin + (CGFloat(h) * incrementVal)
+//            
+//            //Drawing Chart
+//            linePath.move(to: CGPoint(x: xPoint, y: topBottomMargins))
+//            linePath.addLine(to: CGPoint(x: xPoint,
+//                                         y: self.frame.height - topBottomMargins))
+//            
+//            linePath.setLineDash([5.0,5.0], count: 2, phase: 1)
+//            linePath.lineWidth = 1
+//            linePath.stroke()
+//        }
         
     }
     
