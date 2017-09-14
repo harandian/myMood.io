@@ -64,8 +64,10 @@ class LineGraphView: UIView {
         
         drawAxis()
         drawBackgroundLayer()
-        drawDots()
-        drawLines()
+        if (graphPoints.count > 0) {
+            drawDots()
+            drawLines()
+        }
     }
     
     func drawLines() {
