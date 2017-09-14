@@ -37,7 +37,8 @@ class HistoryListViewController: UIViewController, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! HistoryTableViewCell
         
         let entry = entries[indexPath.row]
-        cell.descriptionLabel.text = entry
+        cell.moodLabel.text = entry
+//        cell.dateLabel.text =
         
         return cell
     }
@@ -52,5 +53,6 @@ class HistoryListViewController: UIViewController, UITableViewDataSource {
         // Pass the selected object to the new view controller.
     }
     */
+
 
 }

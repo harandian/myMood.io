@@ -11,7 +11,7 @@ import UIKit
 class HistoryTableViewCell: UITableViewCell {
     
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var moodLabel: UILabel!
     
 
     override func awakeFromNib() {

@@ -13,6 +13,7 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
     let moodLineGraph = GraphView()
     
     var entries: [Entry] = []
+    var dateString = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,20 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
                     print(value)
                 }
             }
+            
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "M/dd/yyyy"
+            
+            for (_, value) in result["Entries"] {
+                
+                // Array of dictionaries (Entry)
+                // there's a variable called dateString that hasn't been set yet
+                // x
+                
+                //dateFormatter.string(from: date)
+            }
+            
         }
         
         // Do any additional setup after loading the view.
@@ -68,7 +83,5 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
         let historyListViewController =  storyboard.instantiateViewController(withIdentifier: "historyViewController")//HistoryListViewController()
         self.navigationController?.pushViewController(historyListViewController, animated: true)
     }
-    
-    
 
 }
