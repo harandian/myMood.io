@@ -113,7 +113,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
         view.addSubview(containerView)
         view.addSubview(saveButton)
         view.addSubview(cancelButton)
