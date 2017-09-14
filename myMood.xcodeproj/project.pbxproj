@@ -18,6 +18,7 @@
 		6A5EB1531F5F626F00D1375A /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5EB1521F5F626F00D1375A /* Photo.swift */; };
 		6A79124A1F609C3300BFC4FE /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7912491F609C3300BFC4FE /* GraphView.swift */; };
 		6AF38C1C1F68D6AB008B8E42 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF38C1B1F68D6AB008B8E42 /* HistoryTableViewCell.swift */; };
+		72020F611F6B402C00B5B587 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE217F41F6727720009A050 /* MapController.swift */; };
 		723BC5201F5F26000022ADF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723BC51F1F5F26000022ADF8 /* AppDelegate.swift */; };
 		723BC5221F5F26000022ADF8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723BC5211F5F26000022ADF8 /* LoginViewController.swift */; };
 		723BC5251F5F26000022ADF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 723BC5231F5F26000022ADF8 /* Main.storyboard */; };
@@ -487,6 +488,7 @@
 				5B7AC8891F5F659C008A70DE /* FirebaseDB.swift in Sources */,
 				725C2DE21F6764F000FC279E /* HistoryListViewController.swift in Sources */,
 				723BC5281F5F26000022ADF8 /* myMood.xcdatamodeld in Sources */,
+				72020F611F6B402C00B5B587 /* MapController.swift in Sources */,
 				72FD94191F61D0F400391818 /* wordCloudLayoutGenerator.swift in Sources */,
 				725C2DDC1F673B6700FC279E /* TextEntry.swift in Sources */,
 			);
