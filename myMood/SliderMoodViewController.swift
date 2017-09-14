@@ -89,7 +89,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "myMood"
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = UIColor.black.withAlphaComponent(0.3)
+        label.textColor = UIColor.black.withAlphaComponent(0.8)
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 60)
         return label
@@ -101,7 +101,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         label.numberOfLines = 0
         label.text = "Please Swipe Up or Down\nto Rate your Mood"
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = UIColor.black.withAlphaComponent(0.5)
+        label.textColor = UIColor.black.withAlphaComponent(0.8)
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
@@ -397,11 +397,14 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
             botNumberLabel.isHidden = true
             topNumberLabel.text = hText
             botNumberLabel.text = hText
-        } else {
+        } else if happinessIndex < 0{
             topNumberLabel.isHidden = true
             botNumberLabel.isHidden = false
             botNumberLabel.text = hText
 
+        } else {
+            topNumberLabel.isHidden = false
+            botNumberLabel.isHidden = false
         }
         
     }
