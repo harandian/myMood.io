@@ -53,9 +53,10 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     let saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("SAVE", for: .normal)
-        button.backgroundColor = UIColor.cyan
+        button.backgroundColor = UIColor.green
         button.translatesAutoresizingMaskIntoConstraints =  false
         button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
+        button.alpha = 0.5
         return button
         
     }()
@@ -63,9 +64,10 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     let cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle("CANCEL", for: .normal)
-        button.backgroundColor = UIColor.red
+        button.backgroundColor = UIColor.blue
         button.translatesAutoresizingMaskIntoConstraints =  false
         button.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
+        button.alpha = 0.5
         return button
         
     }()
@@ -82,6 +84,29 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         return label
     }()
     
+    let mainLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "myMood"
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = UIColor.black.withAlphaComponent(0.3)
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 60)
+        return label
+    }()
+    
+    let discLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.text = "Please Swipe Up or Down\nto Rate your Mood"
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = UIColor.black.withAlphaComponent(0.5)
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        return label
+    } ()
+    
     
 // VIEW DID LOAD 
     
@@ -94,7 +119,15 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         view.addSubview(cancelButton)
         view.addSubview(topNumberLabel)
         view.addSubview(botNumberLabel)
-        
+        view.addSubview(mainLabel)
+        view.addSubview(discLabel)
+   
+        labelSetup()
+        containerViewContraints()
+        topColoredViewConstraints()
+        bottomColoredViewConstraints()
+        setButtonConstraints()
+        drawDashLine()
         
         
         let swipe = UIPanGestureRecognizer(target: self, action: #selector(panGesture))
@@ -103,16 +136,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         let touch = UITapGestureRecognizer(target: self, action: #selector(touchGesture))
         containerView.addGestureRecognizer(touch)
         
-        containerViewContraints()
-        topColoredViewConstraints()
-        bottomColoredViewConstraints()
-        setButtonConstraints()
-        drawDashLine()
-        labelSetup()
-        
         self.view.backgroundColor = UIColor.white
-
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -183,6 +207,17 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         topNumberLabel.textColor = UIColor.white
         botNumberLabel.font = UIFont.boldSystemFont(ofSize: 60)
         botNumberLabel.textColor = UIColor.white
+        
+        mainLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
+        mainLabel.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: 0)
+        mainLabel.bottomAnchor.constraint(equalTo: containerView.topAnchor, constant: -30).isActive = true
+        mainLabel.widthAnchor.constraint(equalToConstant: self.view.frame.width/2).isActive = true
+        
+        discLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
+        discLabel.bottomAnchor.constraint(equalTo: self.saveButton.topAnchor, constant: 30).isActive = true
+        discLabel.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10).isActive = true
+     //   discLabel.widthAnchor.constraint(equalToConstant: self.view.frame.width/2).isActive = true
+        
 
     }
     
