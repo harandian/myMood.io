@@ -137,11 +137,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         containerView.addGestureRecognizer(touch)
         
         self.view.backgroundColor = UIColor.white
-<<<<<<< HEAD
-        
-        
-=======
->>>>>>> master
+
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -12,7 +12,8 @@ class HistoryListViewController: UIViewController, UITableViewDataSource {
 
     @IBOutlet weak var historyListTableView: UITableView!
     
-    var entries:[String] = []
+    var entries:[Entry] = []
+    var dateString = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +21,7 @@ class HistoryListViewController: UIViewController, UITableViewDataSource {
         view.backgroundColor = UIColor.brown
         // Do any additional setup after loading the view.
         self.automaticallyAdjustsScrollViewInsets = false
-        entries = ["Today", "is", "another", "day", "in", "my", "life"]
+        entries = FirebaseDBController.shared.get_allEntries()
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,11 +37,22 @@ class HistoryListViewController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! HistoryTableViewCell
         
+        
+        
         let entry = entries[indexPath.row]
-        cell.moodLabel.text = entry
-//        cell.dateLabel.text =
+        cell.moodLabel.text = String(entry.mood)
+        cell.dateLabel.text = convertDateFromUnix(unixDate: entry.date) //String(entry.date)
         
         return cell
+    }
+    
+    func convertDateFromUnix(unixDate: Double) -> String {
+        let date = NSDate(timeIntervalSince1970: TimeInterval(unixDate))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd YYYY"
+        
+        dateString = dateFormatter.string(from: date as Date)
+        return dateString
     }
     
 

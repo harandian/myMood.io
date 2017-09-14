@@ -48,7 +48,7 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
 //                //dateFormatter.string(from: date)
 //            }
         
-        }
+//        }
         
         // Do any additional setup after loading the view.
     }
