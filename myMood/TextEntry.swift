@@ -45,8 +45,7 @@ class TextEntry: UIView, UITextViewDelegate {
         if(text == "\n")
         {
             self.endEditing(true)
-            let inputText = textView.text
-            textEntryHeader.text = inputText
+           // let inputText = textView.text
             if textView.text.isEmpty {
                 journalText.text = " How was your day?"
                 return true

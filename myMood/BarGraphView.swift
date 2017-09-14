@@ -40,18 +40,13 @@ class BarGraphView: UIView {
         
 
         for item in FirebaseDBController.shared.get_allEntries() {
+
             self.graphArray.append(CGFloat(item.mood))
             if self.graphArray.count > 7 {
                 break
             }
         }
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        //fatalError("init(coder:) has not been implemented")
-    }
-    
+    }    
     
     override func draw(_ rect: CGRect) {
         
