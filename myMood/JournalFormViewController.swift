@@ -120,6 +120,7 @@ class JournalFormViewController: UIViewController {
         imagePicker.heightAnchor.constraint(equalToConstant: 300).isActive = true
         imagePicker.topAnchor.constraint(equalTo: journalTextEntryView.bottomAnchor, constant: 0).isActive = true
         imagePicker.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor, constant: 0).isActive = true
+        imagePicker.backgroundColor = UIColor.red
         
         
     }
