@@ -12,10 +12,11 @@
 		40DB3C1F5F66819AEA1A7A4B /* Pods_myMoodTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 593A9845255E58BFD1AC101A /* Pods_myMoodTests.framework */; };
 		5B2209451F5F39CD00243717 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B2209441F5F39CD00243717 /* GoogleService-Info.plist */; };
 		5B7574881F68715300889E63 /* ImagePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B7574871F68715200889E63 /* ImagePicker.xib */; };
-		5B75748A1F68B15700889E63 /* GraphView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B7574891F68B15700889E63 /* GraphView.xib */; };
-		5B75748C1F68B15F00889E63 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B75748B1F68B15F00889E63 /* GraphViewController.swift */; };
+		5B75748A1F68B15700889E63 /* LineGraphView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B7574891F68B15700889E63 /* LineGraphView.xib */; };
 		5B7AC8891F5F659C008A70DE /* FirebaseDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7AC8881F5F659C008A70DE /* FirebaseDB.swift */; };
+		5BA050D21F6B1C87000EB4EC /* BarGraphView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BA050D11F6B1C87000EB4EC /* BarGraphView.xib */; };
 		5BAAC1EF1F607C2B00A8D331 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAAC1EE1F607C2B00A8D331 /* Entry.swift */; };
+		5BC66A8B1F6A671C0024212C /* BarGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9A83301F673EDB0018AB7F /* BarGraphView.swift */; };
 		5BE217F01F6724C40009A050 /* map.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE217EF1F6724C40009A050 /* map.xib */; };
 		5BE217F91F6728F60009A050 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BE217F81F6728F60009A050 /* MapKit.framework */; };
 		6A5EB1531F5F626F00D1375A /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5EB1521F5F626F00D1375A /* Photo.swift */; };
@@ -55,9 +56,9 @@
 		593A9845255E58BFD1AC101A /* Pods_myMoodTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_myMoodTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B2209441F5F39CD00243717 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5B7574871F68715200889E63 /* ImagePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagePicker.xib; sourceTree = "<group>"; };
-		5B7574891F68B15700889E63 /* GraphView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GraphView.xib; sourceTree = "<group>"; };
-		5B75748B1F68B15F00889E63 /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
+		5B7574891F68B15700889E63 /* LineGraphView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineGraphView.xib; sourceTree = "<group>"; };
 		5B7AC8881F5F659C008A70DE /* FirebaseDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDB.swift; sourceTree = "<group>"; };
+		5BA050D11F6B1C87000EB4EC /* BarGraphView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BarGraphView.xib; sourceTree = "<group>"; };
 		5BAAC1EE1F607C2B00A8D331 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		5BE217EF1F6724C40009A050 /* map.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = map.xib; sourceTree = "<group>"; };
 		5BE217F41F6727720009A050 /* MapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
@@ -146,8 +147,8 @@
 			children = (
 				6A7912491F609C3300BFC4FE /* LineGraphView.swift */,
 				6A9A83301F673EDB0018AB7F /* BarGraphView.swift */,
-				5B7574891F68B15700889E63 /* GraphView.xib */,
-				5B75748B1F68B15F00889E63 /* GraphViewController.swift */,
+				5B7574891F68B15700889E63 /* LineGraphView.xib */,
+				5BA050D11F6B1C87000EB4EC /* BarGraphView.xib */,
 			);
 			name = Graph;
 			sourceTree = "<group>";
@@ -351,11 +352,12 @@
 				5B7574881F68715300889E63 /* ImagePicker.xib in Resources */,
 				723BC52D1F5F26000022ADF8 /* LaunchScreen.storyboard in Resources */,
 				728CF3321F6094B50080405B /* wordCloudLayout.xib in Resources */,
-				5B75748A1F68B15700889E63 /* GraphView.xib in Resources */,
+				5B75748A1F68B15700889E63 /* LineGraphView.xib in Resources */,
 				5B2209451F5F39CD00243717 /* GoogleService-Info.plist in Resources */,
 				725C2DDE1F673B9D00FC279E /* textEntry.xib in Resources */,
 				723BC52A1F5F26000022ADF8 /* Assets.xcassets in Resources */,
 				723BC5251F5F26000022ADF8 /* Main.storyboard in Resources */,
+				5BA050D21F6B1C87000EB4EC /* BarGraphView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,7 +490,6 @@
 				725C2DE01F675F5800FC279E /* HistoryViewController.swift in Sources */,
 				6A5EB1531F5F626F00D1375A /* Photo.swift in Sources */,
 				725C2DD91F673ACC00FC279E /* ImagePicker.swift in Sources */,
-				5B75748C1F68B15F00889E63 /* GraphViewController.swift in Sources */,
 				728CF3341F60986F0080405B /* testViewController.swift in Sources */,
 				723BC5221F5F26000022ADF8 /* LoginViewController.swift in Sources */,
 				6A79124A1F609C3300BFC4FE /* LineGraphView.swift in Sources */,
@@ -498,6 +499,7 @@
 				110045D51F68B58E00D6AA60 /* RegisterViewController.swift in Sources */,
 				725C2DE21F6764F000FC279E /* HistoryListViewController.swift in Sources */,
 				723BC5281F5F26000022ADF8 /* myMood.xcdatamodeld in Sources */,
+				5BC66A8B1F6A671C0024212C /* BarGraphView.swift in Sources */,
 				72FD94191F61D0F400391818 /* wordCloudLayoutGenerator.swift in Sources */,
 				725C2DDC1F673B6700FC279E /* TextEntry.swift in Sources */,
 			);
