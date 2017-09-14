@@ -15,6 +15,7 @@ class GraphView: UIView {
     // Hard coded values for now for plotted points
     
     var graphPoints:[Int] = [4, 2, 6, 4, 5, 8, 3]
+    var entries:[Entry] = []
     
     // create rect property
 //    var rect: CGRect
@@ -28,26 +29,34 @@ class GraphView: UIView {
         super.init(frame: frame)
 
         // TODO: Get all data from the user from FirebaseDB class
-        FirebaseDBController.shared.getAllEntries { (userMood) in
-            if let error = userMood["error"] {
-                print(error)
-                return
-            }
-            //Fix this so it becomes an array
-//            self.graphPoints = userMood["Entries"]! as! [Int]
-            
-//            print("Graphpoints \(self.graphPoints)")
-            
-            // Clear array in the beginning
-            self.graphPoints.removeAll()
-            
-            for (_, value) in userMood["Entries"] as! NSDictionary {
-                self.graphPoints.append(value as! Int)
-            }
-            
-            self.setNeedsDisplay() // This need to be redrawn
-//            print("Mood \(self.graphPoints)")
+        entries = FirebaseDBController.shared.get_allEntries()
+        graphPoints.removeAll()
+        
+        print("This is all of my entries \(entries)")
+        for entry in entries {
+            graphPoints.append(entry.mood)
         }
+        
+//        FirebaseDBController.shared.getAllEntries { (userMood) in
+//            if let error = userMood["error"] {
+//                print(error)
+//                return
+//            }
+//            //Fix this so it becomes an array
+////            self.graphPoints = userMood["Entries"]! as! [Int]
+//            
+////            print("Graphpoints \(self.graphPoints)")
+//            
+//            // Clear array in the beginning
+//            self.graphPoints.removeAll()
+//            
+//            for (_, value) in userMood["Entries"] as! NSDictionary {
+//                self.graphPoints.append(value as! Int)
+//            }
+//            
+//            self.setNeedsDisplay() // This need to be redrawn
+////            print("Mood \(self.graphPoints)")
+//        }
     }
     
     required init?(coder aDecoder: NSCoder) {
