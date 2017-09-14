@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import MapKit
 
-struct Entry:NSObject {
+class Entry:NSObject {
     var ID:String?
     var date:Double!
     var entryDescription:String?

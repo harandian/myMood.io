@@ -186,22 +186,22 @@ final class FirebaseDBController {
     
                 //Create new Entry
                 let e:Entry = Entry(date: newDate,
-                              id: entry.key,
+                              id: entry.key as! String,
                               mood: dict["Mood"] as! Int)
                 
                 //Check Description
                 if dict["Description"] != nil {
-                    e.entryDescription = dict["Description"]
+                    e.entryDescription = dict["Description"] as? String
                 }
                 
                 //Check if Photo is made
                 if dict["PhotoURL"] != nil {
-                    e.photoURL = dict["PhotoURL"]
+                    e.photoURL = dict["PhotoURL"] as? String
                 }
                 
                 if dict["Location"] != nil {
-                    let loc:NSDictionary = dict["Location"]
-                    let location:CLLocation = CLLocationCoordinate2D(latitude: loc["Latitude"], longitude: loc["longitude"])
+                    let loc:NSDictionary = dict["Location"] as! NSDictionary
+                    let location:CLLocation = CLLocation(latitude: loc["Latitude"] as! Double, longitude: loc["longitude"] as! Double)
                     e.location = location
                 }
                 
