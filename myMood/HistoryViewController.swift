@@ -25,6 +25,9 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
         view.addSubview(moodLineGraph)
         moodLineGraphSetup()
         
+        // Get all entries from Firebase
+        entries = FirebaseDBController.shared.get_allEntries()
+        
         
 //        FirebaseDBController.shared.getAllEntries { (snapshot) in
 //            for (_, value) in snapshot["Entries"] as! NSDictionary {

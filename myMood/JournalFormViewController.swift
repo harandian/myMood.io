@@ -8,6 +8,14 @@
 
 import UIKit
 
+protocol JournalEntry {
+    var journalEntry: String {get}
+}
+
+struct DayEntry: JournalEntry {
+    let journalEntry: String
+}
+
 class JournalFormViewController: UIViewController {
     
     var journalTextEntryView = Bundle.main.loadNibNamed("textEntry", owner: nil, options: nil)?.first! as! TextEntry
