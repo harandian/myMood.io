@@ -96,7 +96,7 @@ final class FirebaseDBController {
         //Set entryID on entry Object
         let entryID = newRef.key
         entry.ID = entryID
-        
+
     }
     
     //Update the given Properties

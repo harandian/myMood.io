@@ -11,13 +11,18 @@
 		40DB3C1F5F66819AEA1A7A4B /* Pods_myMoodTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 593A9845255E58BFD1AC101A /* Pods_myMoodTests.framework */; };
 		5B2209451F5F39CD00243717 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B2209441F5F39CD00243717 /* GoogleService-Info.plist */; };
 		5B7574881F68715300889E63 /* ImagePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B7574871F68715200889E63 /* ImagePicker.xib */; };
+		5B75748A1F68B15700889E63 /* LineGraphView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B7574891F68B15700889E63 /* LineGraphView.xib */; };
 		5B7AC8891F5F659C008A70DE /* FirebaseDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7AC8881F5F659C008A70DE /* FirebaseDB.swift */; };
+		5BA050D21F6B1C87000EB4EC /* BarGraphView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BA050D11F6B1C87000EB4EC /* BarGraphView.xib */; };
+		5BA050D41F6B4106000EB4EC /* LineGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA050D31F6B4106000EB4EC /* LineGraphView.swift */; };
+		5BA050D61F6B4118000EB4EC /* BarGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA050D51F6B4118000EB4EC /* BarGraphView.swift */; };
 		5BAAC1EF1F607C2B00A8D331 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAAC1EE1F607C2B00A8D331 /* Entry.swift */; };
+		5BC66A8B1F6A671C0024212C /* (null) in Sources */ = {isa = PBXBuildFile; };
 		5BE217F01F6724C40009A050 /* map.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE217EF1F6724C40009A050 /* map.xib */; };
 		5BE217F91F6728F60009A050 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BE217F81F6728F60009A050 /* MapKit.framework */; };
 		6A5EB1531F5F626F00D1375A /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5EB1521F5F626F00D1375A /* Photo.swift */; };
-		6A79124A1F609C3300BFC4FE /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7912491F609C3300BFC4FE /* GraphView.swift */; };
 		6AF38C1C1F68D6AB008B8E42 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF38C1B1F68D6AB008B8E42 /* HistoryTableViewCell.swift */; };
+		72020F611F6B402C00B5B587 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE217F41F6727720009A050 /* MapController.swift */; };
 		723BC5201F5F26000022ADF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723BC51F1F5F26000022ADF8 /* AppDelegate.swift */; };
 		723BC5221F5F26000022ADF8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723BC5211F5F26000022ADF8 /* LoginViewController.swift */; };
 		723BC5251F5F26000022ADF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 723BC5231F5F26000022ADF8 /* Main.storyboard */; };
@@ -52,13 +57,16 @@
 		593A9845255E58BFD1AC101A /* Pods_myMoodTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_myMoodTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B2209441F5F39CD00243717 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5B7574871F68715200889E63 /* ImagePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagePicker.xib; sourceTree = "<group>"; };
+		5B7574891F68B15700889E63 /* LineGraphView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineGraphView.xib; sourceTree = "<group>"; };
 		5B7AC8881F5F659C008A70DE /* FirebaseDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDB.swift; sourceTree = "<group>"; };
+		5BA050D11F6B1C87000EB4EC /* BarGraphView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BarGraphView.xib; sourceTree = "<group>"; };
+		5BA050D31F6B4106000EB4EC /* LineGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineGraphView.swift; sourceTree = "<group>"; };
+		5BA050D51F6B4118000EB4EC /* BarGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarGraphView.swift; sourceTree = "<group>"; };
 		5BAAC1EE1F607C2B00A8D331 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		5BE217EF1F6724C40009A050 /* map.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = map.xib; sourceTree = "<group>"; };
 		5BE217F41F6727720009A050 /* MapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		5BE217F81F6728F60009A050 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		6A5EB1521F5F626F00D1375A /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
-		6A7912491F609C3300BFC4FE /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		6AF38C1B1F68D6AB008B8E42 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		723BC51C1F5F26000022ADF8 /* myMood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myMood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		723BC51F1F5F26000022ADF8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -139,7 +147,10 @@
 		6A4006841F6246B00086BE7E /* Graph */ = {
 			isa = PBXGroup;
 			children = (
-				6A7912491F609C3300BFC4FE /* GraphView.swift */,
+				5BA050D51F6B4118000EB4EC /* BarGraphView.swift */,
+				5BA050D31F6B4106000EB4EC /* LineGraphView.swift */,
+				5B7574891F68B15700889E63 /* LineGraphView.xib */,
+				5BA050D11F6B1C87000EB4EC /* BarGraphView.xib */,
 			);
 			name = Graph;
 			sourceTree = "<group>";
@@ -296,6 +307,7 @@
 				TargetAttributes = {
 					723BC51B1F5F26000022ADF8 = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = HC9D6ZVXMN;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -342,10 +354,12 @@
 				5B7574881F68715300889E63 /* ImagePicker.xib in Resources */,
 				723BC52D1F5F26000022ADF8 /* LaunchScreen.storyboard in Resources */,
 				728CF3321F6094B50080405B /* wordCloudLayout.xib in Resources */,
+				5B75748A1F68B15700889E63 /* LineGraphView.xib in Resources */,
 				5B2209451F5F39CD00243717 /* GoogleService-Info.plist in Resources */,
 				725C2DDE1F673B9D00FC279E /* textEntry.xib in Resources */,
 				723BC52A1F5F26000022ADF8 /* Assets.xcassets in Resources */,
 				723BC5251F5F26000022ADF8 /* Main.storyboard in Resources */,
+				5BA050D21F6B1C87000EB4EC /* BarGraphView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,18 +489,20 @@
 			files = (
 				725C2DD61F6731C600FC279E /* JournalFormViewController.swift in Sources */,
 				5BAAC1EF1F607C2B00A8D331 /* Entry.swift in Sources */,
+				5BA050D61F6B4118000EB4EC /* BarGraphView.swift in Sources */,
 				725C2DE01F675F5800FC279E /* HistoryViewController.swift in Sources */,
 				6A5EB1531F5F626F00D1375A /* Photo.swift in Sources */,
 				725C2DD91F673ACC00FC279E /* ImagePicker.swift in Sources */,
+				5BA050D41F6B4106000EB4EC /* LineGraphView.swift in Sources */,
 				728CF3341F60986F0080405B /* testViewController.swift in Sources */,
 				723BC5221F5F26000022ADF8 /* LoginViewController.swift in Sources */,
-				6A79124A1F609C3300BFC4FE /* GraphView.swift in Sources */,
 				11A90A6E1F5F6DF1009F524F /* SliderMoodViewController.swift in Sources */,
 				723BC5201F5F26000022ADF8 /* AppDelegate.swift in Sources */,
 				6AF38C1C1F68D6AB008B8E42 /* HistoryTableViewCell.swift in Sources */,
 				5B7AC8891F5F659C008A70DE /* FirebaseDB.swift in Sources */,
 				725C2DE21F6764F000FC279E /* HistoryListViewController.swift in Sources */,
 				723BC5281F5F26000022ADF8 /* myMood.xcdatamodeld in Sources */,
+				72020F611F6B402C00B5B587 /* MapController.swift in Sources */,
 				72FD94191F61D0F400391818 /* wordCloudLayoutGenerator.swift in Sources */,
 				725C2DDC1F673B6700FC279E /* TextEntry.swift in Sources */,
 			);
@@ -630,7 +646,7 @@
 			baseConfigurationReference = DB14DF0CFB57582D8BB3B52A /* Pods-myMood.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = HC9D6ZVXMN;
 				INFOPLIST_FILE = myMood/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.mymood;
@@ -644,7 +660,7 @@
 			baseConfigurationReference = F6A9B725F402016C068CEFD5 /* Pods-myMood.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = HC9D6ZVXMN;
 				INFOPLIST_FILE = myMood/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.mymood;
