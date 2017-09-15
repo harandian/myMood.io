@@ -63,7 +63,7 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func graphConstraints() {
         scrollViewGraphView.addSubview(barGraphView)
-        
+        barGraphView.isUserInteractionEnabled = false
         barGraphView.translatesAutoresizingMaskIntoConstraints = false
         barGraphView.topAnchor.constraint(equalTo: scrollViewGraphView.topAnchor, constant: 0).isActive = true
         barGraphView.leadingAnchor.constraint(equalTo: super.view.leadingAnchor, constant: 0).isActive = true
@@ -99,12 +99,22 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
         scrollViewCenterXConstraint.isActive = true
         scrollViewCenterXConstraint.identifier = "scrollviewxConstraint"
         graphConstraints()
+        wordCloudViewSetup()
 
     }
     
     func wordCloudViewSetup() {
         scrollViewGraphView.addSubview(wordCloudLayout)
+        wordCloudLayout.translatesAutoresizingMaskIntoConstraints = false
+        wordCloudLayout.topAnchor.constraint(equalTo: lineGraphView.bottomAnchor, constant: 0).isActive = true
+        wordCloudLayout.leadingAnchor.constraint(equalTo: super.view.leadingAnchor, constant: 0).isActive = true
+        wordCloudLayout.trailingAnchor.constraint(equalTo: super.view.trailingAnchor, constant: 0).isActive = true
+        wordCloudLayout.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        wordCloudLayout.bottomAnchor.constraint(equalTo: scrollViewGraphView.bottomAnchor, constant: 0).isActive = true
         
+        wordCloudLayout.backgroundColor = UIColor.white
+        wordCloudLayout.layer.borderWidth = 1
+
         
         
         
