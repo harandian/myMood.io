@@ -14,7 +14,7 @@ class JournalFormViewController: UIViewController, ImagePickerDelegate, MapContr
     var journalTextEntryView = Bundle.main.loadNibNamed("textEntry", owner: nil, options: nil)?.first! as! TextEntry
     var mapView = Bundle.main.loadNibNamed("map", owner: nil, options: nil)?.first! as! MapController
     
-    var imagePicker = Bundle.main.loadNibNamed("ImagePicker", owner: nil, options: nil)?.first! as! UIView
+    var imagePicker = Bundle.main.loadNibNamed("ImagePicker", owner: nil, options: nil)?.first! as! ImagePicker
     
     
     var entry: Entry?
@@ -62,7 +62,11 @@ class JournalFormViewController: UIViewController, ImagePickerDelegate, MapContr
         
         let mapController = MapController()
         mapController.delegate = self
-        // Do any additional setup after loading the view.
+        
+        //Update map location if entry includes location
+        if let loc = entry?.location {
+            mapView.turnOnMap(location: loc)
+        }
         
         self.view.backgroundColor = UIColor.white
     }
@@ -74,8 +78,6 @@ class JournalFormViewController: UIViewController, ImagePickerDelegate, MapContr
     
     func viewSetup()  {
         journalTextEntryViewSetup()
-        
-        
     }
     
     
@@ -179,5 +181,9 @@ class JournalFormViewController: UIViewController, ImagePickerDelegate, MapContr
     
     func updateEventWithLocation(location: CLLocation) {
         self.entry?.location = location
+    }
+    
+    func removeEventLocation() {
+        self.entry?.location = nil
     }
 }

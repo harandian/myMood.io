@@ -13,10 +13,12 @@ import UIKit
 
 protocol MapControllerDelegate {
     func updateEventWithLocation(location: CLLocation)
+    func removeEventLocation()
 }
 
 class MapController:UIView, CLLocationManagerDelegate{
 
+    
     
     @IBOutlet weak var mapView: MKMapView!
     let manager = CLLocationManager()
@@ -61,6 +63,27 @@ class MapController:UIView, CLLocationManagerDelegate{
         manager.startUpdatingLocation()
     }
     
+    func turnOnMap(location:CLLocation){
+        //Turn on map
+        mapView.isHidden = false
+        
+        //Zoom value
+        let span:MKCoordinateSpan = MKCoordinateSpanMake(0.01,0.01)
+        //Set map settings
+        let myLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+        let region:MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
+        
+        self.mapView.setRegion(region,animated:true)
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
+                                                       longitude:  location.coordinate.longitude)
+        mapView.addAnnotation(annotation)
+    }
     
-    //SEND LOCATION TO EVENT
+    @IBAction func cancelLocation(_ sender: Any) {
+        mapView.isHidden = true
+        mapView.removeAnnotations(mapView.annotations)
+        self.delegate?.removeEventLocation()
+    }
 }

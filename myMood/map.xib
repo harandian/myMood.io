@@ -28,6 +28,15 @@
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IBg-7P-qSe">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </mapView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H8E-io-8n4">
+                    <rect key="frame" x="313" y="20" width="46" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                    <state key="normal" title="╳"/>
+                    <connections>
+                        <action selector="cancelLocation:" destination="iN0-l3-epB" eventType="touchUpInside" id="a2a-9i-NNx"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.40000000600000002" green="1" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
