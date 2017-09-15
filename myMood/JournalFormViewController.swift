@@ -9,17 +9,7 @@
 import UIKit
 import CoreLocation
 
-
-protocol JournalEntry {
-    var journalEntry: String {get}
-}
-
-struct DayEntry: JournalEntry {
-    let journalEntry: String
-}
-
-
-class JournalFormViewController: UIViewController, ImagePickerDelegate, MapControllerDelegate {
+class JournalFormViewController: UIViewController {
 
     
     var journalTextEntryView = Bundle.main.loadNibNamed("textEntry", owner: nil, options: nil)?.first! as! TextEntry
@@ -67,17 +57,17 @@ class JournalFormViewController: UIViewController, ImagePickerDelegate, MapContr
         setButtonConstraints()
         //  viewSetup()
         
-        //Delegate setup
-        let imagePicker = ImagePicker()
-        imagePicker.delegate = self
-        
-        let mapController = MapController()
-        mapController.delegate = self
-        
-        //Update map location if entry includes location
-        if let loc = entry?.location {
-            mapView.turnOnMap(location: loc)
-        }
+//        //Delegate setup
+//        let imagePicker = ImagePicker()
+//        imagePicker.delegate = self
+//        
+//        let mapController = MapController()
+//        mapController.delegate = self
+//        
+//        //Update map location if entry includes location
+//        if let loc = entry?.location {
+//            mapView.turnOnMap(location: loc)
+//        }
         
         self.view.backgroundColor = UIColor.white
     }
@@ -183,18 +173,18 @@ class JournalFormViewController: UIViewController, ImagePickerDelegate, MapContr
     }
     
     
-    //Delegation functions
-    func updateEventWithImage(image: UIImage) {
-        let photo:Photo = Photo(photo: image)
-        self.entry?.photo = photo
-        FirebaseDBController.shared.insertPhoto(entry: self.entry!)
-    }
-    
-    func updateEventWithLocation(location: CLLocation) {
-        self.entry?.location = location
-    }
-    
-    func removeEventLocation() {
-        self.entry?.location = nil
-    }
+//    //Delegation functions
+//    func updateEventWithImage(image: UIImage) {
+//        let photo:Photo = Photo(photo: image)
+//        self.entry?.photo = photo
+//        FirebaseDBController.shared.insertPhoto(entry: self.entry!)
+//    }
+//    
+//    func updateEventWithLocation(location: CLLocation) {
+//        self.entry?.location = location
+//    }
+//    
+//    func removeEventLocation() {
+//        self.entry?.location = nil
+//    }
 }
