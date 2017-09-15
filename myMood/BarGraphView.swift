@@ -71,7 +71,10 @@ class BarGraphView: UIView {
         let graphBar:UIButton = UIButton()
 
         //bar properties
-        graphBar.backgroundColor = UIColor(white: 0, alpha: 0)
+        graphBar.backgroundColor = UIColor(red: 115/255, green: 1, blue: 115/255, alpha: 0.75)
+        if height < 0 {
+            graphBar.backgroundColor = UIColor(red: 115/255, green: 115/255, blue: 1, alpha: 0.75)
+        }
         graphBar.frame = CGRect(x: 0, y: 0, width: chartWidth, height: 0)
         graphBar.isUserInteractionEnabled = false
         graphBar.layer.borderColor = UIColor.black.cgColor

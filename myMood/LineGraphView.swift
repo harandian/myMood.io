@@ -176,7 +176,11 @@ class LineGraphView: UIView {
             //Set Circle
             let circle = UIBezierPath(ovalIn: CGRect(origin: point,
                                                      size: CGSize(width: dotSize, height: dotSize)))
-            let color:UIColor = UIColor(red: 0, green: 0, blue: 1, alpha: 0.5)
+            var color:UIColor = UIColor(red: 115/255, green: 1, blue: 115/255, alpha: 0.75)
+            if (graphPoints[index] < 0) {
+                color = UIColor(red: 115/255, green: 115/255, blue: 1, alpha: 0.75)
+            }
+
             color.setFill()
             circle.fill()
             
@@ -189,6 +193,7 @@ class LineGraphView: UIView {
                                      width: textLabelWidth*2,
                                      height: textLabelHeight*2)
             textLabel.sizeToFit()
+            textLabel.backgroundColor = UIColor.clear
             self.addSubview(textLabel)
             
         }
@@ -206,7 +211,7 @@ class LineGraphView: UIView {
             linePath.addLine(to: CGPoint(x: self.frame.width - rightMargin, y: yPoint))
             
             linePath.setLineDash([5.0,5.0], count: 2, phase: 1)
-            linePath.lineWidth = 5
+            linePath.lineWidth = 1
             let color = UIColor(red: 211/255, green: 211/255, blue: 211/255, alpha: 0.25)
             color.setStroke()
             linePath.stroke()
