@@ -1,5 +1,9 @@
 import UIKit
 
+protocol ImagePickerDelegate {
+    func updateEventWithImage(image:UIImage)
+}
+
 class ImagePicker: UIView, UIImagePickerControllerDelegate , UINavigationControllerDelegate {
     
     
@@ -17,10 +21,11 @@ class ImagePicker: UIView, UIImagePickerControllerDelegate , UINavigationControl
     }
     
     let bottomVC = UIApplication.shared.keyWindow?.rootViewController
-    
+    var delegate:ImagePickerDelegate?
    
     override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
+        self.delegate = nil
         //navigationItem.title = "Details"
         self.addSubview(imageView)
         self.addSubview(addImageButton)
@@ -58,6 +63,7 @@ class ImagePicker: UIView, UIImagePickerControllerDelegate , UINavigationControl
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         
         imageView.image = image
+        self.delegate?.updateEventWithImage(image: image)
         picker.dismiss(animated: true, completion: nil)
     }
     
