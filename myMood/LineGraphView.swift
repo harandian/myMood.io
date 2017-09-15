@@ -13,7 +13,6 @@ import Foundation
 class LineGraphView: UIView {
     // Plotted Points
     var graphPoints:[Int] = []
-    var graphView:UIView = UIView()
     
     //Graph Height
     var graphHeight:CGFloat!
@@ -33,28 +32,37 @@ class LineGraphView: UIView {
     let textLabelWidth:CGFloat = 20
     var textLabelHeight:CGFloat = 10
     
+    //ScrollView
+    var myScrollView:UIScrollView!
+    
     //Dot Size
     let dotSize:CGFloat = 10
     
     override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
+        myScrollView = self.superview as! UIScrollView
         populateGraphPoints()
         
        // self.graphPoints.append(contentsOf: [1,-5,5,6,3,3,6,3,-3,4,-9,3,10])
         
-        graphHeight = self.frame.height - (topBottomMargins*2)
+        graphHeight = myScrollView.frame.height - (topBottomMargins*2)
         incrementVal = graphHeight / 10.0
         incrementWidth = UIScreen.main.bounds.width / 4
         
-        
+        setupScrollView()
+
+    }
+    
+    
+    func setupScrollView () {
         //TODO SET SCROLL VIEW CONTENTSIZE
-        let myScrollView = self.superview as! UIScrollView
         myScrollView.alwaysBounceHorizontal = false
         let fullWidth = leftMargin+(incrementWidth * CGFloat(graphPoints.count-1))+(myScrollView.frame.width/2)
         self.frame.size.width = fullWidth
         myScrollView.contentSize = CGSize(width: fullWidth, height: myScrollView.frame.size.height-20)
-
+        
         myScrollView.contentOffset = CGPoint(x:fullWidth-UIScreen.main.bounds.width ,y:0)
+        self.frame.size.height = myScrollView.frame.size.height
     }
     
     func populateGraphPoints() {
