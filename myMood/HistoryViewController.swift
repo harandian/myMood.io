@@ -10,7 +10,7 @@ import UIKit
 
 class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
     
-    let moodLineGraph = GraphView()
+ //   let moodLineGraph = GraphView()
     
     var entries: [Entry] = []
     var dateString = ""
@@ -19,11 +19,11 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToTable))
         self.view.backgroundColor = UIColor.cyan
-        moodLineGraph.isUserInteractionEnabled = true
-        moodLineGraph.addGestureRecognizer(tapGesture)
-        tapGesture.delegate = self
-        view.addSubview(moodLineGraph)
-        moodLineGraphSetup()
+//        moodLineGraph.isUserInteractionEnabled = true
+//        moodLineGraph.addGestureRecognizer(tapGesture)
+//        tapGesture.delegate = self
+//        view.addSubview(moodLineGraph)
+//        moodLineGraphSetup()
         
         
 //        FirebaseDBController.shared.getAllEntries { (snapshot) in
@@ -69,15 +69,15 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     */
     
-    func moodLineGraphSetup(){
+//    func moodLineGraphSetup(){
         
-        moodLineGraph.translatesAutoresizingMaskIntoConstraints = false
+//        moodLineGraph.translatesAutoresizingMaskIntoConstraints = false
+//
+//        moodLineGraph.heightAnchor.constraint(equalToConstant: view.bounds.height/3).isActive = true
+//       moodLineGraph.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
+//        moodLineGraph.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         
-        moodLineGraph.heightAnchor.constraint(equalToConstant: view.bounds.height/3).isActive = true
-        moodLineGraph.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
-        moodLineGraph.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-        
-    }
+ //   }
     
     func goToTable() {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
