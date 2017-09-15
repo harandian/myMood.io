@@ -91,7 +91,7 @@ class BarGraphView: UIView {
         
         
         //Set up date - Label
-        let newDate:Double = entry.date + Double(barsOnGraph*86400) //DEBUG
+        let newDate:Double = entry.date + Double(barsOnGraph*86400) //DEBUG TODO
         let textLabel:UILabel = UILabel()
         textLabel.frame = CGRect(x: nextXOrigin-(chartWidth/10),
                                  y: self.frame.height/2-textLabelHeight/2,

@@ -11,12 +11,13 @@ import Foundation
 
 
 class LineGraphView: UIView {
-    
-    // Hard coded values for now for plotted points
-    var graphPoints:[Int] = [4, 2, 6, 4, 5, 8, 3]
+    // Plotted Points
+    var graphPoints:[Int] = []
+    var graphView:UIView = UIView()
     
     //Graph Height
     var graphHeight:CGFloat!
+    var graphWidth:CGFloat!
     
     //Increment Values
     var incrementVal:CGFloat!
@@ -26,19 +27,37 @@ class LineGraphView: UIView {
     
     //Axis measurement values
     let topBottomMargins:CGFloat = 20
-    let leftMargin:CGFloat = 40
+    let leftMargin:CGFloat = 20
     let rightMargin:CGFloat = 20
     let textPositionRightMargin:CGFloat = 20
     let textLabelWidth:CGFloat = 20
     var textLabelHeight:CGFloat = 10
     
     //Dot Size
-    let dotSize:CGFloat = 5
+    let dotSize:CGFloat = 10
     
     override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
+        populateGraphPoints()
         
-        self.graphPoints.removeAll()
+       // self.graphPoints.append(contentsOf: [1,-5,5,6,3,3,6,3,-3,4,-9,3,10])
+        
+        graphHeight = self.frame.height - (topBottomMargins*2)
+        incrementVal = graphHeight / 10.0
+        incrementWidth = UIScreen.main.bounds.width / 4
+        
+        
+        //TODO SET SCROLL VIEW CONTENTSIZE
+        let myScrollView = self.superview as! UIScrollView
+        myScrollView.alwaysBounceHorizontal = false
+        let fullWidth = leftMargin+(incrementWidth * CGFloat(graphPoints.count-1))+(myScrollView.frame.width/2)
+        self.frame.size.width = fullWidth
+        myScrollView.contentSize = CGSize(width: fullWidth, height: myScrollView.frame.size.height-20)
+
+        myScrollView.contentOffset = CGPoint(x:fullWidth-UIScreen.main.bounds.width ,y:0)
+    }
+    
+    func populateGraphPoints() {
         var weekAverge:CGFloat = 0
         var weekDay:Int = 0
         for plots in FirebaseDBController.shared.get_allEntries().reversed() {
@@ -48,24 +67,25 @@ class LineGraphView: UIView {
                 weekAverge /= 7
                 self.graphPoints.append(Int(weekAverge))
                 weekDay = 0
+                weekAverge = 0
             }
+            weekDay += 1
+        }
+        if weekAverge > 0 {
+            self.graphPoints.append(Int(weekAverge/CGFloat(weekDay)))
         }
         
-        graphHeight = (self.frame.height - (topBottomMargins*2))
-        incrementVal = graphHeight / 10.0
-        let graphWidth = self.frame.width - (leftMargin + rightMargin)
-        incrementWidth = graphWidth/CGFloat(self.graphPoints.count)
-        
+
     }
 
     
     override func draw(_ rect: CGRect) {
-        
-        
         drawAxis()
         drawBackgroundLayer()
-        drawDots()
-        drawLines()
+        if self.graphPoints.count > 0 {
+            drawDots()
+            drawLines()
+        }
     }
     
     func drawLines() {
@@ -77,9 +97,10 @@ class LineGraphView: UIView {
         var yPoint:CGFloat = (pointPercentage * (graphHeight/2))
 
         //Y Position : Up or Down depending on neg/pos
-        yPoint = topBottomMargins+graphHeight/2 - yPoint
         if (graphPoints[0] < 0) {
             yPoint = topBottomMargins+graphHeight/2 + yPoint
+        } else {
+            yPoint = topBottomMargins+graphHeight/2 - yPoint
         }
         
         //First Position
@@ -96,11 +117,10 @@ class LineGraphView: UIView {
             
             //Y Position : Up or Down depending on neg/pos
             var yPoint:CGFloat = topBottomMargins + graphHeight/2 - yPointOffset
-            if (circlePoint < 0) {
+            if (graphPoints[circlePoint] < 0) {
                 yPoint = topBottomMargins + graphHeight/2 + yPointOffset
             }
             
-            //TODO - DESIGN - HOW SPARSE
             //X Position
             let xPoint:CGFloat = leftMargin + (CGFloat(circlePoint)*incrementWidth)
             
@@ -120,15 +140,16 @@ class LineGraphView: UIView {
     }
     
     func drawDots() {
-        for index in 0..<graphPoints.count {
-            // Set up the points line
+        for index in 0..<graphPoints.count {            
+            print(graphPoints[index])
             //percentage + / - depending plus/minus
-            let yPointOffset:CGFloat = (abs(CGFloat(graphPoints[index]))/10.0) * (graphHeight/2)
+            let pointPercentage:CGFloat = abs(CGFloat(graphPoints[index]))/10.0
+            let yPointOffset:CGFloat = pointPercentage * (graphHeight/2)
             
             //Y Position : Up or Down depending on neg/pos
-            var yPoint:CGFloat = graphHeight/2 - yPointOffset
-            if (index < 0) {
-                yPoint = graphHeight/2 + yPointOffset
+            var yPoint:CGFloat = (topBottomMargins + graphHeight/2) - yPointOffset
+            if (graphPoints[index] < 0) {
+                yPoint = (topBottomMargins + graphHeight/2) + yPointOffset
             }
             
             
@@ -137,7 +158,7 @@ class LineGraphView: UIView {
             var xPoint:CGFloat = leftMargin + (CGFloat(index)*incrementWidth)
             
             //Normalize to dot center
-            yPoint += dotSize/2
+            yPoint -= dotSize/2
             xPoint -= dotSize/2
             
             //Setup Point
@@ -147,7 +168,21 @@ class LineGraphView: UIView {
             //Set Circle
             let circle = UIBezierPath(ovalIn: CGRect(origin: point,
                                                      size: CGSize(width: dotSize, height: dotSize)))
+            let color:UIColor = UIColor(red: 0, green: 0, blue: 1, alpha: 0.5)
+            color.setFill()
             circle.fill()
+            
+            
+            //Draw labels
+            let textLabel:UILabel = UILabel()
+            textLabel.text = "W\(index)"
+            textLabel.frame = CGRect(x: xPoint-(textLabelWidth/2),
+                                     y: self.frame.height/2,
+                                     width: textLabelWidth*2,
+                                     height: textLabelHeight*2)
+            textLabel.sizeToFit()
+            self.addSubview(textLabel)
+            
         }
     }
     
@@ -163,7 +198,7 @@ class LineGraphView: UIView {
             linePath.addLine(to: CGPoint(x: self.frame.width - rightMargin, y: yPoint))
             
             linePath.setLineDash([5.0,5.0], count: 2, phase: 1)
-            linePath.lineWidth = 1
+            linePath.lineWidth = 5
             let color = UIColor(red: 211/255, green: 211/255, blue: 211/255, alpha: 0.25)
             color.setStroke()
             linePath.stroke()
@@ -184,32 +219,6 @@ class LineGraphView: UIView {
 
         linePath.lineWidth = 1.0
         linePath.stroke()
-        
-//        //Vertical Line
-//        linePath.move(to: CGPoint(x:leftMargin,
-//                                  y: topBottomMargins))
-//        linePath.addLine(to: CGPoint(x:leftMargin,
-//                                     y:self.frame.size.height - topBottomMargins))
-//        linePath.stroke()
-        
-        
-        //Set the labels
-//        var label:Int = 10
-//        for i in 0 ... 10{
-//            
-//            //Position of label
-//            let yCenter = topBottomMargins + CGFloat(i) * incrementVal!
-//            let xCenter = textPositionRightMargin
-//            
-//            //Create the text label
-//            let text = UILabel()
-//            text.frame = CGRect(x: xCenter, y: yCenter, width: textLabelWidth, height: textLabelHeight)
-//            text.center = CGPoint(x: xCenter, y: yCenter)
-//            text.text = "\(label)"
-//            text.font = UIFont.boldSystemFont(ofSize: 10)
-//            self.addSubview(text)
-//            label -= 2
-//        }
     }
     
     
