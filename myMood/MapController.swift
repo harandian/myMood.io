@@ -13,21 +13,17 @@ import UIKit
 
 protocol MapControllerDelegate {
     func updateEventWithLocation(location: CLLocation)
+    func removeEventLocation()
 }
 
-class MapController:UIView, CLLocationManagerDelegate, MapControllerDelegate{
+class MapController:UIView, CLLocationManagerDelegate{
+
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        self.delegate = nil
-        print("hello")
-    }
     
     @IBOutlet weak var mapView: MKMapView!
     let manager = CLLocationManager()
     
-    var delegate:MapControllerDelegate?
+    var delegate:MapControllerDelegate? = nil
     
     //Setup pin onto map and zoom
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -39,10 +35,12 @@ class MapController:UIView, CLLocationManagerDelegate, MapControllerDelegate{
         
         self.mapView.setRegion(region,animated:true)
         
+        mapView.removeAnnotations(mapView.annotations)
+        
         let annotation = MKPointAnnotation()
         annotation.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude:  location.coordinate.longitude)
         mapView.addAnnotation(annotation)
-        updateEventWithLocation(location: location)
+        self.delegate?.updateEventWithLocation(location: location)
     }
     
     
@@ -65,9 +63,27 @@ class MapController:UIView, CLLocationManagerDelegate, MapControllerDelegate{
         manager.startUpdatingLocation()
     }
     
-    func updateEventWithLocation(location: CLLocation) {
+    func turnOnMap(location:CLLocation){
+        //Turn on map
+        mapView.isHidden = false
         
+        //Zoom value
+        let span:MKCoordinateSpan = MKCoordinateSpanMake(0.01,0.01)
+        //Set map settings
+        let myLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+        let region:MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
+        
+        self.mapView.setRegion(region,animated:true)
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
+                                                       longitude:  location.coordinate.longitude)
+        mapView.addAnnotation(annotation)
     }
     
-    //SEND LOCATION TO EVENT
+    @IBAction func cancelLocation(_ sender: Any) {
+        mapView.isHidden = true
+        mapView.removeAnnotations(mapView.annotations)
+        self.delegate?.removeEventLocation()
+    }
 }

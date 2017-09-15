@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreLocation
+
 
 protocol JournalEntry {
     var journalEntry: String {get}
@@ -16,12 +18,14 @@ struct DayEntry: JournalEntry {
     let journalEntry: String
 }
 
-class JournalFormViewController: UIViewController {
+
+class JournalFormViewController: UIViewController, ImagePickerDelegate, MapControllerDelegate {
+
     
     var journalTextEntryView = Bundle.main.loadNibNamed("textEntry", owner: nil, options: nil)?.first! as! TextEntry
     var mapView = Bundle.main.loadNibNamed("map", owner: nil, options: nil)?.first! as! MapController
     
-    var imagePicker = Bundle.main.loadNibNamed("ImagePicker", owner: nil, options: nil)?.first! as! UIView
+    var imagePicker = Bundle.main.loadNibNamed("ImagePicker", owner: nil, options: nil)?.first! as! ImagePicker
     
     
     var entry: Entry?
@@ -63,8 +67,17 @@ class JournalFormViewController: UIViewController {
         setButtonConstraints()
         //  viewSetup()
         
+        //Delegate setup
+        let imagePicker = ImagePicker()
+        imagePicker.delegate = self
         
-        // Do any additional setup after loading the view.
+        let mapController = MapController()
+        mapController.delegate = self
+        
+        //Update map location if entry includes location
+        if let loc = entry?.location {
+            mapView.turnOnMap(location: loc)
+        }
         
         self.view.backgroundColor = UIColor.white
     }
@@ -76,8 +89,6 @@ class JournalFormViewController: UIViewController {
     
     func viewSetup()  {
         journalTextEntryViewSetup()
-        
-        
     }
     
     
@@ -169,5 +180,21 @@ class JournalFormViewController: UIViewController {
         backButton.widthAnchor.constraint(equalToConstant: view.frame.width/2).isActive = true
         backButton.heightAnchor.constraint(equalTo: continueButton.heightAnchor, constant: 0).isActive = true
         backButton.bottomAnchor.constraint(equalTo: continueButton.bottomAnchor, constant: 0).isActive = true
+    }
+    
+    
+    //Delegation functions
+    func updateEventWithImage(image: UIImage) {
+        let photo:Photo = Photo(photo: image)
+        self.entry?.photo = photo
+        FirebaseDBController.shared.insertPhoto(entry: self.entry!)
+    }
+    
+    func updateEventWithLocation(location: CLLocation) {
+        self.entry?.location = location
+    }
+    
+    func removeEventLocation() {
+        self.entry?.location = nil
     }
 }

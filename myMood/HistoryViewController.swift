@@ -15,7 +15,7 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
     var entries: [Entry] = []
     var dateString = ""
     
-    var lineGraphView = Bundle.main.loadNibNamed("LineGraphView", owner: nil, options: nil)?.first! as! LineGraphView
+    var lineGraphView = Bundle.main.loadNibNamed("LineGraphView", owner: nil, options: nil)?.first! as! UIScrollView
     var barGraphView = Bundle.main.loadNibNamed("BarGraphView", owner: nil, options: nil)?.first! as! BarGraphView
     let tempview:UIView = wordCloudLayoutGenerator()
     
@@ -64,11 +64,12 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func graphConstraints() {
         scrollViewGraphView.addSubview(barGraphView)
-        
+        barGraphView.isUserInteractionEnabled = false
         barGraphView.translatesAutoresizingMaskIntoConstraints = false
         barGraphView.topAnchor.constraint(equalTo: scrollViewGraphView.topAnchor, constant: 0).isActive = true
         barGraphView.leadingAnchor.constraint(equalTo: super.view.leadingAnchor, constant: 0).isActive = true
         barGraphView.trailingAnchor.constraint(equalTo: super.view.trailingAnchor, constant: 0).isActive = true
+        barGraphView.frame.size.height = 300
         barGraphView.heightAnchor.constraint(equalToConstant: 300).isActive = true
         barGraphView.layer.borderWidth = 1
         
@@ -78,6 +79,7 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
         lineGraphView.topAnchor.constraint(equalTo: barGraphView.bottomAnchor, constant: 0).isActive = true
         lineGraphView.leadingAnchor.constraint(equalTo: super.view.leadingAnchor, constant: 0).isActive = true
         lineGraphView.trailingAnchor.constraint(equalTo: super.view.trailingAnchor, constant: 0).isActive = true
+        lineGraphView.frame.size.height = 300
         lineGraphView.heightAnchor.constraint(equalToConstant: 300).isActive = true
         lineGraphView.layer.borderWidth = 1
         
@@ -100,12 +102,22 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
         scrollViewCenterXConstraint.isActive = true
         scrollViewCenterXConstraint.identifier = "scrollviewxConstraint"
         graphConstraints()
+        wordCloudViewSetup()
 
     }
     
     func wordCloudViewSetup() {
         scrollViewGraphView.addSubview(wordCloudLayout)
+        wordCloudLayout.translatesAutoresizingMaskIntoConstraints = false
+        wordCloudLayout.topAnchor.constraint(equalTo: lineGraphView.bottomAnchor, constant: 0).isActive = true
+        wordCloudLayout.leadingAnchor.constraint(equalTo: super.view.leadingAnchor, constant: 0).isActive = true
+        wordCloudLayout.trailingAnchor.constraint(equalTo: super.view.trailingAnchor, constant: 0).isActive = true
+        wordCloudLayout.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        wordCloudLayout.bottomAnchor.constraint(equalTo: scrollViewGraphView.bottomAnchor, constant: 0).isActive = true
         
+        wordCloudLayout.backgroundColor = UIColor.white
+        wordCloudLayout.layer.borderWidth = 1
+
         
         
         
