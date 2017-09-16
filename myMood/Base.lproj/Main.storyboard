@@ -85,6 +85,59 @@
             </objects>
             <point key="canvasLocation" x="2466" y="123"/>
         </scene>
+        <!--Popup View Controller-->
+        <scene sceneID="YmD-61-WAZ">
+            <objects>
+                <viewController storyboardIdentifier="popupvc" title="Popup View Controller" id="oQV-PB-XHE" customClass="JournalPopupViewController" customModule="myMood" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4LY-1P-6BJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="F3L-MR-IfI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nzT-6b-ZCj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HnI-5J-02J">
+                                <rect key="frame" x="16" y="183.5" width="343" height="300"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gwY-u1-7J8">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="29"/>
+                                        <segments>
+                                            <segment title="Entry"/>
+                                            <segment title="Image"/>
+                                            <segment title="Location"/>
+                                        </segments>
+                                    </segmentedControl>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x2x-gE-JGT">
+                                        <rect key="frame" x="0.0" y="270" width="343" height="30"/>
+                                        <state key="normal" title="Done"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="7i6-GY-rZu"/>
+                                    <constraint firstAttribute="trailing" secondItem="gwY-u1-7J8" secondAttribute="trailing" id="988-Sp-UEV"/>
+                                    <constraint firstAttribute="trailing" secondItem="x2x-gE-JGT" secondAttribute="trailing" id="Mqx-GT-QDh"/>
+                                    <constraint firstItem="gwY-u1-7J8" firstAttribute="leading" secondItem="HnI-5J-02J" secondAttribute="leading" id="W0f-CR-FKR"/>
+                                    <constraint firstAttribute="bottom" secondItem="x2x-gE-JGT" secondAttribute="bottom" id="a2C-WB-jVj"/>
+                                    <constraint firstItem="gwY-u1-7J8" firstAttribute="top" secondItem="HnI-5J-02J" secondAttribute="top" id="htA-MF-ZWZ"/>
+                                    <constraint firstItem="x2x-gE-JGT" firstAttribute="leading" secondItem="HnI-5J-02J" secondAttribute="leading" id="pCx-Zz-PSP"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="HnI-5J-02J" firstAttribute="centerX" secondItem="nzT-6b-ZCj" secondAttribute="centerX" id="UU2-Pg-kEL"/>
+                            <constraint firstItem="HnI-5J-02J" firstAttribute="leading" secondItem="nzT-6b-ZCj" secondAttribute="leadingMargin" id="eQi-YZ-oyB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HnI-5J-02J" secondAttribute="trailing" id="j2Y-Tq-Dti"/>
+                            <constraint firstItem="HnI-5J-02J" firstAttribute="centerY" secondItem="nzT-6b-ZCj" secondAttribute="centerY" id="ueN-Nc-OWN"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fRZ-FN-dim" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2464.8000000000002" y="814.54272863568224"/>
+        </scene>
         <!--Journal Form View Controller-->
         <scene sceneID="zMD-Y9-8Oh">
             <objects>

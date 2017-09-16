@@ -30,6 +30,7 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToTable))
+        
         self.view.backgroundColor = UIColor.white
         tapGesture.delegate = self
         scrollViewForGraphSetup()
