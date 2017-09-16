@@ -2,17 +2,19 @@
 //  RegisterViewController.swift
 //  myMood
 //
-//  Created by Mohammad Shahzaib Ather on 2017-09-12.
+//  Created by Mohammad Shahzaib Ather on 2017-09-15.
 //  Copyright © 2017 Hirad. All rights reserved.
 //
 
 import UIKit
 import Firebase
 
+
 class RegisterViewController: UIViewController {
     
-    let colors = Colors()
+    var sliderMoodViewController: SliderMoodViewController?
     
+    let colors = Colors()
     
     
     let emailContainerView : UIView  = {
@@ -85,8 +87,8 @@ class RegisterViewController: UIViewController {
             else {
                 print("form is not valid")
                 return
-            }
-        
+        }
+       
         Auth.auth().createUser(withEmail: email, password: password) { (user: User?, error) in
             if error != nil{
                 return
@@ -104,6 +106,20 @@ class RegisterViewController: UIViewController {
                 if error != nil{
                     return
                 }
+                
+                let alertController = UIAlertController(title: "Register", message: "Congratulations, user successfully saved ", preferredStyle: UIAlertControllerStyle.alert)
+                
+                alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+                    
+                    self.present(self.sliderMoodViewController!, animated: true, completion: nil)
+                }))
+                    
+                self.present(alertController, animated: true, completion: nil)
+                
+                let sliderMoodController = SliderMoodViewController()
+                self.present(sliderMoodController, animated: true, completion: nil)
+            
+                
                 print("Saved user successfully into Firebase database")
             })
             
@@ -114,9 +130,11 @@ class RegisterViewController: UIViewController {
     }
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+   
+
         view.addSubview(nameContainerView)
         view.addSubview(emailContainerView)
         view.addSubview(passwordContainerView)
@@ -124,15 +142,18 @@ class RegisterViewController: UIViewController {
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-        
+       
         refresh()
         setupNameContainerView ()
         setupEmailContainerView()
         setupPasswordContainerView ()
         setupRegisterButtonView ()
         
+        sliderMoodViewController = SliderMoodViewController()
+        
     }
     
+
     func setupNameContainerView (){
         nameContainerView.addSubview(nameTextField)
         nameContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
