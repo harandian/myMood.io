@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HistoryListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class HistoryListViewController: UIViewController, UITableViewDataSource {
     var scrollChartView = Bundle.main.loadNibNamed("ChartScrollView", owner: nil, options: nil)?.first! as! ChartScrollController
     
     @IBOutlet weak var historyListTableView: UITableView!
@@ -24,6 +24,7 @@ class HistoryListViewController: UIViewController, UITableViewDataSource, UITabl
         
         view.backgroundColor = UIColor.brown
         scrollChartView.frame = myScrollView.frame
+        
         myScrollView.addSubview(scrollChartView)
         setupOverlay()
         

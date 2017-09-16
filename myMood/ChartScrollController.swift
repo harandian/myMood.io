@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class ChartScrollController:UIView, UIScrollViewDelegate {
-    let barChart = Bundle.main.loadNibNamed("LineGraphView", owner: self, options: nil)?.first as! UIScrollView
-    let lineChart = Bundle.main.loadNibNamed("BarGraphView", owner: self, options: nil)?.first as! BarGraphView
+    let barChart = Bundle.main.loadNibNamed("BarGraphView", owner: self, options: nil)?.first as! BarGraphView
+    let lineChart = Bundle.main.loadNibNamed("LineGraphView", owner: self, options: nil)?.first as! UIScrollView
     var wordCloudLayout = Bundle.main.loadNibNamed("wordCloudLayout", owner: nil, options: nil)?.first! as! wordCloudLayoutGenerator
 
     @IBOutlet weak var pageControl: UIPageControl!
@@ -25,11 +25,11 @@ class ChartScrollController:UIView, UIScrollViewDelegate {
         lineChart.frame.size = self.frame.size
         wordCloudLayout.frame.size = self.frame.size
         
-        barChart.center = CGPoint(x:self.frame.width*0.5, y:self.center.y)
-        lineChart.center = CGPoint(x:self.frame.width*1.5, y:self.center.y)
+        lineChart.center = CGPoint(x:self.frame.width*0.5, y:self.center.y)
+        barChart.center = CGPoint(x:self.frame.width*1.5, y:self.center.y)
         wordCloudLayout.center = CGPoint(x:self.frame.width*2.5, y:self.center.y)
+         content.addSubview(lineChart)
         content.addSubview(barChart)
-        content.addSubview(lineChart)
         content.addSubview(wordCloudLayout)
         
         

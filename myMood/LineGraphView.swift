@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 
 protocol LineGraphDelegate {
-    func passEntryThrough(entry:Entry)
+    func passEntryThrough(entry:[Entry])
 }
 
 class LineGraphView: UIView {
@@ -18,7 +18,7 @@ class LineGraphView: UIView {
     var delegate:LineGraphDelegate? = nil
     
     // Plotted Points
-    var graphPoints:[Int] = []
+    var graphPoints:[[Entry]] = []
     
     //Graph Height
     var graphHeight:CGFloat!
@@ -75,21 +75,17 @@ class LineGraphView: UIView {
     }
     
     func populateGraphPoints() {
-        var weekAverge:CGFloat = 0
-        var weekDay:Int = 0
+        var weekEntries:[Entry] = []
         for plots in FirebaseDBController.shared.get_allEntries().reversed() {
-            weekAverge += CGFloat(plots.mood)
+            weekEntries.append(plots)
             
-            if weekDay == 7 {
-                weekAverge /= 7
-                self.graphPoints.append(Int(weekAverge))
-                weekDay = 0
-                weekAverge = 0
+            if weekEntries.count == 7 {
+                self.graphPoints.append(weekEntries)
+                weekEntries.removeAll()
             }
-            weekDay += 1
         }
-        if weekAverge > 0 {
-            self.graphPoints.append(Int(weekAverge/CGFloat(weekDay)))
+        if weekEntries.count > 0 {
+            self.graphPoints.append(weekEntries)
         }
         
 
@@ -110,11 +106,11 @@ class LineGraphView: UIView {
         
         //Move path to first Point
         //Y Position
-        let pointPercentage:CGFloat = abs(CGFloat(graphPoints[0]))/10.0
+        let pointPercentage:CGFloat = abs(averageEntry(graphPoints[0]))/10.0
         var yPoint:CGFloat = (pointPercentage * (graphHeight/2))
 
         //Y Position : Up or Down depending on neg/pos
-        if (graphPoints[0] < 0) {
+        if (averageEntry(graphPoints[0]) < 0) {
             yPoint = topBottomMargins+graphHeight/2 + yPoint
         } else {
             yPoint = topBottomMargins+graphHeight/2 - yPoint
@@ -129,12 +125,12 @@ class LineGraphView: UIView {
         for circlePoint in 1..<graphPoints.count {
             // Set up the points line
             //percentage + / - depending plus/minus
-            let pointPercentage:CGFloat = abs(CGFloat(graphPoints[circlePoint]))/10.0
+            let pointPercentage:CGFloat = abs(averageEntry(graphPoints[circlePoint]))/10.0
             let yPointOffset:CGFloat = (pointPercentage * (graphHeight/2))
             
             //Y Position : Up or Down depending on neg/pos
             var yPoint:CGFloat = topBottomMargins + graphHeight/2 - yPointOffset
-            if (graphPoints[circlePoint] < 0) {
+            if (averageEntry(graphPoints[circlePoint]) < 0) {
                 yPoint = topBottomMargins + graphHeight/2 + yPointOffset
             }
             
@@ -159,12 +155,12 @@ class LineGraphView: UIView {
     func drawDots() {
         for index in 0..<graphPoints.count {            
             //percentage + / - depending plus/minus
-            let pointPercentage:CGFloat = abs(CGFloat(graphPoints[index]))/10.0
+            let pointPercentage:CGFloat = abs(averageEntry(graphPoints[index]))/10.0
             let yPointOffset:CGFloat = pointPercentage * (graphHeight/2)
             
             //Y Position : Up or Down depending on neg/pos
             var yPoint:CGFloat = (topBottomMargins + graphHeight/2) - yPointOffset
-            if (graphPoints[index] < 0) {
+            if (averageEntry(graphPoints[index]) < 0) {
                 yPoint = (topBottomMargins + graphHeight/2) + yPointOffset
             }
             
@@ -185,7 +181,7 @@ class LineGraphView: UIView {
             let circle = UIBezierPath(ovalIn: CGRect(origin: point,
                                                      size: CGSize(width: dotSize, height: dotSize)))
             var color:UIColor = UIColor(red: 115/255, green: 1, blue: 115/255, alpha: 0.75)
-            if (graphPoints[index] < 0) {
+            if (averageEntry(graphPoints[index]) < 0) {
                 color = UIColor(red: 115/255, green: 115/255, blue: 1, alpha: 0.75)
             }
 
@@ -212,12 +208,13 @@ class LineGraphView: UIView {
                                       height: self.frame.height)
             weekButton.backgroundColor = UIColor.clear
             weekButton.addTarget(self, action: #selector(tapWeek), for: .touchUpInside)
+            weekButton.tag = index
             self.addSubview(weekButton)
-            
         }
     }
     
-    func tapWeek(sender: UITapGestureRecognizer){
+    func tapWeek(sender: UIButton){
+        self.delegate?.passEntryThrough(entry: graphPoints[sender.tag])
         print("Reset table")
     }
     
@@ -254,6 +251,15 @@ class LineGraphView: UIView {
 
         linePath.lineWidth = 1.0
         linePath.stroke()
+    }
+    
+    
+    func averageEntry(_ e:[Entry]) -> CGFloat{
+        var average:CGFloat = 0
+        for obj in e {
+            average += CGFloat(obj.mood)
+        }
+        return average/CGFloat(e.count)
     }
     
     
