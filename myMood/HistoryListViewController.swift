@@ -16,11 +16,14 @@ class HistoryListViewController: UIViewController, UITableViewDataSource, UITabl
     
     var entries:[Entry] = []
     var dateString = ""
+    let overlay = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        entries = FirebaseDBController.shared.get_allEntries()
+        while (entries.count == 0) {
+            FirebaseDBController.shared.loadAllEntries()
+            entries = FirebaseDBController.shared.get_allEntries()
+        }
         
         view.backgroundColor = UIColor.brown
         scrollChartView.frame = myScrollView.frame
@@ -29,8 +32,13 @@ class HistoryListViewController: UIViewController, UITableViewDataSource, UITabl
         
     }
     
+    /*
+ 
+     Gesture Setup
+ 
+    */
+    
     func setupOverlay() {
-        let overlay = UIView()
         overlay.frame = myScrollView.frame
         overlay.backgroundColor = UIColor.clear
         
@@ -43,7 +51,27 @@ class HistoryListViewController: UIViewController, UITableViewDataSource, UITabl
         rightSwipe.direction = UISwipeGestureRecognizerDirection.right
         overlay.addGestureRecognizer(rightSwipe)
         
+        //Taps
+        let tapGest = UITapGestureRecognizer(target: self, action: #selector(tapChart))
+        overlay.addGestureRecognizer(tapGest)
+        
         self.view.addSubview(overlay)
+    }
+    
+    func tapChart(sender: UITapGestureRecognizer){
+        print(self.overlay.alpha)
+        if self.overlay.frame == self.historyListTableView.frame{
+            UIView.animate(withDuration: 0.25, animations: { 
+                self.overlay.backgroundColor = UIColor.clear
+            }, completion: { (true) in
+                self.overlay.frame = self.myScrollView.frame
+            })
+        } else {
+            self.overlay.frame = self.historyListTableView.frame
+            UIView.animate(withDuration: 0.25) {
+                self.overlay.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
+            }
+        }
     }
     
     func swipeLeft(sender: UISwipeGestureRecognizer) {
@@ -75,7 +103,6 @@ class HistoryListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func changePageControl(scrollView:ChartScrollController, xValue:CGFloat){
-        print(scrollView.myScrollView.contentOffset.x)
         switch xValue {
         case 0.0:
             scrollView.pageControl.currentPage = 0
@@ -89,6 +116,14 @@ class HistoryListViewController: UIViewController, UITableViewDataSource, UITabl
         default: break
         }
     }
+    
+    /*
+ 
+ 
+     Table View Setup
+ 
+ 
+    */
    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
