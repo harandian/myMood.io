@@ -20,10 +20,7 @@ class HistoryListViewController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        while (entries.count == 0) {
-            FirebaseDBController.shared.loadAllEntries()
-            entries = FirebaseDBController.shared.get_allEntries()
-        }
+        entries = FirebaseDBController.shared.get_allEntries()
         
         view.backgroundColor = UIColor.brown
         scrollChartView.frame = myScrollView.frame

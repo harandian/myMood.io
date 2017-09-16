@@ -9,8 +9,14 @@
 import UIKit
 import Foundation
 
+protocol LineGraphDelegate {
+    func passEntryThrough(entry:Entry)
+}
 
 class LineGraphView: UIView {
+    //Delegate
+    var delegate:LineGraphDelegate? = nil
+    
     // Plotted Points
     var graphPoints:[Int] = []
     
@@ -55,9 +61,12 @@ class LineGraphView: UIView {
     
     
     func setupScrollView () {
-        //TODO SET SCROLL VIEW CONTENTSIZE
+        // SET SCROLL VIEW CONTENTSIZE
         myScrollView.alwaysBounceHorizontal = false
-        let fullWidth = leftMargin+(incrementWidth * CGFloat(graphPoints.count-1))+(myScrollView.frame.width/2)
+        var fullWidth = leftMargin+(incrementWidth * CGFloat(graphPoints.count-1))+(myScrollView.frame.width/2)
+        if graphPoints.count == 0 {
+            fullWidth = myScrollView.frame.width
+        }
         self.frame.size.width = fullWidth
         myScrollView.contentSize = CGSize(width: fullWidth, height: myScrollView.frame.size.height-20)
         
@@ -195,7 +204,21 @@ class LineGraphView: UIView {
             textLabel.backgroundColor = UIColor.clear
             self.addSubview(textLabel)
             
+            //Draw Buttons
+            let weekButton:UIButton = UIButton()
+            weekButton.frame = CGRect(x: xPoint-(textLabelWidth/2),
+                                      y: 0,
+                                      width: textLabelWidth*2,
+                                      height: self.frame.height)
+            weekButton.backgroundColor = UIColor.clear
+            weekButton.addTarget(self, action: #selector(tapWeek), for: .touchUpInside)
+            self.addSubview(weekButton)
+            
         }
+    }
+    
+    func tapWeek(sender: UITapGestureRecognizer){
+        print("Reset table")
     }
     
     func drawBackgroundLayer() {
