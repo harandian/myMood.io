@@ -100,28 +100,28 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HnI-5J-02J">
                                 <rect key="frame" x="16" y="183.5" width="343" height="300"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="22G-gK-5ma">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="260"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zKZ-ay-hSe">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gwY-u1-7J8">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="29"/>
+                                        <segments>
+                                            <segment title="Entry"/>
+                                            <segment title="Image"/>
+                                            <segment title="Location"/>
+                                        </segments>
+                                    </segmentedControl>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x2x-gE-JGT">
                                         <rect key="frame" x="0.0" y="270" width="343" height="30"/>
                                         <state key="normal" title="Done"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="zKZ-ay-hSe" firstAttribute="leading" secondItem="HnI-5J-02J" secondAttribute="leading" id="4TR-Ni-VPH"/>
                                     <constraint firstAttribute="height" constant="300" id="7i6-GY-rZu"/>
-                                    <constraint firstAttribute="trailing" secondItem="zKZ-ay-hSe" secondAttribute="trailing" id="M0U-9c-3gB"/>
-                                    <constraint firstItem="22G-gK-5ma" firstAttribute="top" secondItem="HnI-5J-02J" secondAttribute="top" id="Pwe-dz-H7g"/>
-                                    <constraint firstItem="22G-gK-5ma" firstAttribute="leading" secondItem="HnI-5J-02J" secondAttribute="leading" id="Y1h-BN-Vdx"/>
-                                    <constraint firstAttribute="bottom" secondItem="zKZ-ay-hSe" secondAttribute="bottom" id="Ye0-UY-Up1"/>
-                                    <constraint firstAttribute="trailing" secondItem="22G-gK-5ma" secondAttribute="trailing" id="atf-FT-0vZ"/>
-                                    <constraint firstItem="zKZ-ay-hSe" firstAttribute="top" secondItem="22G-gK-5ma" secondAttribute="bottom" constant="10" id="huL-D6-jgx"/>
+                                    <constraint firstAttribute="trailing" secondItem="gwY-u1-7J8" secondAttribute="trailing" id="988-Sp-UEV"/>
+                                    <constraint firstAttribute="trailing" secondItem="x2x-gE-JGT" secondAttribute="trailing" id="Mqx-GT-QDh"/>
+                                    <constraint firstItem="gwY-u1-7J8" firstAttribute="leading" secondItem="HnI-5J-02J" secondAttribute="leading" id="W0f-CR-FKR"/>
+                                    <constraint firstAttribute="bottom" secondItem="x2x-gE-JGT" secondAttribute="bottom" id="a2C-WB-jVj"/>
+                                    <constraint firstItem="gwY-u1-7J8" firstAttribute="top" secondItem="HnI-5J-02J" secondAttribute="top" id="htA-MF-ZWZ"/>
+                                    <constraint firstItem="x2x-gE-JGT" firstAttribute="leading" secondItem="HnI-5J-02J" secondAttribute="leading" id="pCx-Zz-PSP"/>
                                 </constraints>
                             </view>
                         </subviews>
