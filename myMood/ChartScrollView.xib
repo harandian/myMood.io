@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ChartScrollController" customModule="myMood" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uom-vP-aex">
+                    <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                    <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </scrollView>
+                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="rNL-HI-TYO">
+                    <rect key="frame" x="0.0" y="338" width="667" height="37"/>
+                    <color key="pageIndicatorTintColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="currentPageIndicatorTintColor" red="0.60784313725490191" green="0.60784313725490191" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </pageControl>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="rNL-HI-TYO" secondAttribute="trailing" id="E15-NQ-1eA"/>
+                <constraint firstAttribute="trailing" secondItem="uom-vP-aex" secondAttribute="trailing" id="Tfx-ds-KKB"/>
+                <constraint firstItem="uom-vP-aex" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="V7v-bk-GoM"/>
+                <constraint firstItem="rNL-HI-TYO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="fdc-0b-Afx"/>
+                <constraint firstItem="uom-vP-aex" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="r55-S6-Avt"/>
+                <constraint firstAttribute="bottom" secondItem="rNL-HI-TYO" secondAttribute="bottom" id="rTT-Fk-TJZ"/>
+                <constraint firstAttribute="bottom" secondItem="uom-vP-aex" secondAttribute="bottom" id="wsA-dQ-7Rz"/>
+            </constraints>
+            <connections>
+                <outlet property="myScrollView" destination="uom-vP-aex" id="Dmo-o3-oL7"/>
+                <outlet property="pageControl" destination="rNL-HI-TYO" id="f8J-Tr-NAr"/>
+            </connections>
+            <point key="canvasLocation" x="24.5" y="52.5"/>
+        </view>
+    </objects>
+</document>

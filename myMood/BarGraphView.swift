@@ -99,7 +99,7 @@ class BarGraphView: UIView {
         textLabel.frame = CGRect(x: nextXOrigin-(chartWidth/10),
                                  y: self.frame.height/2-textLabelHeight/2,
                                  width: chartWidth/5,
-                                 height: textLabelHeight)
+                                 height: textLabelHeight*2)
         textLabel.textColor = UIColor.black
         textLabel.backgroundColor = UIColor.init(white: 1.0, alpha: 0.5)
         textLabel.font = UIFont(name:"Roboto", size:textLabel.font.pointSize)
@@ -136,8 +136,7 @@ class BarGraphView: UIView {
     }
     
     func clickAction() {
-        print("Click")
-        
+       print("Cliked bar")
     }
     
     

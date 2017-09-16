@@ -8,9 +8,11 @@
 
 import UIKit
 
-class HistoryListViewController: UIViewController, UITableViewDataSource {
-
+class HistoryListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    var scrollChartView = Bundle.main.loadNibNamed("ChartScrollView", owner: nil, options: nil)?.first! as! ChartScrollController
+    
     @IBOutlet weak var historyListTableView: UITableView!
+    @IBOutlet weak var myScrollView: UIView!
     
     var entries:[Entry] = []
     var dateString = ""
@@ -18,16 +20,76 @@ class HistoryListViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.brown
-        // Do any additional setup after loading the view.
-        self.automaticallyAdjustsScrollViewInsets = false
         entries = FirebaseDBController.shared.get_allEntries()
+        
+        view.backgroundColor = UIColor.brown
+        scrollChartView.frame = myScrollView.frame
+        myScrollView.addSubview(scrollChartView)
+        setupOverlay()
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func setupOverlay() {
+        let overlay = UIView()
+        overlay.frame = myScrollView.frame
+        overlay.backgroundColor = UIColor.clear
+        
+        //Gestures
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft))
+        leftSwipe.direction = UISwipeGestureRecognizerDirection.left
+        overlay.addGestureRecognizer(leftSwipe)
+        
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight))
+        rightSwipe.direction = UISwipeGestureRecognizerDirection.right
+        overlay.addGestureRecognizer(rightSwipe)
+        
+        self.view.addSubview(overlay)
     }
+    
+    func swipeLeft(sender: UISwipeGestureRecognizer) {
+        let scrollView:UIScrollView = scrollChartView.myScrollView
+        var xVal = scrollView.contentOffset.x + scrollView.frame.width
+        if xVal == scrollView.frame.width*3 {
+            xVal = 0
+        }
+        let rect = CGRect(x: xVal,
+                          y: scrollView.center.y,
+                          width: scrollView.frame.width,
+                          height: scrollView.frame.height)
+        scrollChartView.myScrollView.scrollRectToVisible(rect, animated: true)
+        changePageControl(scrollView: scrollChartView, xValue:xVal)
+    }
+    
+    func swipeRight(sender:UISwipeGestureRecognizer){
+        let scrollView:UIScrollView = scrollChartView.myScrollView
+        var xVal = scrollView.contentOffset.x - scrollView.frame.width
+        if xVal == -scrollView.frame.width {
+            xVal = scrollView.frame.width*2
+        }
+        let rect = CGRect(x: xVal,
+                          y: scrollView.center.y,
+                          width: scrollView.frame.width,
+                          height: scrollView.frame.height)
+        scrollChartView.myScrollView.scrollRectToVisible(rect, animated: true)
+        changePageControl(scrollView: scrollChartView, xValue:xVal)
+    }
+    
+    func changePageControl(scrollView:ChartScrollController, xValue:CGFloat){
+        print(scrollView.myScrollView.contentOffset.x)
+        switch xValue {
+        case 0.0:
+            scrollView.pageControl.currentPage = 0
+            break
+        case scrollView.frame.width:
+            scrollView.pageControl.currentPage = 1
+            break
+        case scrollView.frame.width*2:
+            scrollView.pageControl.currentPage = 2
+            break
+        default: break
+        }
+    }
+   
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return entries.count
@@ -54,17 +116,4 @@ class HistoryListViewController: UIViewController, UITableViewDataSource {
         dateString = dateFormatter.string(from: date as Date)
         return dateString
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-
 }

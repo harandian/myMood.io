@@ -149,7 +149,6 @@ class LineGraphView: UIView {
     
     func drawDots() {
         for index in 0..<graphPoints.count {            
-            print(graphPoints[index])
             //percentage + / - depending plus/minus
             let pointPercentage:CGFloat = abs(CGFloat(graphPoints[index]))/10.0
             let yPointOffset:CGFloat = pointPercentage * (graphHeight/2)
