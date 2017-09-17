@@ -30,11 +30,6 @@ class HistoryListViewController: UIViewController, UITableViewDataSource {
         
     }
     
-    func passEntryThrough(entry:[Entry]){
-        entries = entry
-        historyListTableView.reloadData()
-    }
-    
     /*
  
      Gesture Setup
