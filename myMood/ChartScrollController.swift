@@ -15,7 +15,7 @@ class ChartScrollController:UIView, UIScrollViewDelegate {
     var wordCloudLayout = Bundle.main.loadNibNamed("wordCloudLayout", owner: nil, options: nil)?.first! as! wordCloudLayoutGenerator
 
     @IBOutlet weak var pageControl: UIPageControl!
-    @IBOutlet weak var myScrollView: UIScrollView!
+    @IBOutlet weak var chartScrollView: UIScrollView!
     
     override func willMove(toWindow newWindow: UIWindow?) {
         let content:UIView = UIView()
@@ -34,11 +34,11 @@ class ChartScrollController:UIView, UIScrollViewDelegate {
         
         
         content.backgroundColor = UIColor.red
-        myScrollView.contentMode = UIViewContentMode.scaleAspectFit
-        myScrollView.isPagingEnabled = true
-        myScrollView.contentSize = content.frame.size
-        myScrollView.addSubview(content)
-        myScrollView.delegate = self
+        chartScrollView.contentMode = UIViewContentMode.scaleAspectFit
+        chartScrollView.isPagingEnabled = true
+        chartScrollView.contentSize = content.frame.size
+        chartScrollView.addSubview(content)
+        chartScrollView.delegate = self
         
     }
 

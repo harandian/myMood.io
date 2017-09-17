@@ -9,14 +9,7 @@
 import UIKit
 import Foundation
 
-protocol LineGraphDelegate {
-    func passEntryThrough(entry:[Entry])
-}
-
-class LineGraphView: UIView {
-    //Delegate
-    var delegate:LineGraphDelegate? = nil
-    
+class LineGraphView: UIView {    
     // Plotted Points
     var graphPoints:[[Entry]] = []
     
@@ -214,7 +207,6 @@ class LineGraphView: UIView {
     }
     
     func tapWeek(sender: UIButton){
-        self.delegate?.passEntryThrough(entry: graphPoints[sender.tag])
         print("Reset table")
     }
     

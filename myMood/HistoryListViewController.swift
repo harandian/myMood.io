@@ -30,6 +30,11 @@ class HistoryListViewController: UIViewController, UITableViewDataSource {
         
     }
     
+    func passEntryThrough(entry:[Entry]){
+        entries = entry
+        historyListTableView.reloadData()
+    }
+    
     /*
  
      Gesture Setup
@@ -73,7 +78,7 @@ class HistoryListViewController: UIViewController, UITableViewDataSource {
     }
     
     func swipeLeft(sender: UISwipeGestureRecognizer) {
-        let scrollView:UIScrollView = scrollChartView.myScrollView
+        let scrollView:UIScrollView = scrollChartView.chartScrollView
         var xVal = scrollView.contentOffset.x + scrollView.frame.width
         if xVal == scrollView.frame.width*3 {
             xVal = 0
@@ -82,12 +87,12 @@ class HistoryListViewController: UIViewController, UITableViewDataSource {
                           y: scrollView.center.y,
                           width: scrollView.frame.width,
                           height: scrollView.frame.height)
-        scrollChartView.myScrollView.scrollRectToVisible(rect, animated: true)
+        scrollChartView.chartScrollView.scrollRectToVisible(rect, animated: true)
         changePageControl(scrollView: scrollChartView, xValue:xVal)
     }
     
     func swipeRight(sender:UISwipeGestureRecognizer){
-        let scrollView:UIScrollView = scrollChartView.myScrollView
+        let scrollView:UIScrollView = scrollChartView.chartScrollView
         var xVal = scrollView.contentOffset.x - scrollView.frame.width
         if xVal == -scrollView.frame.width {
             xVal = scrollView.frame.width*2
@@ -96,7 +101,7 @@ class HistoryListViewController: UIViewController, UITableViewDataSource {
                           y: scrollView.center.y,
                           width: scrollView.frame.width,
                           height: scrollView.frame.height)
-        scrollChartView.myScrollView.scrollRectToVisible(rect, animated: true)
+        scrollChartView.chartScrollView.scrollRectToVisible(rect, animated: true)
         changePageControl(scrollView: scrollChartView, xValue:xVal)
     }
     

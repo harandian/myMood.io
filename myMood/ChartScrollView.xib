@@ -36,7 +36,7 @@
                 <constraint firstAttribute="bottom" secondItem="uom-vP-aex" secondAttribute="bottom" id="wsA-dQ-7Rz"/>
             </constraints>
             <connections>
-                <outlet property="myScrollView" destination="uom-vP-aex" id="Dmo-o3-oL7"/>
+                <outlet property="chartScrollView" destination="uom-vP-aex" id="aA3-ay-ggc"/>
                 <outlet property="pageControl" destination="rNL-HI-TYO" id="f8J-Tr-NAr"/>
             </connections>
             <point key="canvasLocation" x="24.5" y="52.5"/>
