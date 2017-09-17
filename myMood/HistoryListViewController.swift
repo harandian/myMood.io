@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HistoryListViewController: UIViewController, UITableViewDataSource {
+class HistoryListViewController: UIViewController, UITableViewDataSource,LineGraphViewDelegate {
     var scrollChartView = Bundle.main.loadNibNamed("ChartScrollView", owner: nil, options: nil)?.first! as! ChartScrollController
     
     @IBOutlet weak var historyListTableView: UITableView!
@@ -25,11 +25,16 @@ class HistoryListViewController: UIViewController, UITableViewDataSource {
         view.backgroundColor = UIColor.brown
         scrollChartView.frame = myScrollView.frame
         
+        scrollChartView.lineChart.lineGraph.delegate = self
+        
         myScrollView.addSubview(scrollChartView)
         setupOverlay()
         
     }
-    
+    func passWeekEvent(e: [Entry]) {
+        entries = e
+        historyListTableView.reloadData()
+    }
     /*
  
      Gesture Setup

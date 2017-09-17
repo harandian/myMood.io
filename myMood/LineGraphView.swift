@@ -9,7 +9,19 @@
 import UIKit
 import Foundation
 
-class LineGraphView: UIView {    
+protocol LineGraphViewDelegate {
+    func passWeekEvent(e:[Entry])
+}
+
+class LineScrollGraph: UIScrollView {
+    @IBOutlet weak var lineGraph: LineGraphView!
+    
+}
+
+class LineGraphView: UIView {
+    //Delegate
+    var delegate:LineGraphViewDelegate? = nil
+    
     // Plotted Points
     var graphPoints:[[Entry]] = []
     
@@ -207,7 +219,7 @@ class LineGraphView: UIView {
     }
     
     func tapWeek(sender: UIButton){
-        print("Reset table")
+        delegate?.passWeekEvent(e: self.graphPoints[sender.tag])
     }
     
     func drawBackgroundLayer() {

@@ -11,7 +11,7 @@ import UIKit
 
 class ChartScrollController:UIView, UIScrollViewDelegate {
     let barChart = Bundle.main.loadNibNamed("BarGraphView", owner: self, options: nil)?.first as! BarGraphView
-    let lineChart = Bundle.main.loadNibNamed("LineGraphView", owner: self, options: nil)?.first as! UIScrollView
+    let lineChart = Bundle.main.loadNibNamed("LineGraphView", owner: self, options: nil)?.first as! LineScrollGraph
     var wordCloudLayout = Bundle.main.loadNibNamed("wordCloudLayout", owner: nil, options: nil)?.first! as! wordCloudLayoutGenerator
 
     @IBOutlet weak var pageControl: UIPageControl!
