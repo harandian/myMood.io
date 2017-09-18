@@ -9,10 +9,21 @@
 import UIKit
 import Foundation
 
+protocol LineGraphViewDelegate {
+    func passWeekEvent(e:[Entry])
+}
+
+class LineScrollGraph: UIScrollView {
+    @IBOutlet weak var lineGraph: LineGraphView!
+    
+}
 
 class LineGraphView: UIView {
+    //Delegate
+    var delegate:LineGraphViewDelegate? = nil
+    
     // Plotted Points
-    var graphPoints:[Int] = []
+    var graphPoints:[[Entry]] = []
     
     //Graph Height
     var graphHeight:CGFloat!
@@ -55,9 +66,12 @@ class LineGraphView: UIView {
     
     
     func setupScrollView () {
-        //TODO SET SCROLL VIEW CONTENTSIZE
+        // SET SCROLL VIEW CONTENTSIZE
         myScrollView.alwaysBounceHorizontal = false
-        let fullWidth = leftMargin+(incrementWidth * CGFloat(graphPoints.count-1))+(myScrollView.frame.width/2)
+        var fullWidth = leftMargin+(incrementWidth * CGFloat(graphPoints.count-1))+(myScrollView.frame.width/2)
+        if graphPoints.count == 0 {
+            fullWidth = myScrollView.frame.width
+        }
         self.frame.size.width = fullWidth
         myScrollView.contentSize = CGSize(width: fullWidth, height: myScrollView.frame.size.height-20)
         
@@ -66,21 +80,17 @@ class LineGraphView: UIView {
     }
     
     func populateGraphPoints() {
-        var weekAverge:CGFloat = 0
-        var weekDay:Int = 0
+        var weekEntries:[Entry] = []
         for plots in FirebaseDBController.shared.get_allEntries().reversed() {
-            weekAverge += CGFloat(plots.mood)
+            weekEntries.append(plots)
             
-            if weekDay == 7 {
-                weekAverge /= 7
-                self.graphPoints.append(Int(weekAverge))
-                weekDay = 0
-                weekAverge = 0
+            if weekEntries.count == 7 {
+                self.graphPoints.append(weekEntries)
+                weekEntries.removeAll()
             }
-            weekDay += 1
         }
-        if weekAverge > 0 {
-            self.graphPoints.append(Int(weekAverge/CGFloat(weekDay)))
+        if weekEntries.count > 0 {
+            self.graphPoints.append(weekEntries)
         }
         
 
@@ -101,11 +111,11 @@ class LineGraphView: UIView {
         
         //Move path to first Point
         //Y Position
-        let pointPercentage:CGFloat = abs(CGFloat(graphPoints[0]))/10.0
+        let pointPercentage:CGFloat = abs(averageEntry(graphPoints[0]))/10.0
         var yPoint:CGFloat = (pointPercentage * (graphHeight/2))
 
         //Y Position : Up or Down depending on neg/pos
-        if (graphPoints[0] < 0) {
+        if (averageEntry(graphPoints[0]) < 0) {
             yPoint = topBottomMargins+graphHeight/2 + yPoint
         } else {
             yPoint = topBottomMargins+graphHeight/2 - yPoint
@@ -120,12 +130,12 @@ class LineGraphView: UIView {
         for circlePoint in 1..<graphPoints.count {
             // Set up the points line
             //percentage + / - depending plus/minus
-            let pointPercentage:CGFloat = abs(CGFloat(graphPoints[circlePoint]))/10.0
+            let pointPercentage:CGFloat = abs(averageEntry(graphPoints[circlePoint]))/10.0
             let yPointOffset:CGFloat = (pointPercentage * (graphHeight/2))
             
             //Y Position : Up or Down depending on neg/pos
             var yPoint:CGFloat = topBottomMargins + graphHeight/2 - yPointOffset
-            if (graphPoints[circlePoint] < 0) {
+            if (averageEntry(graphPoints[circlePoint]) < 0) {
                 yPoint = topBottomMargins + graphHeight/2 + yPointOffset
             }
             
@@ -149,14 +159,13 @@ class LineGraphView: UIView {
     
     func drawDots() {
         for index in 0..<graphPoints.count {            
-            print(graphPoints[index])
             //percentage + / - depending plus/minus
-            let pointPercentage:CGFloat = abs(CGFloat(graphPoints[index]))/10.0
+            let pointPercentage:CGFloat = abs(averageEntry(graphPoints[index]))/10.0
             let yPointOffset:CGFloat = pointPercentage * (graphHeight/2)
             
             //Y Position : Up or Down depending on neg/pos
             var yPoint:CGFloat = (topBottomMargins + graphHeight/2) - yPointOffset
-            if (graphPoints[index] < 0) {
+            if (averageEntry(graphPoints[index]) < 0) {
                 yPoint = (topBottomMargins + graphHeight/2) + yPointOffset
             }
             
@@ -177,7 +186,7 @@ class LineGraphView: UIView {
             let circle = UIBezierPath(ovalIn: CGRect(origin: point,
                                                      size: CGSize(width: dotSize, height: dotSize)))
             var color:UIColor = UIColor(red: 115/255, green: 1, blue: 115/255, alpha: 0.75)
-            if (graphPoints[index] < 0) {
+            if (averageEntry(graphPoints[index]) < 0) {
                 color = UIColor(red: 115/255, green: 115/255, blue: 1, alpha: 0.75)
             }
 
@@ -196,7 +205,21 @@ class LineGraphView: UIView {
             textLabel.backgroundColor = UIColor.clear
             self.addSubview(textLabel)
             
+            //Draw Buttons
+            let weekButton:UIButton = UIButton()
+            weekButton.frame = CGRect(x: xPoint-(textLabelWidth/2),
+                                      y: 0,
+                                      width: textLabelWidth*2,
+                                      height: self.frame.height)
+            weekButton.backgroundColor = UIColor.clear
+            weekButton.addTarget(self, action: #selector(tapWeek), for: .touchUpInside)
+            weekButton.tag = index
+            self.addSubview(weekButton)
         }
+    }
+    
+    func tapWeek(sender: UIButton){
+        delegate?.passWeekEvent(e: self.graphPoints[sender.tag])
     }
     
     func drawBackgroundLayer() {
@@ -232,6 +255,15 @@ class LineGraphView: UIView {
 
         linePath.lineWidth = 1.0
         linePath.stroke()
+    }
+    
+    
+    func averageEntry(_ e:[Entry]) -> CGFloat{
+        var average:CGFloat = 0
+        for obj in e {
+            average += CGFloat(obj.mood)
+        }
+        return average/CGFloat(e.count)
     }
     
     

@@ -197,14 +197,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HLW-sa-1tv">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="216" width="375" height="451"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="60" id="K3H-G4-YsS" customClass="HistoryTableViewCell" customModule="myMood" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K3H-G4-YsS" id="Lte-Rm-grU">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4DY-Vk-PxU">
@@ -239,17 +239,28 @@
                                     <outlet property="dataSource" destination="A5h-BO-PMw" id="5UJ-M4-fHt"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ICJ-rR-rP1">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="216" id="Jbs-oP-dhA"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="HLW-sa-1tv" secondAttribute="trailing" id="Mvt-g3-e5t"/>
+                            <constraint firstItem="xm7-Px-2bZ" firstAttribute="top" secondItem="HLW-sa-1tv" secondAttribute="bottom" id="N8G-wM-IiY"/>
+                            <constraint firstItem="HLW-sa-1tv" firstAttribute="top" secondItem="ICJ-rR-rP1" secondAttribute="bottom" id="OUM-Wc-tQ0"/>
+                            <constraint firstAttribute="trailing" secondItem="ICJ-rR-rP1" secondAttribute="trailing" id="Rwp-V3-ENB"/>
+                            <constraint firstItem="ICJ-rR-rP1" firstAttribute="top" secondItem="LuP-DD-i75" secondAttribute="top" id="X8F-tu-2af"/>
                             <constraint firstItem="HLW-sa-1tv" firstAttribute="leading" secondItem="LuP-DD-i75" secondAttribute="leading" id="ZA4-Wz-d2x"/>
-                            <constraint firstItem="HLW-sa-1tv" firstAttribute="top" secondItem="bZE-Ug-GIY" secondAttribute="bottom" id="ZHN-wh-Jt7"/>
-                            <constraint firstItem="xm7-Px-2bZ" firstAttribute="top" secondItem="HLW-sa-1tv" secondAttribute="bottom" id="jDZ-lX-elD"/>
+                            <constraint firstItem="ICJ-rR-rP1" firstAttribute="leading" secondItem="LuP-DD-i75" secondAttribute="leading" id="qGh-yx-q06"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="historyListTableView" destination="HLW-sa-1tv" id="x8M-42-fpm"/>
+                        <outlet property="myScrollView" destination="ICJ-rR-rP1" id="v3I-ag-Nqi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fXf-Fs-VrQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
