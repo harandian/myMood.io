@@ -449,7 +449,6 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         popupVC.view.frame = self.view.frame
         self.view.addSubview(popupVC.view)
         popupVC.didMove(toParentViewController: self)
-        
     }
 
 }

@@ -98,30 +98,51 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HnI-5J-02J">
-                                <rect key="frame" x="16" y="183.5" width="343" height="300"/>
+                                <rect key="frame" x="16" y="184" width="343" height="300"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gwY-u1-7J8">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="29"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="28" id="jAf-Ih-BMv"/>
+                                        </constraints>
                                         <segments>
                                             <segment title="Entry"/>
                                             <segment title="Image"/>
                                             <segment title="Location"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="segmentedView:" destination="oQV-PB-XHE" eventType="valueChanged" id="OCu-ag-xQz"/>
+                                        </connections>
                                     </segmentedControl>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G8q-DJ-R6G">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="244"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x2x-gE-JGT">
-                                        <rect key="frame" x="0.0" y="270" width="343" height="30"/>
+                                        <rect key="frame" x="0.0" y="272" width="343" height="28"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="28" id="03L-iJ-Uud"/>
+                                        </constraints>
                                         <state key="normal" title="Done"/>
+                                        <connections>
+                                            <action selector="nextOrDoneButton:" destination="oQV-PB-XHE" eventType="touchUpInside" id="N8F-6O-nuD"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="gwY-u1-7J8" secondAttribute="trailing" id="4Ud-MG-KQe"/>
                                     <constraint firstAttribute="height" constant="300" id="7i6-GY-rZu"/>
-                                    <constraint firstAttribute="trailing" secondItem="gwY-u1-7J8" secondAttribute="trailing" id="988-Sp-UEV"/>
-                                    <constraint firstAttribute="trailing" secondItem="x2x-gE-JGT" secondAttribute="trailing" id="Mqx-GT-QDh"/>
-                                    <constraint firstItem="gwY-u1-7J8" firstAttribute="leading" secondItem="HnI-5J-02J" secondAttribute="leading" id="W0f-CR-FKR"/>
-                                    <constraint firstAttribute="bottom" secondItem="x2x-gE-JGT" secondAttribute="bottom" id="a2C-WB-jVj"/>
-                                    <constraint firstItem="gwY-u1-7J8" firstAttribute="top" secondItem="HnI-5J-02J" secondAttribute="top" id="htA-MF-ZWZ"/>
-                                    <constraint firstItem="x2x-gE-JGT" firstAttribute="leading" secondItem="HnI-5J-02J" secondAttribute="leading" id="pCx-Zz-PSP"/>
+                                    <constraint firstItem="gwY-u1-7J8" firstAttribute="top" secondItem="HnI-5J-02J" secondAttribute="top" id="8ng-uy-ZMH"/>
+                                    <constraint firstItem="x2x-gE-JGT" firstAttribute="top" secondItem="G8q-DJ-R6G" secondAttribute="bottom" id="A2W-Ip-DMs"/>
+                                    <constraint firstAttribute="bottom" secondItem="x2x-gE-JGT" secondAttribute="bottom" id="GHY-XY-g2z"/>
+                                    <constraint firstAttribute="trailing" secondItem="x2x-gE-JGT" secondAttribute="trailing" id="Kjr-Jd-bsz"/>
+                                    <constraint firstAttribute="trailing" secondItem="G8q-DJ-R6G" secondAttribute="trailing" id="e65-W6-6fw"/>
+                                    <constraint firstItem="G8q-DJ-R6G" firstAttribute="leading" secondItem="HnI-5J-02J" secondAttribute="leading" id="gg7-YC-fmo"/>
+                                    <constraint firstItem="gwY-u1-7J8" firstAttribute="leading" secondItem="HnI-5J-02J" secondAttribute="leading" id="gmE-UB-PaF"/>
+                                    <constraint firstItem="G8q-DJ-R6G" firstAttribute="top" secondItem="gwY-u1-7J8" secondAttribute="bottom" id="jlF-2T-ojg"/>
+                                    <constraint firstItem="x2x-gE-JGT" firstAttribute="leading" secondItem="HnI-5J-02J" secondAttribute="leading" id="mUk-AK-Bkd"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -133,6 +154,10 @@
                             <constraint firstItem="HnI-5J-02J" firstAttribute="centerY" secondItem="nzT-6b-ZCj" secondAttribute="centerY" id="ueN-Nc-OWN"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="entryView" destination="G8q-DJ-R6G" id="1ZU-Is-1Qg"/>
+                        <outlet property="segmentedView" destination="gwY-u1-7J8" id="LxL-HN-4u7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fRZ-FN-dim" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
