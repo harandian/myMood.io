@@ -418,7 +418,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
             topNumberLabel.text = hText
         } else if happinessIndex == 0 {
             topNumberLabel.isHidden = true
-            botNumberLabel.isHidden = true
+            botNumberLabel.isHidden = false
             topNumberLabel.text = hText
             botNumberLabel.text = hText
         } else if happinessIndex < 0{
@@ -438,11 +438,11 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         var newValue = value
         
         if value > 0 && value < 1 {
-            newValue = 1
+            newValue = 0
         }
         
         if value < 0 && value > -1 {
-            newValue = -1
+            newValue = 0
         }
         
         return Int(newValue)

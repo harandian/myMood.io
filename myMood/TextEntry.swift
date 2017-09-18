@@ -10,7 +10,6 @@ import UIKit
 
 class TextEntry: UIView, UITextViewDelegate {
     
-    @IBOutlet weak var textEntryHeader: UILabel!
     @IBOutlet weak var journalText: UITextView!
     /*
      // Only override draw() if you perform custom drawing.
@@ -22,23 +21,20 @@ class TextEntry: UIView, UITextViewDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        labelHeaderSetup()
         journalText.delegate = self
         journalText.textColor = UIColor.white
         journalText.text = " How was your day?"
     }
     
     func labelHeaderSetup() {
-        textEntryHeader.translatesAutoresizingMaskIntoConstraints = false
-        textEntryHeader.leadingAnchor.constraint(equalTo: super.leadingAnchor, constant: 0).isActive = true
-        textEntryHeader.trailingAnchor.constraint(equalTo: super.trailingAnchor, constant: 0).isActive = true
-        textEntryHeader.topAnchor.constraint(equalTo: super.topAnchor, constant: 0).isActive = true
-        textEntryHeader.heightAnchor.constraint(equalToConstant: 30).isActive = true
+
         
         journalText.translatesAutoresizingMaskIntoConstraints = false
-        journalText.bottomAnchor.constraint(equalTo: super.bottomAnchor, constant: 0).isActive = true
-        journalText.leadingAnchor.constraint(equalTo: super.leadingAnchor, constant: 0).isActive = true
-        journalText.trailingAnchor.constraint(equalTo: super.trailingAnchor, constant: 0).isActive = true
-        journalText.topAnchor.constraint(equalTo: textEntryHeader.topAnchor, constant: 20).isActive = true
+        journalText.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+        journalText.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
+        journalText.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
+        journalText.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
         
         
         
