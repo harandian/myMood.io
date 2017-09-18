@@ -252,10 +252,12 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     
     func addTapped()  {
         
-        let alertController = UIAlertController(title: "myMood", message: "Please select an action", preferredStyle: .actionSheet)
-        alertController.addAction(UIAlertAction(title: "Add Entry Details", style: .default, handler: self.popupJournalEntry))
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alertController, animated: true, completion: nil)    }
+        self.popupJournalEntry()
+//        let alertController = UIAlertController(title: "myMood", message: "Please select an action", preferredStyle: .actionSheet)
+//        alertController.addAction(UIAlertAction(title: "Add Entry Details", style: .default, handler: self.popupJournalEntry))
+//        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//        self.present(alertController, animated: true, completion: nil)    
+    }
     
     func saveNewMood() {
         let myEntry: Entry = Entry.init(mood: happinessIndex)
@@ -457,7 +459,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     
     //MARK: - Journal Entry Popup
     
-    func popupJournalEntry(alert: UIAlertAction) {
+    func popupJournalEntry() {
         let popupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "popupvc") as! JournalPopupViewController
         self.addChildViewController(popupVC)
         popupVC.view.frame = self.view.frame
