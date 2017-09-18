@@ -12,6 +12,7 @@ class JournalPopupViewController: UIViewController {
 
     @IBOutlet weak var segmentedView: UISegmentedControl!
     @IBOutlet weak var entryView: UIView!
+    @IBOutlet weak var doneButton: UIButton!
     
     let textEntry:UIView = Bundle.main.loadNibNamed("textEntry", owner: nil, options: nil)?.first! as! TextEntry
     let imageEntry:UIView = Bundle.main.loadNibNamed("ImagePicker", owner: nil, options: nil)?.first! as! ImagePicker
@@ -22,7 +23,9 @@ class JournalPopupViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        setConstraints()
         showAnimate()
+        
 
         // Do any additional setup after loading the view.
     }
@@ -39,11 +42,14 @@ class JournalPopupViewController: UIViewController {
     func setupOverlapViews() {
         
         
-        textEntry.frame = entryView.frame
+     //   textEntry.frame = entryView.frame
         imageEntry.frame = entryView.frame
         locationEntry.frame = entryView.frame
+    //    textEntry.center = entryView.center
+        textEntry.layer.borderWidth = 1
+        imageEntry.layer.borderWidth = 1
+        locationEntry.layer.borderWidth = 1
     
-        entryView.addSubview(textEntry)
         entryView.addSubview(imageEntry)
         entryView.addSubview(locationEntry)
         
@@ -106,4 +112,14 @@ class JournalPopupViewController: UIViewController {
             break
         }
     }
+    
+    func setConstraints() {
+        entryView.addSubview(textEntry)
+        textEntry.translatesAutoresizingMaskIntoConstraints = false
+        textEntry.topAnchor.constraint(equalTo: segmentedView.bottomAnchor, constant: 0).isActive = true
+        textEntry.leadingAnchor.constraint(equalTo: entryView.leadingAnchor, constant: 0).isActive = true
+        textEntry.trailingAnchor.constraint(equalTo: entryView.trailingAnchor, constant: 0).isActive = true
+        textEntry.bottomAnchor.constraint(equalTo: doneButton.topAnchor, constant: 0).isActive = true
+    }
+    
 }
