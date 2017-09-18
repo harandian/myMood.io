@@ -24,12 +24,10 @@ class JournalPopupViewController: UIViewController {
         setConstraints()
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         showAnimate()
-        
-<<<<<<< HEAD
-=======
+
         let tappedOutside = UITapGestureRecognizer(target: self, action: #selector(removeAnimate))
         self.view.addGestureRecognizer(tappedOutside)
->>>>>>> master
+
 
         // Do any additional setup after loading the view.
     }
@@ -94,6 +92,7 @@ class JournalPopupViewController: UIViewController {
     
     
     @IBAction func nextOrDoneButton(_ sender: UIButton) {
+        
         
     }
     
