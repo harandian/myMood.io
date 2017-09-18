@@ -112,8 +112,11 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       // let nav = UINavigationBar()
         
-        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
+
         view.addSubview(containerView)
         view.addSubview(saveButton)
         view.addSubview(cancelButton)
@@ -121,7 +124,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         view.addSubview(botNumberLabel)
         view.addSubview(mainLabel)
         view.addSubview(discLabel)
-        
+        navigationItem.rightBarButtonItem = add
         saveButton.isEnabled = false
         saveButton.backgroundColor = UIColor.gray
         
@@ -234,7 +237,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         saveNewMood()
         
         //******** Go to JournalView ********
-        //        performSegue(withIdentifier: "Journal", sender: self)
+        performSegue(withIdentifier: "Journal", sender: self)
         
         //******** Show new view with objects on top of Slider VC ********
         //        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "popupvc") as! JournalPopupViewController
@@ -244,12 +247,15 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         //        popOverVC.didMove(toParentViewController: self)
         
         //******** Show Action Controller ********
+   
+    }
+    
+    func addTapped()  {
+        
         let alertController = UIAlertController(title: "myMood", message: "Please select an action", preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Add Entry Details", style: .default, handler: self.popupJournalEntry))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
+        self.present(alertController, animated: true, completion: nil)    }
     
     func saveNewMood() {
         let myEntry: Entry = Entry.init(mood: happinessIndex)

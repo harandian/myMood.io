@@ -78,7 +78,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="VF4-cc-Qjc" kind="show" identifier="Journal" id="MMS-w0-iYn"/>
+                        <segue destination="A5h-BO-PMw" kind="show" identifier="Journal" id="pan-TL-00s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fVQ-h6-sjK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -183,7 +183,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="65H-Xj-yMm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3375" y="123"/>
+            <point key="canvasLocation" x="3374" y="316"/>
         </scene>
         <!--History List View Controller-->
         <scene sceneID="8xb-YA-PJI">
@@ -269,4 +269,7 @@
             <point key="canvasLocation" x="4264.8000000000002" y="122.78860569715144"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="pan-TL-00s"/>
+    </inferredMetricsTieBreakers>
 </document>
