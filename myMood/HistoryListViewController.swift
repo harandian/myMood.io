@@ -8,9 +8,10 @@
 
 import UIKit
 
+
 class HistoryListViewController: UIViewController, UITableViewDataSource,LineGraphViewDelegate {
     var scrollChartView = Bundle.main.loadNibNamed("ChartScrollView", owner: nil, options: nil)?.first! as! ChartScrollController
-    
+
     @IBOutlet weak var historyListTableView: UITableView!
     @IBOutlet weak var myScrollView: UIView!
     
@@ -136,11 +137,9 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! HistoryTableViewCell
-        
-        
-        
         let entry = entries[indexPath.row]
-        cell.moodLabel.text = String(entry.mood)
+        
+        cell.moodLabel.text = "Mood: \(String(entry.mood))"
         cell.dateLabel.text = convertDateFromUnix(unixDate: entry.date) //String(entry.date)
         
         return cell
@@ -149,9 +148,27 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
     func convertDateFromUnix(unixDate: Double) -> String {
         let date = NSDate(timeIntervalSince1970: TimeInterval(unixDate))
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd YYYY"
+        dateFormatter.dateFormat = "EEE, MMM dd YYYY"
         
         dateString = dateFormatter.string(from: date as Date)
         return dateString
     }
+
+
+    // MARK: - Navigation
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "Journal", sender: entries[indexPath.row])
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Journal" {
+            if let indexPath = historyListTableView.indexPathForSelectedRow {
+                let journalVC = segue.destination as! JournalFormViewController
+                journalVC.entry = entries[indexPath.row]
+            }
+        }
+    }
+
 }

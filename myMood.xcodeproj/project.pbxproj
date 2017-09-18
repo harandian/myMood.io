@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		110045E51F6C849900D6AA60 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110045E41F6C849900D6AA60 /* RegisterViewController.swift */; };
 		11A90A6E1F5F6DF1009F524F /* SliderMoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A90A6D1F5F6DF1009F524F /* SliderMoodViewController.swift */; };
 		40DB3C1F5F66819AEA1A7A4B /* Pods_myMoodTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 593A9845255E58BFD1AC101A /* Pods_myMoodTests.framework */; };
 		5B2209451F5F39CD00243717 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B2209441F5F39CD00243717 /* GoogleService-Info.plist */; };
@@ -21,6 +22,7 @@
 		5BAE234F1F6C6DC7000E9F1E /* ChartScrollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAE234E1F6C6DC7000E9F1E /* ChartScrollController.swift */; };
 		5BE217F01F6724C40009A050 /* map.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE217EF1F6724C40009A050 /* map.xib */; };
 		5BE217F91F6728F60009A050 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BE217F81F6728F60009A050 /* MapKit.framework */; };
+		6A3579451F6C72AF00DD1D90 /* JournalPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3579441F6C72AF00DD1D90 /* JournalPopupViewController.swift */; };
 		6A5EB1531F5F626F00D1375A /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5EB1521F5F626F00D1375A /* Photo.swift */; };
 		6AF38C1C1F68D6AB008B8E42 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF38C1B1F68D6AB008B8E42 /* HistoryTableViewCell.swift */; };
 		72020F611F6B402C00B5B587 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE217F41F6727720009A050 /* MapController.swift */; };
@@ -54,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		110045E41F6C849900D6AA60 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		11A90A6D1F5F6DF1009F524F /* SliderMoodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderMoodViewController.swift; sourceTree = "<group>"; };
 		593A9845255E58BFD1AC101A /* Pods_myMoodTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_myMoodTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B2209441F5F39CD00243717 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -69,6 +72,7 @@
 		5BE217EF1F6724C40009A050 /* map.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = map.xib; sourceTree = "<group>"; };
 		5BE217F41F6727720009A050 /* MapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		5BE217F81F6728F60009A050 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		6A3579441F6C72AF00DD1D90 /* JournalPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalPopupViewController.swift; sourceTree = "<group>"; };
 		6A5EB1521F5F626F00D1375A /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		6AF38C1B1F68D6AB008B8E42 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		723BC51C1F5F26000022ADF8 /* myMood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myMood.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -198,6 +202,7 @@
 				5BD7FC421F63403B00314DA1 /* Model */,
 				723BC51F1F5F26000022ADF8 /* AppDelegate.swift */,
 				723BC5211F5F26000022ADF8 /* LoginViewController.swift */,
+				110045E41F6C849900D6AA60 /* RegisterViewController.swift */,
 				11A90A6D1F5F6DF1009F524F /* SliderMoodViewController.swift */,
 				723BC5231F5F26000022ADF8 /* Main.storyboard */,
 				725C2DDF1F675F5700FC279E /* HistoryViewController.swift */,
@@ -228,6 +233,7 @@
 				725C2DDB1F673B6700FC279E /* TextEntry.swift */,
 				725C2DDD1F673B9D00FC279E /* textEntry.xib */,
 				725C2DD51F6731C600FC279E /* JournalFormViewController.swift */,
+				6A3579441F6C72AF00DD1D90 /* JournalPopupViewController.swift */,
 			);
 			name = JournalFormViews;
 			path = ..;
@@ -505,6 +511,7 @@
 				5BAAC1EF1F607C2B00A8D331 /* Entry.swift in Sources */,
 				5BA050D61F6B4118000EB4EC /* BarGraphView.swift in Sources */,
 				725C2DE01F675F5800FC279E /* HistoryViewController.swift in Sources */,
+				110045E51F6C849900D6AA60 /* RegisterViewController.swift in Sources */,
 				6A5EB1531F5F626F00D1375A /* Photo.swift in Sources */,
 				5BAE234F1F6C6DC7000E9F1E /* ChartScrollController.swift in Sources */,
 				725C2DD91F673ACC00FC279E /* ImagePicker.swift in Sources */,
@@ -519,6 +526,7 @@
 				723BC5281F5F26000022ADF8 /* myMood.xcdatamodeld in Sources */,
 				72020F611F6B402C00B5B587 /* MapController.swift in Sources */,
 				72FD94191F61D0F400391818 /* wordCloudLayoutGenerator.swift in Sources */,
+				6A3579451F6C72AF00DD1D90 /* JournalPopupViewController.swift in Sources */,
 				725C2DDC1F673B6700FC279E /* TextEntry.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

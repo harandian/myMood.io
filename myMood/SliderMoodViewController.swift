@@ -229,7 +229,22 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
 //        self.navigationController?.pushViewController(journalFormViewController, animated: true)
         print(123)
         saveNewMood()
-        performSegue(withIdentifier: "Journal", sender: self)
+        
+        //******** Go to JournalView ********
+//        performSegue(withIdentifier: "Journal", sender: self)
+        
+        //******** Show new view with objects on top of Slider VC ********
+//        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "popupvc") as! JournalPopupViewController
+//        self.addChildViewController(popOverVC)
+//        popOverVC.view.frame = self.view.frame
+//        self.view.addSubview(popOverVC.view)
+//        popOverVC.didMove(toParentViewController: self)
+        
+        //******** Show Action Controller ********
+        let alertController = UIAlertController(title: "myMood", message: "Please select an action", preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Add Entry Details", style: .default, handler: self.popupJournalEntry))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
     }
     
     
@@ -423,6 +438,17 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         }
         
         return Int(newValue)
+    }
+    
+    
+    //MARK: - Journal Entry Popup
+    
+    func popupJournalEntry(alert: UIAlertAction) {
+        let popupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "popupvc") as! JournalPopupViewController
+        self.addChildViewController(popupVC)
+        popupVC.view.frame = self.view.frame
+        self.view.addSubview(popupVC.view)
+        popupVC.didMove(toParentViewController: self)
     }
 
 }
