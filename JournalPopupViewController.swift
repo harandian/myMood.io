@@ -21,9 +21,8 @@ class JournalPopupViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         setConstraints()
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         showAnimate()
         
 
@@ -42,16 +41,15 @@ class JournalPopupViewController: UIViewController {
     func setupOverlapViews() {
         
         
-     //   textEntry.frame = entryView.frame
-        imageEntry.frame = entryView.frame
-        locationEntry.frame = entryView.frame
-    //    textEntry.center = entryView.center
+//     textEntry.frame = entryView.frame
+//     imageEntry.frame = entryView.frame
+//     locationEntry.frame = entryView.frame
+//     textEntry.center = entryView.center
         textEntry.layer.borderWidth = 1
         imageEntry.layer.borderWidth = 1
         locationEntry.layer.borderWidth = 1
     
-        entryView.addSubview(imageEntry)
-        entryView.addSubview(locationEntry)
+
         
     }
     
@@ -115,11 +113,27 @@ class JournalPopupViewController: UIViewController {
     
     func setConstraints() {
         entryView.addSubview(textEntry)
+        entryView.addSubview(imageEntry)
+        entryView.addSubview(locationEntry)
+        
         textEntry.translatesAutoresizingMaskIntoConstraints = false
         textEntry.topAnchor.constraint(equalTo: segmentedView.bottomAnchor, constant: 0).isActive = true
         textEntry.leadingAnchor.constraint(equalTo: entryView.leadingAnchor, constant: 0).isActive = true
         textEntry.trailingAnchor.constraint(equalTo: entryView.trailingAnchor, constant: 0).isActive = true
         textEntry.bottomAnchor.constraint(equalTo: doneButton.topAnchor, constant: 0).isActive = true
+        
+        imageEntry.translatesAutoresizingMaskIntoConstraints = false
+        imageEntry.topAnchor.constraint(equalTo: segmentedView.bottomAnchor, constant: 0).isActive = true
+        imageEntry.leadingAnchor.constraint(equalTo: entryView.leadingAnchor, constant: 0).isActive = true
+        imageEntry.trailingAnchor.constraint(equalTo: entryView.trailingAnchor, constant: 0).isActive = true
+        imageEntry.bottomAnchor.constraint(equalTo: doneButton.topAnchor, constant: 0).isActive = true
+        
+        locationEntry.translatesAutoresizingMaskIntoConstraints = false
+        locationEntry.topAnchor.constraint(equalTo: segmentedView.bottomAnchor, constant: 0).isActive = true
+        locationEntry.leadingAnchor.constraint(equalTo: entryView.leadingAnchor, constant: 0).isActive = true
+        locationEntry.trailingAnchor.constraint(equalTo: entryView.trailingAnchor, constant: 0).isActive = true
+        locationEntry.bottomAnchor.constraint(equalTo: doneButton.topAnchor, constant: 0).isActive = true
+    
     }
     
 }
