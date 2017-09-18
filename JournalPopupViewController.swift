@@ -23,6 +23,9 @@ class JournalPopupViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         showAnimate()
+        
+        let tappedOutside = UITapGestureRecognizer(target: self, action: #selector(removeAnimate))
+        self.view.addGestureRecognizer(tappedOutside)
 
         // Do any additional setup after loading the view.
     }
@@ -46,6 +49,10 @@ class JournalPopupViewController: UIViewController {
         entryView.addSubview(textEntry)
         entryView.addSubview(imageEntry)
         entryView.addSubview(locationEntry)
+        
+        textEntry.isHidden = false
+        imageEntry.isHidden = true
+        locationEntry.isHidden = true
         
     }
     
