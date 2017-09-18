@@ -124,6 +124,7 @@ class JournalPopupViewController: UIViewController {
         entryView.addSubview(imageEntry)
         entryView.addSubview(locationEntry)
         
+        
         textEntry.translatesAutoresizingMaskIntoConstraints = false
         textEntry.topAnchor.constraint(equalTo: segmentedView.bottomAnchor, constant: 0).isActive = true
         textEntry.leadingAnchor.constraint(equalTo: entryView.leadingAnchor, constant: 0).isActive = true

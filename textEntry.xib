@@ -25,24 +25,14 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" spellCheckingType="yes"/>
                 </textView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Please Enter Your Text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRa-vx-rhW">
-                    <rect key="frame" x="102" y="229" width="171.5" height="21"/>
-                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Koc-VE-c4k" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="10" id="G3C-37-cmW"/>
                 <constraint firstItem="Koc-VE-c4k" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="XmD-x5-vrc"/>
-                <constraint firstItem="Koc-VE-c4k" firstAttribute="top" relation="lessThanOrEqual" secondItem="kRa-vx-rhW" secondAttribute="bottom" constant="5" id="bsZ-Kk-V1K"/>
-                <constraint firstItem="kRa-vx-rhW" firstAttribute="centerX" secondItem="Koc-VE-c4k" secondAttribute="centerX" id="rws-I5-vlD"/>
             </constraints>
             <connections>
                 <outlet property="journalText" destination="Koc-VE-c4k" id="I2U-ZT-df8"/>
-                <outlet property="textEntryHeader" destination="kRa-vx-rhW" id="pj7-y2-7wI"/>
             </connections>
             <point key="canvasLocation" x="34.5" y="101.5"/>
         </view>
