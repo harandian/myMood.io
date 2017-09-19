@@ -55,13 +55,8 @@ class JournalPopupViewController: UIViewController, TextEntryDelegate {
         textEntry.layer.borderWidth = 1
         imageEntry.layer.borderWidth = 1
         locationEntry.layer.borderWidth = 1
-    
 
-        
-        textEntry.isHidden = false
-        imageEntry.isHidden = true
-        locationEntry.isHidden = true
-        
+        setSegmentIndex(i: self.segmentedView.selectedSegmentIndex)
     }
     
 
@@ -96,14 +91,21 @@ class JournalPopupViewController: UIViewController, TextEntryDelegate {
     
     @IBAction func doneButton(_ sender: UIButton) {
         //delegate call.
-        self.delegate?.passBackEntry(journalEntry: entryDescription!)
+        if entryDescription != nil {
+             self.delegate?.passBackEntry(journalEntry: entryDescription!)
+        }
         removeAnimate()
     }
     
     
 
     @IBAction func segmentedView(_ sender: UISegmentedControl) {
-        switch segmentedView.selectedSegmentIndex {
+
+        setSegmentIndex(i: segmentedView.selectedSegmentIndex )
+    }
+    
+    func setSegmentIndex(i: Int){
+        switch i {
         case 0:
             textEntry.isHidden = false
             imageEntry.isHidden = true

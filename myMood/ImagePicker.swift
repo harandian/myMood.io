@@ -26,10 +26,6 @@ class ImagePicker: UIView, UIImagePickerControllerDelegate , UINavigationControl
    
     override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
-        //navigationItem.title = "Details"
-        self.addSubview(imageView)
-        self.addSubview(addImageButton)
-        self.addSubview(deleteImageButton)
         self.backgroundColor = UIColor.white
   
     }
@@ -46,12 +42,12 @@ class ImagePicker: UIView, UIImagePickerControllerDelegate , UINavigationControl
             
         }))
         
-        actionSheet.addAction(UIAlertAction(title: "Photolibrary", style: .default, handler: { (action : UIAlertAction) in
+        actionSheet.addAction(UIAlertAction(title: "Library", style: .default, handler: { (action : UIAlertAction) in
             imagePickerController.sourceType = .photoLibrary
             self.bottomVC?.present(imagePickerController, animated: true, completion: nil)
             
         }))
-        actionSheet.addAction(UIAlertAction(title: "Cencel", style: .cancel, handler: { (nil) in
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (nil) in
             self.bottomVC?.dismiss(animated: true, completion: nil)
         }))
         
@@ -60,6 +56,7 @@ class ImagePicker: UIView, UIImagePickerControllerDelegate , UINavigationControl
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         
         imageView.image = image

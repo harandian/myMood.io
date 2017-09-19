@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-<device id="retina4_7" orientation="portrait">
-<adaptation id="fullscreen"/>
-</device>
-<dependencies>
-<deployment identifier="iOS"/>
-<plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-<capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-<capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-</dependencies>
-<objects>
-<placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
-<placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-<view contentMode="scaleToFill" id="NAO-h3-At3" customClass="ImagePicker" customModule="myMood">
-<rect key="frame" x="0.0" y="0.0" width="375" height="184"/>
-<autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-<subviews>
-<imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YvQ-We-PAj">
-<rect key="frame" x="0.0" y="0.0" width="375" height="184"/>
-<constraints>
-<constraint firstAttribute="width" secondItem="YvQ-We-PAj" secondAttribute="height" multiplier="375:184" id="eRh-S3-t1B"/>
-</constraints>
-</imageView>
-<button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cR-tE-UY0">
-<rect key="frame" x="0.0" y="0.0" width="375" height="184"/>
-<state key="normal" title="AddImage"/>
-<connections>
-<action selector="addImageAction:" destination="NAO-h3-At3" eventType="touchUpInside" id="GA3-dG-0dN"/>
-</connections>
-</button>
-<button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5L-Qn-13L">
-<rect key="frame" x="315" y="0.0" width="60" height="60"/>
-<constraints>
-<constraint firstAttribute="height" constant="60" id="doO-7B-0i8"/>
-<constraint firstAttribute="width" constant="60" id="tRc-Ad-icz"/>
-</constraints>
-<state key="normal" title="X"/>
-<connections>
-<action selector="deleteImage:" destination="NAO-h3-At3" eventType="touchUpInside" id="iFo-6D-Vgm"/>
-</connections>
-</button>
-</subviews>
-<color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-<constraints>
-<constraint firstItem="g5L-Qn-13L" firstAttribute="top" secondItem="NAO-h3-At3" secondAttribute="top" id="0v5-fV-GUU"/>
-<constraint firstAttribute="bottom" secondItem="YvQ-We-PAj" secondAttribute="bottom" id="59r-7b-SbH"/>
-<constraint firstAttribute="trailing" secondItem="YvQ-We-PAj" secondAttribute="trailing" id="5ca-qH-LTy"/>
-<constraint firstItem="YvQ-We-PAj" firstAttribute="top" secondItem="NAO-h3-At3" secondAttribute="top" id="GiQ-By-Whz"/>
-<constraint firstAttribute="trailing" secondItem="g5L-Qn-13L" secondAttribute="trailing" id="ZCS-qq-Xng"/>
-<constraint firstAttribute="bottom" secondItem="8cR-tE-UY0" secondAttribute="bottom" id="cJd-c3-zm6"/>
-<constraint firstItem="8cR-tE-UY0" firstAttribute="leading" secondItem="NAO-h3-At3" secondAttribute="leading" id="rpl-fo-XUi"/>
-<constraint firstItem="8cR-tE-UY0" firstAttribute="top" secondItem="NAO-h3-At3" secondAttribute="top" id="u1U-CN-iWz"/>
-<constraint firstAttribute="trailing" secondItem="8cR-tE-UY0" secondAttribute="trailing" id="u6F-eO-bdA"/>
-<constraint firstItem="YvQ-We-PAj" firstAttribute="leading" secondItem="NAO-h3-At3" secondAttribute="leading" id="vH8-EU-yFe"/>
-</constraints>
-<freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-<connections>
-<outlet property="addImageButton" destination="8cR-tE-UY0" id="EvF-iS-79y"/>
-<outlet property="deleteImageButton" destination="g5L-Qn-13L" id="pJo-sJ-zUd"/>
-<outlet property="imageView" destination="YvQ-We-PAj" id="yRX-WZ-WN1"/>
-</connections>
-<point key="canvasLocation" x="-812.5" y="320"/>
-</view>
-</objects>
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="NAO-h3-At3" customClass="ImagePicker" customModule="myMood">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="184"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cR-tE-UY0">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="184"/>
+                    <state key="normal" title="AddImage"/>
+                    <connections>
+                        <action selector="addImageAction:" destination="NAO-h3-At3" eventType="touchUpInside" id="GA3-dG-0dN"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YvQ-We-PAj">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="184"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="YvQ-We-PAj" secondAttribute="height" multiplier="375:184" id="eRh-S3-t1B"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5L-Qn-13L">
+                    <rect key="frame" x="315" y="0.0" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="doO-7B-0i8"/>
+                        <constraint firstAttribute="width" constant="60" id="tRc-Ad-icz"/>
+                    </constraints>
+                    <state key="normal" title="X"/>
+                    <connections>
+                        <action selector="deleteImage:" destination="NAO-h3-At3" eventType="touchUpInside" id="iFo-6D-Vgm"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="g5L-Qn-13L" firstAttribute="top" secondItem="NAO-h3-At3" secondAttribute="top" id="0v5-fV-GUU"/>
+                <constraint firstAttribute="bottom" secondItem="YvQ-We-PAj" secondAttribute="bottom" id="59r-7b-SbH"/>
+                <constraint firstAttribute="trailing" secondItem="YvQ-We-PAj" secondAttribute="trailing" id="5ca-qH-LTy"/>
+                <constraint firstItem="YvQ-We-PAj" firstAttribute="top" secondItem="NAO-h3-At3" secondAttribute="top" id="GiQ-By-Whz"/>
+                <constraint firstAttribute="trailing" secondItem="g5L-Qn-13L" secondAttribute="trailing" id="ZCS-qq-Xng"/>
+                <constraint firstAttribute="bottom" secondItem="8cR-tE-UY0" secondAttribute="bottom" id="cJd-c3-zm6"/>
+                <constraint firstItem="8cR-tE-UY0" firstAttribute="leading" secondItem="NAO-h3-At3" secondAttribute="leading" id="rpl-fo-XUi"/>
+                <constraint firstItem="8cR-tE-UY0" firstAttribute="top" secondItem="NAO-h3-At3" secondAttribute="top" id="u1U-CN-iWz"/>
+                <constraint firstAttribute="trailing" secondItem="8cR-tE-UY0" secondAttribute="trailing" id="u6F-eO-bdA"/>
+                <constraint firstItem="YvQ-We-PAj" firstAttribute="leading" secondItem="NAO-h3-At3" secondAttribute="leading" id="vH8-EU-yFe"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="addImageButton" destination="8cR-tE-UY0" id="EvF-iS-79y"/>
+                <outlet property="deleteImageButton" destination="g5L-Qn-13L" id="pJo-sJ-zUd"/>
+                <outlet property="imageView" destination="YvQ-We-PAj" id="yRX-WZ-WN1"/>
+            </connections>
+            <point key="canvasLocation" x="-812.5" y="320"/>
+        </view>
+    </objects>
 </document>
