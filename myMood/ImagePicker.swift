@@ -2,6 +2,7 @@ import UIKit
 
 protocol ImagePickerDelegate {
     func updateEventWithImage(image:UIImage)
+    func removeEventImage()
 }
 
 class ImagePicker: UIView, UIImagePickerControllerDelegate , UINavigationControllerDelegate {
@@ -72,6 +73,7 @@ class ImagePicker: UIView, UIImagePickerControllerDelegate , UINavigationControl
     }
     
     func deleteImage()  {
+        self.delegate?.removeEventImage()
         imageView.image = nil
     }
 }

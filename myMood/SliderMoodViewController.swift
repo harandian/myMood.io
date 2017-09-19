@@ -512,5 +512,9 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         entry.photo = Photo(photo: image)
     }
     
+    func removeEventImage() {
+        entry.photo = nil
+    }
+    
     
 }
