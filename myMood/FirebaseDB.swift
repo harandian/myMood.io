@@ -223,7 +223,8 @@ final class FirebaseDBController {
                 
                 if dict["Location"] != nil {
                     let loc:NSDictionary = dict["Location"] as! NSDictionary
-                    let location:CLLocation = CLLocation(latitude: loc["Latitude"] as! Double, longitude: loc["longitude"] as! Double)
+                    let location:CLLocation = CLLocation(latitude: loc["Latitude"] as! Double,
+                                                         longitude: loc["Longitude"] as! Double)
                     e.location = location
                 }
                 

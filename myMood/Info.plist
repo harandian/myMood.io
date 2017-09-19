@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>myMood wants to access your library</string>
+	<key>NSCameraUsageDescription</key>
+	<string>myMood wants to access your camera</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>myMood wants to access your location to record your entry</string>
 	<key>CFBundleDevelopmentRegion</key>

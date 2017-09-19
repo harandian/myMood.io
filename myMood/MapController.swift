@@ -25,6 +25,9 @@ class MapController:UIView, CLLocationManagerDelegate{
     
     var delegate:MapControllerDelegate? = nil
     
+    //Location Variable to store the location
+    var savedLocation:CLLocation! = nil
+    
     //Setup pin onto map and zoom
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[0]
@@ -40,7 +43,8 @@ class MapController:UIView, CLLocationManagerDelegate{
         let annotation = MKPointAnnotation()
         annotation.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude:  location.coordinate.longitude)
         mapView.addAnnotation(annotation)
-        self.delegate?.updateEventWithLocation(location: location)
+        savedLocation = location
+        self.delegate?.updateEventWithLocation(location: savedLocation)
     }
     
     
@@ -51,7 +55,12 @@ class MapController:UIView, CLLocationManagerDelegate{
         let tap = UITapGestureRecognizer(target: self, action: #selector(createMap))
         self.addGestureRecognizer(tap)
         self.isUserInteractionEnabled = true
-        mapView.isHidden = true
+        
+        if savedLocation != nil {
+            turnOnMap(location: savedLocation)
+        } else {
+            mapView.isHidden = true
+        }
     }
     
     //Make map appear and update map
@@ -84,6 +93,9 @@ class MapController:UIView, CLLocationManagerDelegate{
     @IBAction func cancelLocation(_ sender: Any) {
         mapView.isHidden = true
         mapView.removeAnnotations(mapView.annotations)
+        savedLocation = nil
+        manager.stopUpdatingLocation()
         self.delegate?.removeEventLocation()
+        
     }
 }

@@ -24,10 +24,20 @@ class JournalPopupViewController: UIViewController, TextEntryDelegate {
     
     var delegate: JournalPopupDelegate?  = nil
     var entryDescription: String? = nil
+    var newEntry:Entry? = nil
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if newEntry?.entryDescription != nil {
+            (self.textEntry as! TextEntry).journalText.text = newEntry?.entryDescription
+        }
+        if newEntry?.photo != nil {
+            (self.imageEntry as! ImagePicker).imageView.image = self.newEntry?.photo?.photoObject
+        }
+        if newEntry?.location != nil{
+            (self.locationEntry as! MapController).savedLocation = self.newEntry?.location
+        }
         setConstraints()
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         showAnimate()
@@ -55,13 +65,8 @@ class JournalPopupViewController: UIViewController, TextEntryDelegate {
         textEntry.layer.borderWidth = 1
         imageEntry.layer.borderWidth = 1
         locationEntry.layer.borderWidth = 1
-    
 
-        
-        textEntry.isHidden = false
-        imageEntry.isHidden = true
-        locationEntry.isHidden = true
-        
+        setSegmentIndex(i: self.segmentedView.selectedSegmentIndex)
     }
     
 
@@ -75,6 +80,9 @@ class JournalPopupViewController: UIViewController, TextEntryDelegate {
     }
     
     func removeAnimate() {
+        if entryDescription != nil {
+            self.delegate?.passBackEntry(journalEntry: entryDescription!)
+        }
         UIView.animate(withDuration: 0.25, animations: {
             self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
             self.view.alpha = 0.0
@@ -83,27 +91,20 @@ class JournalPopupViewController: UIViewController, TextEntryDelegate {
                 self.view.removeFromSuperview()
             } })
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     
     @IBAction func doneButton(_ sender: UIButton) {
-        //delegate call.
-        self.delegate?.passBackEntry(journalEntry: entryDescription!)
         removeAnimate()
     }
     
     
 
     @IBAction func segmentedView(_ sender: UISegmentedControl) {
-        switch segmentedView.selectedSegmentIndex {
+
+        setSegmentIndex(i: segmentedView.selectedSegmentIndex )
+    }
+    
+    func setSegmentIndex(i: Int){
+        switch i {
         case 0:
             textEntry.isHidden = false
             imageEntry.isHidden = true
