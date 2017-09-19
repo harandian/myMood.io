@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 
 class HistoryListViewController: UIViewController, UITableViewDataSource,LineGraphViewDelegate {
@@ -21,6 +22,11 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logoutUser))
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        
         entries = FirebaseDBController.shared.get_allEntries()
         
         view.backgroundColor = UIColor.brown
@@ -169,6 +175,18 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
                 journalVC.entry = entries[indexPath.row]
             }
         }
+    }
+    func logoutUser()  {
+        
+        try! Auth.auth().signOut()
+        
+        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let loginController = mainStoryBoard.instantiateViewController(withIdentifier: "loginVC") as! LoginViewController
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = loginController
+        print("LoggedOut")
     }
 
 }
