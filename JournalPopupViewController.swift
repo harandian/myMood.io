@@ -115,11 +115,13 @@ class JournalPopupViewController: UIViewController, TextEntryDelegate {
             textEntry.isHidden = true
             imageEntry.isHidden = false
             locationEntry.isHidden = true
+            view.endEditing(true)
             break
         case 2:
             textEntry.isHidden = true
             imageEntry.isHidden = true
             locationEntry.isHidden = false
+            view.endEditing(true)
             break
         default:
             break
