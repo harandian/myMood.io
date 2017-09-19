@@ -22,11 +22,10 @@ class ImagePicker: UIView, UIImagePickerControllerDelegate , UINavigationControl
     }
     
     let bottomVC = UIApplication.shared.keyWindow?.rootViewController
-    var delegate:ImagePickerDelegate?
+    var delegate:ImagePickerDelegate? = nil
    
     override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
-        self.delegate = nil
         //navigationItem.title = "Details"
         self.addSubview(imageView)
         self.addSubview(addImageButton)

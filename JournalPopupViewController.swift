@@ -31,6 +31,8 @@ class JournalPopupViewController: UIViewController, TextEntryDelegate {
         setConstraints()
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         showAnimate()
+        let textEntryObj:TextEntry = textEntry as! TextEntry
+        textEntryObj.delegate = self
 
         let tappedOutside = UITapGestureRecognizer(target: self, action: #selector(removeAnimate))
         self.view.addGestureRecognizer(tappedOutside)
@@ -49,12 +51,7 @@ class JournalPopupViewController: UIViewController, TextEntryDelegate {
     }
     
     func setupOverlapViews() {
-        
-        
-//     textEntry.frame = entryView.frame
-//     imageEntry.frame = entryView.frame
-//     locationEntry.frame = entryView.frame
-//     textEntry.center = entryView.center
+
         textEntry.layer.borderWidth = 1
         imageEntry.layer.borderWidth = 1
         locationEntry.layer.borderWidth = 1
