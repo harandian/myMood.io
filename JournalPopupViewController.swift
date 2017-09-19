@@ -24,10 +24,14 @@ class JournalPopupViewController: UIViewController, TextEntryDelegate {
     
     var delegate: JournalPopupDelegate?  = nil
     var entryDescription: String? = nil
+    var newEntry:Entry? = nil
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if newEntry?.entryDescription != nil {
+            (self.textEntry as! TextEntry).journalText.text = newEntry?.entryDescription
+        }
         setConstraints()
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         showAnimate()
@@ -78,16 +82,6 @@ class JournalPopupViewController: UIViewController, TextEntryDelegate {
                 self.view.removeFromSuperview()
             } })
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     
     @IBAction func doneButton(_ sender: UIButton) {
         //delegate call.

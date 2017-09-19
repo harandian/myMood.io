@@ -18,7 +18,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
     
     var happinessIndex: Int  = 0
     
-    var entry: Entry? = nil
+    var entry: Entry? = Entry(mood: 0)
     
     var tapLocation = CGFloat()
     
@@ -109,8 +109,6 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         return label
     } ()
     
-    //let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
-    
     var add = UIBarButtonItem()
     
     // VIEW DID LOAD
@@ -119,7 +117,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         super.viewDidLoad()
         // let nav = UINavigationBar()
         
-        add = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
+        add = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(popupJournalEntry))
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logoutUser))
         
@@ -227,54 +225,19 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         botNumberLabel.font = UIFont.boldSystemFont(ofSize: 60)
         botNumberLabel.textColor = UIColor.white
         
-        //        mainLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
-        //        mainLabel.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: 0)
-        //        mainLabel.bottomAnchor.constraint(equalTo: containerView.topAnchor, constant: -20).isActive = true
-        //        mainLabel.widthAnchor.constraint(equalToConstant: self.view.frame.width/2).isActive = true
-        //        mainLabel.isHidden = true
-        
+
         discLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
         discLabel.bottomAnchor.constraint(equalTo: self.containerView.topAnchor, constant: 0).isActive = true
         discLabel.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: 0).isActive = true
-        //   discLabel.widthAnchor.constraint(equalToConstant: self.view.frame.width/2).isActive = true
-        
-        
     }
     
     
     func saveButtonPressed () {
-        //        let journalFormViewController = JournalFormViewController()
-        //   self.navigationController?.show(JournalFormViewController(), sender: self)
-        //        self.navigationController?.pushViewController(journalFormViewController, animated: true)
-        saveNewMood()
-        
+        FirebaseDBController.shared.insertEntry(entry: self.entry!)
         //******** Go to JournalView ********
         performSegue(withIdentifier: "Journal", sender: self)
-        
-        //******** Show new view with objects on top of Slider VC ********
-        //        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "popupvc") as! JournalPopupViewController
-        //        self.addChildViewController(popOverVC)
-        //        popOverVC.view.frame = self.view.frame
-        //        self.view.addSubview(popOverVC.view)
-        //        popOverVC.didMove(toParentViewController: self)
-        
-        //******** Show Action Controller ********
-        
     }
-    
-    func addTapped()  {
-        
-        self.popupJournalEntry()
-        //        let alertController = UIAlertController(title: "myMood", message: "Please select an action", preferredStyle: .actionSheet)
-        //        alertController.addAction(UIAlertAction(title: "Add Entry Details", style: .default, handler: self.popupJournalEntry))
-        //        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        //        self.present(alertController, animated: true, completion: nil)
-    }
-    
-    func saveNewMood() {
-        FirebaseDBController.shared.insertEntry(entry: self.entry!)
-    }
-    
+
     func cancelButtonPressed() {
         
         tapLocation = CGFloat(containerView.frame.height/2)
@@ -285,7 +248,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         saveButton.backgroundColor = UIColor.gray
         saveButton.isEnabled = false
         disableAdd()
-        self.entry = nil
+        self.entry = Entry(mood: 0)
         
     }
     
@@ -311,9 +274,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         
         happinessIndex = valueSetToOne(value: value)
         labelTextSetup(happinessIndex: happinessIndex)
-        
-        //Set Up New Entry
-        self.entry = Entry(mood: happinessIndex)
+        self.entry?.mood = happinessIndex
     }
     func setupSliders(tapLocation: CGFloat) {
         //Bottom Section
@@ -339,16 +300,11 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         if (topViewHeightConstraint?.constant)! > containerView.frame.height/2 {
             topViewHeightConstraint?.constant = containerView.frame.size.height/2
         }
-        
-        
-        //TODO - GET THE VALUE OF THE MEASUREMENT - DEPENDENT ON HEIGHT OF RECTANGLE
-        // Range is -10 -> 10
-        
+    
     }
     
     
     func touchGesture(sender: UITapGestureRecognizer)  {
-        print ("Tap here \(sender.location(in: containerView))")
         let tapLocation:CGFloat = sender.location(in: containerView).y
         saveButton.isEnabled = true
         saveButton.backgroundColor = UIColor.green
@@ -374,10 +330,9 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
             value = -10
         }
         
-        
         happinessIndex = valueSetToOne(value: value)
         labelTextSetup(happinessIndex: happinessIndex)
-        self.entry = Entry(mood: happinessIndex)
+        self.entry?.mood = happinessIndex
     }
     
     func drawDashLine() {
@@ -394,8 +349,6 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         let  dashes: [ CGFloat ] = [ 16.0, 32.0 ]
         path.setLineDash(dashes, count: dashes.count, phase: 0.0)
         
-        // path.lineWidth = 12.0
-        // path.lineCapStyle = .butt
         UIColor.black.setStroke()
         path.stroke()
         UIColor.black.setFill()
@@ -409,20 +362,8 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         self.view.layer.addSublayer(layer)
         
     }
-    
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //        performSegue(withIdentifier: "formSeg", sender: sender)
-        
-        if segue.identifier == "Journal" {
-            let journal = segue.destination as? JournalFormViewController
-            journal?.entry = entry
-        }
-    }
-    
-    
-    
+
+
     func dashBoarder (){
         
         let yourViewBorder = CAShapeLayer()
@@ -482,6 +423,9 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
     func popupJournalEntry() {
         
         let popupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "popupvc") as! JournalPopupViewController
+        //Set up the entry incase there is already inserted info
+        popupVC.newEntry = self.entry
+        
         self.addChildViewController(popupVC)
         popupVC.view.frame = self.view.frame
         self.view.addSubview(popupVC.view)
