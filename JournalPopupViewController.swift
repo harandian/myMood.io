@@ -89,6 +89,7 @@ class JournalPopupViewController: UIViewController, TextEntryDelegate {
         }, completion: {(finished: Bool) in
             if (finished) {
                 self.view.removeFromSuperview()
+                (self.parent as! SliderMoodViewController).enableAdd()
             } })
     }
     
@@ -153,7 +154,6 @@ class JournalPopupViewController: UIViewController, TextEntryDelegate {
     
     //MARK: - Journal Entry Delegate
     func updateEventWithText(journalEntry: String) {
-        //updateb string var locally
         entryDescription = journalEntry
     }
     

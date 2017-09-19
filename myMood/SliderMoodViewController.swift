@@ -431,9 +431,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         popupVC.view.frame = self.view.frame
         self.view.addSubview(popupVC.view)
         popupVC.didMove(toParentViewController: self)
-        add.isEnabled = false
-        add.tintColor = UIColor.clear
-        
+        disableAdd()
         popupVC.delegate = self
         
         let locDelegate:MapController = popupVC.locationEntry as! MapController
