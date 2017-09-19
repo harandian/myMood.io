@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -126,7 +126,7 @@
                                         </constraints>
                                         <state key="normal" title="Done"/>
                                         <connections>
-                                            <action selector="nextOrDoneButton:" destination="oQV-PB-XHE" eventType="touchUpInside" id="N8F-6O-nuD"/>
+                                            <action selector="doneButton:" destination="oQV-PB-XHE" eventType="touchUpInside" id="36h-5j-VxO"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -155,7 +155,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="doneButton" destination="x2x-gE-JGT" id="Sfr-ab-UMS"/>
+                        <outlet property="doneButton" destination="x2x-gE-JGT" id="okL-ei-JaR"/>
                         <outlet property="entryView" destination="G8q-DJ-R6G" id="1ZU-Is-1Qg"/>
                         <outlet property="segmentedView" destination="gwY-u1-7J8" id="LxL-HN-4u7"/>
                     </connections>
@@ -205,7 +205,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K3H-G4-YsS" id="Lte-Rm-grU">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="59.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4DY-Vk-PxU">

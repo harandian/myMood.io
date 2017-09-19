@@ -9,8 +9,9 @@
 import UIKit
 import CoreGraphics
 import QuartzCore
+import CoreLocation
 
-class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
+class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, MapControllerDelegate, ImagePickerDelegate {
     
     let step = Float(10)
     
@@ -466,5 +467,22 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         self.view.addSubview(popupVC.view)
         popupVC.didMove(toParentViewController: self)
     }
+    
+    //MARK: - Map Delegates
+    func updateEventWithLocation(location: CLLocation) {
+        entry.location = location
+    }
+    
+    
+    func removeEventLocation() {
+        entry.location = nil
+    }
+    
+    
+    // MARK: - Image Delegates
+    func updateEventWithImage(image:UIImage) {
+        entry.photo = Photo(photo: image)
+    }
+    
     
 }
