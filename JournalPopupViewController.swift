@@ -32,6 +32,12 @@ class JournalPopupViewController: UIViewController, TextEntryDelegate {
         if newEntry?.entryDescription != nil {
             (self.textEntry as! TextEntry).journalText.text = newEntry?.entryDescription
         }
+        if newEntry?.photo != nil {
+            (self.imageEntry as! ImagePicker).imageView.image = self.newEntry?.photo?.photoObject
+        }
+        if newEntry?.location != nil{
+            (self.locationEntry as! MapController).turnOnMap(location: (self.newEntry?.location)!)
+        }
         setConstraints()
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         showAnimate()
@@ -74,6 +80,9 @@ class JournalPopupViewController: UIViewController, TextEntryDelegate {
     }
     
     func removeAnimate() {
+        if entryDescription != nil {
+            self.delegate?.passBackEntry(journalEntry: entryDescription!)
+        }
         UIView.animate(withDuration: 0.25, animations: {
             self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
             self.view.alpha = 0.0
@@ -84,10 +93,6 @@ class JournalPopupViewController: UIViewController, TextEntryDelegate {
     }
     
     @IBAction func doneButton(_ sender: UIButton) {
-        //delegate call.
-        if entryDescription != nil {
-             self.delegate?.passBackEntry(journalEntry: entryDescription!)
-        }
         removeAnimate()
     }
     
