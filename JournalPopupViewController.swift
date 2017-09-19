@@ -36,7 +36,7 @@ class JournalPopupViewController: UIViewController, TextEntryDelegate {
             (self.imageEntry as! ImagePicker).imageView.image = self.newEntry?.photo?.photoObject
         }
         if newEntry?.location != nil{
-            (self.locationEntry as! MapController).turnOnMap(location: (self.newEntry?.location)!)
+            (self.locationEntry as! MapController).savedLocation = self.newEntry?.location
         }
         setConstraints()
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
