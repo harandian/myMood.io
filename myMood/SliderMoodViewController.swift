@@ -119,6 +119,8 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         
         add = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logoutUser))
+        
         navigationController?.setNavigationBarHidden(false, animated: true)
         self.title = "myMood"
         
@@ -494,5 +496,17 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         add.tintColor = UIColor.gray
         add.isEnabled = false
     }
-    
+    func logoutUser()  {
+        
+//        try! Auth.auth().signOut()
+//        
+//        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+//        
+//        let loginController = mainStoryBoard.instantiateViewController(withIdentifier: "loginVC") as! LoginViewController
+//        
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        appDelegate.window?.rootViewController = loginController
+        print("LoggedOut")
+    }
+
 }
