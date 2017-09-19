@@ -9,11 +9,8 @@
 import UIKit
 import CoreGraphics
 import QuartzCore
-<<<<<<< HEAD
 import Firebase
-=======
 import CoreLocation
->>>>>>> master
 
 class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, MapControllerDelegate, ImagePickerDelegate {
     
