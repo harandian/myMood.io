@@ -108,26 +108,33 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         return label
     } ()
     
+    //let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
+    
+    var add = UIBarButtonItem()
     
     // VIEW DID LOAD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // let nav = UINavigationBar()
+        // let nav = UINavigationBar()
+        
+        add = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
         
         navigationController?.setNavigationBarHidden(false, animated: true)
-        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
-
+        self.title = "myMood"
+        
+        
         view.addSubview(containerView)
         view.addSubview(saveButton)
         view.addSubview(cancelButton)
         view.addSubview(topNumberLabel)
         view.addSubview(botNumberLabel)
-        view.addSubview(mainLabel)
+        // view.addSubview(mainLabel)
         view.addSubview(discLabel)
         navigationItem.rightBarButtonItem = add
         saveButton.isEnabled = false
         saveButton.backgroundColor = UIColor.gray
+        disableAdd()
         
         labelSetup()
         containerViewContraints()
@@ -149,8 +156,9 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
     
     override func viewDidAppear(_ animated: Bool) {
         dashBoarder()
+        
     }
-    
+
     
     var containerViewHeight : NSLayoutConstraint?
     var topViewHeightConstraint : NSLayoutConstraint?
@@ -216,14 +224,15 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         botNumberLabel.font = UIFont.boldSystemFont(ofSize: 60)
         botNumberLabel.textColor = UIColor.white
         
-        mainLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
-        mainLabel.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: 0)
-        mainLabel.bottomAnchor.constraint(equalTo: containerView.topAnchor, constant: -30).isActive = true
-        mainLabel.widthAnchor.constraint(equalToConstant: self.view.frame.width/2).isActive = true
+        //        mainLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
+        //        mainLabel.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: 0)
+        //        mainLabel.bottomAnchor.constraint(equalTo: containerView.topAnchor, constant: -20).isActive = true
+        //        mainLabel.widthAnchor.constraint(equalToConstant: self.view.frame.width/2).isActive = true
+        //        mainLabel.isHidden = true
         
         discLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
-        discLabel.bottomAnchor.constraint(equalTo: self.saveButton.topAnchor, constant: 30).isActive = true
-        discLabel.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10).isActive = true
+        discLabel.bottomAnchor.constraint(equalTo: self.containerView.topAnchor, constant: 0).isActive = true
+        discLabel.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: 0).isActive = true
         //   discLabel.widthAnchor.constraint(equalToConstant: self.view.frame.width/2).isActive = true
         
         
@@ -248,16 +257,16 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         //        popOverVC.didMove(toParentViewController: self)
         
         //******** Show Action Controller ********
-   
+        
     }
     
     func addTapped()  {
         
         self.popupJournalEntry()
-//        let alertController = UIAlertController(title: "myMood", message: "Please select an action", preferredStyle: .actionSheet)
-//        alertController.addAction(UIAlertAction(title: "Add Entry Details", style: .default, handler: self.popupJournalEntry))
-//        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//        self.present(alertController, animated: true, completion: nil)    
+        //        let alertController = UIAlertController(title: "myMood", message: "Please select an action", preferredStyle: .actionSheet)
+        //        alertController.addAction(UIAlertAction(title: "Add Entry Details", style: .default, handler: self.popupJournalEntry))
+        //        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        //        self.present(alertController, animated: true, completion: nil)
     }
     
     func saveNewMood() {
@@ -275,6 +284,8 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         print("this is the tap location",tapLocation,"happiness index is",happinessIndex)
         saveButton.backgroundColor = UIColor.gray
         saveButton.isEnabled = false
+        disableAdd()
+        
     }
     
     
@@ -286,6 +297,8 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         setupSliders(tapLocation: tapLocation)
         saveButton.isEnabled = true
         saveButton.backgroundColor = UIColor.green
+        add.isEnabled = true
+        add.tintColor = self.view.tintColor
         let point:CGPoint = sender.location(in: containerView)
         let percentage:CGFloat = point.y/containerView.frame.height
         var value:CGFloat = -1*((21.0 * percentage)-10.0)
@@ -335,6 +348,8 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         let tapLocation:CGFloat = sender.location(in: containerView).y
         saveButton.isEnabled = true
         saveButton.backgroundColor = UIColor.green
+        add.isEnabled = true
+        add.tintColor = self.view.tintColor
         
         //Bottom Section
         if tapLocation > containerView.frame.size.height/2 {
@@ -461,11 +476,24 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
     //MARK: - Journal Entry Popup
     
     func popupJournalEntry() {
+        
         let popupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "popupvc") as! JournalPopupViewController
         self.addChildViewController(popupVC)
         popupVC.view.frame = self.view.frame
         self.view.addSubview(popupVC.view)
         popupVC.didMove(toParentViewController: self)
+        add.isEnabled = false
+        add.tintColor = UIColor.clear
+    }
+    
+    func enableAdd()  {
+        add.tintColor = self.view.tintColor
+        add.isEnabled = true
+    }
+    
+    func disableAdd() {
+        add.tintColor = UIColor.gray
+        add.isEnabled = false
     }
     
     //MARK: - Map Delegates
