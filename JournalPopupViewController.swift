@@ -8,7 +8,11 @@
 
 import UIKit
 
-class JournalPopupViewController: UIViewController {
+protocol JournalPopupDelegate {
+    func passBackEntry(journalEntry: String)
+}
+
+class JournalPopupViewController: UIViewController, TextEntryDelegate {
 
     @IBOutlet weak var segmentedView: UISegmentedControl!
     @IBOutlet weak var entryView: UIView!
@@ -17,6 +21,9 @@ class JournalPopupViewController: UIViewController {
     let textEntry:UIView = Bundle.main.loadNibNamed("textEntry", owner: nil, options: nil)?.first! as! TextEntry
     let imageEntry:UIView = Bundle.main.loadNibNamed("ImagePicker", owner: nil, options: nil)?.first! as! ImagePicker
     let locationEntry:UIView = Bundle.main.loadNibNamed("map", owner: nil, options: nil)?.first! as! MapController
+    
+    var delegate: JournalPopupDelegate?  = nil
+    var entryDescription: String? = nil
     
 
     override func viewDidLoad() {
@@ -70,7 +77,6 @@ class JournalPopupViewController: UIViewController {
         });
     }
     
-    //TODO - Call this where you need to dismiss
     func removeAnimate() {
         UIView.animate(withDuration: 0.25, animations: {
             self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
@@ -91,10 +97,12 @@ class JournalPopupViewController: UIViewController {
     */
     
     
-    @IBAction func nextOrDoneButton(_ sender: UIButton) {
-        
-        
+    @IBAction func doneButton(_ sender: UIButton) {
+        //delegate call.
+        self.delegate?.passBackEntry(journalEntry: entryDescription!)
+        removeAnimate()
     }
+    
     
 
     @IBAction func segmentedView(_ sender: UISegmentedControl) {
@@ -144,5 +152,12 @@ class JournalPopupViewController: UIViewController {
         locationEntry.bottomAnchor.constraint(equalTo: doneButton.topAnchor, constant: 0).isActive = true
     
     }
+    
+    //MARK: - Journal Entry Delegate
+    func updateEventWithText(journalEntry: String) {
+        //updateb string var locally
+        entryDescription = journalEntry
+    }
+    
     
 }

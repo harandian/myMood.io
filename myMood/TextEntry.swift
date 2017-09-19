@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol TextEntryDelegate {
+    func updateEventWithText(journalEntry: String)
+}
+
 class TextEntry: UIView, UITextViewDelegate {
+    
+    var delegate: TextEntryDelegate? = nil
     
     @IBOutlet weak var journalText: UITextView!
     /*
@@ -25,6 +31,8 @@ class TextEntry: UIView, UITextViewDelegate {
         journalText.delegate = self
         journalText.textColor = UIColor.white
         journalText.text = " How was your day?"
+        
+        
     }
     
     func labelHeaderSetup() {
@@ -42,6 +50,7 @@ class TextEntry: UIView, UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        self.delegate?.updateEventWithText(journalEntry: textView.text)
         if(text == "\n")
         {
             self.endEditing(true)
@@ -54,6 +63,8 @@ class TextEntry: UIView, UITextViewDelegate {
         } else {
             return true
         }
+        
+        
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -62,5 +73,13 @@ class TextEntry: UIView, UITextViewDelegate {
             textView.text = nil
             textView.textColor = UIColor.black
         }
+        
+        
     }
+    
+//    func textViewDidChangeSelection(_ textView: UITextView) {
+//        let textString = textView.text
+//        let index = textString.index(textString?.endIndex)!
+//    }
+    
 }

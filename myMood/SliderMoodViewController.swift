@@ -9,9 +9,13 @@
 import UIKit
 import CoreGraphics
 import QuartzCore
+<<<<<<< HEAD
 import Firebase
+=======
+import CoreLocation
+>>>>>>> master
 
-class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
+class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, MapControllerDelegate, ImagePickerDelegate {
     
     let step = Float(10)
     
@@ -510,4 +514,26 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
         print("LoggedOut")
     }
 
+    
+    //MARK: - Map Delegates
+    func updateEventWithLocation(location: CLLocation) {
+        entry.location = location
+    }
+    
+    
+    func removeEventLocation() {
+        entry.location = nil
+    }
+    
+    
+    // MARK: - Image Delegates
+    func updateEventWithImage(image:UIImage) {
+        entry.photo = Photo(photo: image)
+    }
+    
+    func removeEventImage() {
+        entry.photo = nil
+    }
+    
+    
 }

@@ -86,16 +86,38 @@ final class FirebaseDBController {
     //Insert into Entry
     func insertEntry(entry:Entry) {
         let userId = Auth.auth().currentUser?.uid
+        var properties = Dictionary<String,Any>()
+        properties["UserID"] = userId
+        properties["Date"] = entry.date
+        properties["Mood"] = entry.mood
+        
         
         //Auto generate entry id
         let newRef = ref.child("Entries").childByAutoId()
-        newRef.setValue(["UserID":userId!,
-                         "Date":entry.date,
-                         "Mood":entry.mood])
+        
+        
+        //Text
+        if entry.entryDescription != nil {
+            properties["Description"] = entry.entryDescription
+        }
+        
+        //Enter base properties first
+        newRef.setValue(properties)
         
         //Set entryID on entry Object
         let entryID = newRef.key
         entry.ID = entryID
+        
+        //Image
+        if entry.photo != nil {
+            insertPhoto(entry: entry)
+        }
+        
+        //Change location to string
+        if let loc = entry.location {
+            ref.child("Entries").child(entry.ID!).child("Location").updateChildValues(["Latitude":loc.coordinate.latitude,
+                                                                                       "Longitude":loc.coordinate.longitude])
+        }
 
     }
     
@@ -125,7 +147,7 @@ final class FirebaseDBController {
     
     //Insert & Update Photo into Storage
     //Takes in entry containing photo
-    func insertPhoto(entry:Entry) {
+    private func insertPhoto(entry:Entry) {
         let userId = Auth.auth().currentUser?.uid
         
         //Check if a photo exist in this entry
