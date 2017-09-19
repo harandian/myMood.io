@@ -12,13 +12,13 @@ import QuartzCore
 import Firebase
 import CoreLocation
 
-class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, MapControllerDelegate, ImagePickerDelegate {
+class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, MapControllerDelegate, ImagePickerDelegate,JournalPopupDelegate {
     
     let step = Float(10)
     
     var happinessIndex: Int  = 0
     
-    var entry: Entry = Entry.init(mood: 0)
+    var entry: Entry? = nil
     
     var tapLocation = CGFloat()
     
@@ -246,7 +246,6 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         //        let journalFormViewController = JournalFormViewController()
         //   self.navigationController?.show(JournalFormViewController(), sender: self)
         //        self.navigationController?.pushViewController(journalFormViewController, animated: true)
-        print(123)
         saveNewMood()
         
         //******** Go to JournalView ********
@@ -273,9 +272,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
     }
     
     func saveNewMood() {
-        let myEntry: Entry = Entry.init(mood: happinessIndex)
-        entry = myEntry
-        FirebaseDBController.shared.insertEntry(entry: myEntry)
+        FirebaseDBController.shared.insertEntry(entry: self.entry!)
     }
     
     func cancelButtonPressed() {
@@ -288,6 +285,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         saveButton.backgroundColor = UIColor.gray
         saveButton.isEnabled = false
         disableAdd()
+        self.entry = nil
         
     }
     
@@ -313,6 +311,9 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         
         happinessIndex = valueSetToOne(value: value)
         labelTextSetup(happinessIndex: happinessIndex)
+        
+        //Set Up New Entry
+        self.entry = Entry(mood: happinessIndex)
     }
     func setupSliders(tapLocation: CGFloat) {
         //Bottom Section
@@ -376,7 +377,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         
         happinessIndex = valueSetToOne(value: value)
         labelTextSetup(happinessIndex: happinessIndex)
-        
+        self.entry = Entry(mood: happinessIndex)
     }
     
     func drawDashLine() {
@@ -487,6 +488,14 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         popupVC.didMove(toParentViewController: self)
         add.isEnabled = false
         add.tintColor = UIColor.clear
+        
+        popupVC.delegate = self
+        
+        let locDelegate:MapController = popupVC.locationEntry as! MapController
+        locDelegate.delegate = self
+        
+        let imgDelegate:ImagePicker = popupVC.imageEntry as! ImagePicker
+        imgDelegate.delegate = self
     }
     
     func enableAdd()  {
@@ -514,22 +523,27 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
     
     //MARK: - Map Delegates
     func updateEventWithLocation(location: CLLocation) {
-        entry.location = location
+        self.entry!.location = location
     }
     
     
     func removeEventLocation() {
-        entry.location = nil
+        self.entry!.location = nil
     }
     
     
     // MARK: - Image Delegates
     func updateEventWithImage(image:UIImage) {
-        entry.photo = Photo(photo: image)
+        self.entry!.photo = Photo(photo: image)
     }
     
     func removeEventImage() {
-        entry.photo = nil
+        self.entry!.photo = nil
+    }
+    
+    // MARK: - Text Delegates
+    func passBackEntry(journalEntry: String){
+        self.entry!.entryDescription = journalEntry
     }
     
     
