@@ -4,6 +4,8 @@
 <dict>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>myMood wants to access your library</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>myMood wants to access your library</string>
 	<key>NSCameraUsageDescription</key>
 	<string>myMood wants to access your camera</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
