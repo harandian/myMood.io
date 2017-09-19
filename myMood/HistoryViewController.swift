@@ -160,7 +160,7 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
             return value1.1 < value2.1
         })
         sortedArray = sortedArray.reversed()
-        print ((sortedArray))
+       // print ((sortedArray))
         return sortedArray
         
     }

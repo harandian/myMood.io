@@ -19,6 +19,8 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
     var entries:[Entry] = []
     var dateString = ""
     let overlay = UIView()
+    var allStrings:String = String()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,11 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
         
         entries = FirebaseDBController.shared.get_allEntries()
         
+        let stringArray =  scrollChartView.wordCount(s: setupStrings(entries: entries))
+        
+        print (stringArray)
+
+        scrollChartView.wordCloudLayout.setupLabel(word: stringArray)
         view.backgroundColor = UIColor.brown
         scrollChartView.frame = myScrollView.frame
         
@@ -186,7 +193,17 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.window?.rootViewController = loginController
-        print("LoggedOut")
+    }
+    
+    func setupStrings(entries: Array<Entry>) -> String {
+        
+        for entry in entries {
+            if let tempString = entry.entryDescription {
+                allStrings.append(tempString)
+            }
+        }
+        print ("these are your strings",allStrings)
+        return allStrings
     }
 
 }
