@@ -9,6 +9,7 @@
 import UIKit
 import CoreGraphics
 import QuartzCore
+import Firebase
 
 class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     
@@ -498,14 +499,14 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate {
     }
     func logoutUser()  {
         
-//        try! Auth.auth().signOut()
-//        
-//        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
-//        
-//        let loginController = mainStoryBoard.instantiateViewController(withIdentifier: "loginVC") as! LoginViewController
-//        
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        appDelegate.window?.rootViewController = loginController
+        try! Auth.auth().signOut()
+        
+        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let loginController = mainStoryBoard.instantiateViewController(withIdentifier: "loginVC") as! LoginViewController
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = loginController
         print("LoggedOut")
     }
 
