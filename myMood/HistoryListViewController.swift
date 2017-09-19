@@ -20,6 +20,7 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
     var dateString = ""
     let overlay = UIView()
     var allStrings:String = String()
+    
 
     
     override func viewDidLoad() {
@@ -31,11 +32,8 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
         
         entries = FirebaseDBController.shared.get_allEntries()
         
-        let stringArray =  scrollChartView.wordCount(s: setupStrings(entries: entries))
-        
-        print (stringArray)
+       
 
-        scrollChartView.wordCloudLayout.setupLabel(word: stringArray)
         view.backgroundColor = UIColor.brown
         scrollChartView.frame = myScrollView.frame
         
@@ -48,6 +46,15 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
     func passWeekEvent(e: [Entry]) {
         entries = e
         historyListTableView.reloadData()
+    }
+    
+   override func viewDidAppear(_ animated: Bool) {
+        let tempString = setupStrings(entries: entries)
+        
+        let stringArray = scrollChartView.wordCount(s: tempString)
+        
+        scrollChartView.wordCloudLayout.setupLabel(word: stringArray)
+        
     }
     /*
  

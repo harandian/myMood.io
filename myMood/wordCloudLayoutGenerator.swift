@@ -24,15 +24,15 @@ class wordCloudLayoutGenerator: UIView {
             label.textColor = UIColor.black
         }
         
-        if word.count < 5 {
-            initalLabelSetup()
+        if word.count > 5 {
+            centerLabel.text = word.first?.0.capitalized
+            topRL.text = word[1].0
+            botLL.text = word[2].0
+            botROL.text = word[3].0
+            botROL.transform = CGAffineTransform(rotationAngle:CGFloat.pi/2)
+            topLL.text = word[4].0
         } else if word.count > 5 {
-        centerLabel.text = word.first?.0.capitalized
-        topRL.text = word[1].0
-        botLL.text = word[2].0
-        botROL.text = word[3].0
-        botROL.transform = CGAffineTransform(rotationAngle:CGFloat.pi/2)
-        topLL.text = word[4].0
+          initalLabelSetup()
         }
     }
     
