@@ -116,6 +116,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         // let nav = UINavigationBar()
+        FirebaseDBController.shared.loadAllEntries()
         
         add = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(popupJournalEntry))
         

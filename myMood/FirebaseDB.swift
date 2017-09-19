@@ -118,7 +118,7 @@ final class FirebaseDBController {
             ref.child("Entries").child(entry.ID!).child("Location").updateChildValues(["Latitude":loc.coordinate.latitude,
                                                                                        "Longitude":loc.coordinate.longitude])
         }
-
+        allEntries.insert(entry, at: 0)
     }
     
     //Update the given Properties
