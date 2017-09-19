@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
     
@@ -31,14 +32,21 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToTable))
         
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        scrollViewForGraphSetup()
         self.view.backgroundColor = UIColor.white
         tapGesture.delegate = self
-        scrollViewForGraphSetup()
         wordCloudLayout.initalLabelSetup()
-
+        
         //  graphConstraints()
         
         // Do any additional setup after loading the view.
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+    
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -94,16 +102,17 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.addSubview(scrollViewGraphView)
         scrollViewGraphView.backgroundColor = UIColor.white
         //  scrollViewGraphView.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
+        
         scrollViewGraphView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
         scrollViewGraphView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-        scrollViewGraphView.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        scrollViewGraphView.topAnchor.constraint(equalTo: super.topLayoutGuide.bottomAnchor, constant: 0).isActive = true
         scrollViewGraphView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
         let scrollViewCenterXConstraint = scrollViewGraphView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0)
         scrollViewCenterXConstraint.isActive = true
         scrollViewCenterXConstraint.identifier = "scrollviewxConstraint"
         graphConstraints()
         wordCloudViewSetup()
-
+        
     }
     
     func wordCloudViewSetup() {
@@ -117,7 +126,7 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
         
         wordCloudLayout.backgroundColor = UIColor.white
         wordCloudLayout.layer.borderWidth = 1
-
+        
         
         
         
@@ -156,32 +165,34 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
         
     }
     
-    
-    
-//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-//        if(text == "\n")
-//        {
-//            //sortedArray.removeAll()
-//            view.endEditing(true)
-//            let inputText = textView.text
-//            let tempArray:Array<(String, Int)> = wordCount(s: inputText!)
-//            if tempArray.count < 5
-//            {
-//                throwAllert(alertTitle: "Alert", alertMessage: "Please type at least 20 characters")
-//                throwAllert(alertTitle: "Alert", alertMessage: "Please type at least 20 words")
-//                return true
-//            }
-//            wordCloudLayout.setupLabel(word: tempArray)
-//            return false
-//        } else {
-//            return true
-//        }
-//    }
-//    
-//    func throwAllert(alertTitle:String, alertMessage: String) {
-//        let alert = UIAlertController(title: alertTitle , message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
-//        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-//        self.present(alert, animated: true, completion: nil)
-//    }
 
+    
+    
+    
+    //    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    //        if(text == "\n")
+    //        {
+    //            //sortedArray.removeAll()
+    //            view.endEditing(true)
+    //            let inputText = textView.text
+    //            let tempArray:Array<(String, Int)> = wordCount(s: inputText!)
+    //            if tempArray.count < 5
+    //            {
+    //                throwAllert(alertTitle: "Alert", alertMessage: "Please type at least 20 characters")
+    //                throwAllert(alertTitle: "Alert", alertMessage: "Please type at least 20 words")
+    //                return true
+    //            }
+    //            wordCloudLayout.setupLabel(word: tempArray)
+    //            return false
+    //        } else {
+    //            return true
+    //        }
+    //    }
+    //
+    //    func throwAllert(alertTitle:String, alertMessage: String) {
+    //        let alert = UIAlertController(title: alertTitle , message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
+    //        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+    //        self.present(alert, animated: true, completion: nil)
+    //    }
+    
 }
