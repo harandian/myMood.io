@@ -154,6 +154,9 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         
         self.view.backgroundColor = UIColor.white
         
+        //DUMMY DATA
+        //DummyData.shared
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
