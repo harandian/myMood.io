@@ -19,7 +19,6 @@ protocol MapControllerDelegate {
 class MapController:UIView, CLLocationManagerDelegate{
 
     
-    
     @IBOutlet weak var mapView: MKMapView!
     let manager = CLLocationManager()
     

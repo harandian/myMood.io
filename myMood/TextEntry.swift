@@ -29,7 +29,7 @@ class TextEntry: UIView, UITextViewDelegate {
         super.awakeFromNib()
         labelHeaderSetup()
         journalText.delegate = self
-        journalText.textColor = UIColor.white
+        journalText.textColor = UIColor.black
         journalText.text = " How was your day?"
         
         
@@ -69,7 +69,7 @@ class TextEntry: UIView, UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         
-        if textView.textColor == UIColor.white {
+        if textView.textColor == UIColor.black {
             textView.text = nil
             textView.textColor = UIColor.black
         }

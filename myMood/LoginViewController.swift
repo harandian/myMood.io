@@ -74,21 +74,21 @@ class LoginViewController: UIViewController {
             return button
         }()
         
-        let createAccountLabel : UILabel = {
-            let label = UILabel()
-            label.text = "Don't have an account?"
-            label.backgroundColor = UIColor.clear
-            label.textColor = UIColor.red
-            label.font = UIFont.systemFont(ofSize: 15)
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-        
+//        let createAccountLabel : UILabel = {
+//            let label = UILabel()
+//            label.text = "Don't have an account?"
+//            label.backgroundColor = UIColor.clear
+//            label.textColor = UIColor.white
+//            label.font = UIFont.systemFont(ofSize: 15)
+//            label.translatesAutoresizingMaskIntoConstraints = false
+//            return label
+//        }()
+    
         let createAccountButton: UIButton = {
             let button = UIButton()
             button.translatesAutoresizingMaskIntoConstraints = false
             button.setTitle("Create Account", for: .normal)
-            button.setTitleColor(.red, for: .normal)
+            button.setTitleColor(.white, for: .normal)
             button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             button.addTarget(self, action: #selector(registerUser), for: .touchUpInside)
             return button
@@ -150,7 +150,7 @@ class LoginViewController: UIViewController {
             view.addSubview(emailContainerView)
             view.addSubview(passwordContainerView)
             view.addSubview(loginButton)
-            view.addSubview(createAccountLabel)
+//            view.addSubview(createAccountLabel)
             view.addSubview(createAccountButton)
             
             refresh()
@@ -159,7 +159,7 @@ class LoginViewController: UIViewController {
             setupEmailContainerView ()
             setupPasswordContainerView()
             setupLoginButtonView ()
-            setuplabelContraints()
+//            setuplabelContraints()
             createAccountButtonConstraints()
             
         }
@@ -207,19 +207,20 @@ class LoginViewController: UIViewController {
             loginButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         }
         
-        func setuplabelContraints() {
-            createAccountLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
-            createAccountLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
-            createAccountLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
-            createAccountLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
-        }
-        
+//        func setuplabelContraints() {
+//            createAccountLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+//            createAccountLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
+//            createAccountLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+//            createAccountLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
+//        }
+    
         func createAccountButtonConstraints() {
-            createAccountButton.leftAnchor.constraint(equalTo: createAccountLabel.rightAnchor, constant: 10).isActive = true
+//            createAccountButton.leftAnchor.constraint(equalTo: createAccountLabel.rightAnchor, constant: 10).isActive = true
+            createAccountButton.centerXAnchor.constraint(equalTo: view.centerXAnchor , constant: 10).isActive = true
             createAccountButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
             // createAccountButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
             createAccountButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-            createAccountButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15).isActive = true
+//            createAccountButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15).isActive = true
             
         }
         
