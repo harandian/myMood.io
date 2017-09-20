@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol BarGraphViewDelegate {
+    func passDayEntry(e : [Entry])
+}
+
 class BarGraphView: UIView {
+    //Delegate
+    var delegate:BarGraphViewDelegate? = nil
     
     var graphArray: [[Entry]] = []
     
@@ -38,37 +44,43 @@ class BarGraphView: UIView {
         textLabelHeight = incrementVal/2
         chartWidth = (self.frame.width - leftMargin - 5 - rightMargin-5)/7
         
-        var currentDate:Double = Date().timeIntervalSince1970
+        var currentDate:Date = Date()
         var dayOfEntries:[Entry] = []
         for item in FirebaseDBController.shared.get_allEntries() {
             //Store x amount of entries on the same day
-            if UnixToDate(date: item.date) != UnixToDate(date: currentDate){
+            if !Calendar.current.isDate(Date(timeIntervalSince1970: item.date), inSameDayAs: currentDate)
+            {
                 //New Day
                 graphArray.append(dayOfEntries)
                 if self.graphArray.count == 7 {
                     break
                 }
-                currentDate = item.date
+                currentDate = Date(timeIntervalSince1970: item.date)
                 dayOfEntries.removeAll()
             }
             dayOfEntries.append(item)
         }
+        
+        if dayOfEntries.count > 0 {
+            graphArray.append(dayOfEntries)
+        }
     }    
     
     override func draw(_ rect: CGRect) {
-        for barItems in graphArray.reversed() {
-            //Grab average
-            //Grab Date
+        for barIndex in graphArray.count-1...0 {
             
-            addGraph(height:  averageOfAllEntries(entries: barItems),date: barItems[0].date)
+            //addGraph(entry: graphArray[barIndex])
+            addGraph(index: barIndex)
         }
         self.chartLayer()
         self.chartAxis()
         
     }
     
-    func addGraph(height:CGFloat, date:Double) {
-       // let height:CGFloat = CGFloat(entry.mood)
+    func addGraph(index: Int) {
+
+        let height:CGFloat = averageOfAllEntries(entries: graphArray[index])
+        let date:Double = (graphArray[index].first?.date)!
         
         // Draws next bar
         //left margin + width of graph bar + barwidth/2 + (subviewCount * incrementalVal) + border
@@ -101,6 +113,7 @@ class BarGraphView: UIView {
         graphButton.backgroundColor = UIColor.init(white: 0, alpha: 0)
         graphButton.frame = CGRect(x: 0, y: 0, width: chartWidth, height: graphHeight)
         graphButton.addTarget(self, action: #selector(clickAction), for: UIControlEvents.touchUpInside)
+        graphButton.tag = index
         
         
         //Set up date - Label
@@ -145,8 +158,8 @@ class BarGraphView: UIView {
         barsOnGraph += 1
     }
     
-    func clickAction() {
-       print("Cliked bar")
+    func clickAction(sender:UIButton) {
+       self.delegate?.passDayEntry(e: self.graphArray[sender.tag].reversed())
     }
     
     
@@ -168,32 +181,7 @@ class BarGraphView: UIView {
         
         linePath.lineWidth = 1.0
         linePath.stroke()
-        
-//        //Vertical line
-//        linePath.move(to: CGPoint(x:leftMargin,
-//                                  y:topBottomMargins))
-//        linePath.addLine(to: CGPoint(x:leftMargin,
-//                                     y:self.frame.size.height-topBottomMargins))
-//        linePath.stroke()
-//        
-//
-//        //Set the labels
-//        var label:Int = 10
-//        for i in 0 ... 10{
-//            
-//            //Position of label
-//            let yCenter = topBottomMargins + (CGFloat(i) * incrementVal!)
-//            let xCenter = textPositionRightMargin
-//            
-//            //Create the text label
-//            let text = UILabel()
-//            text.frame = CGRect(x: xCenter, y: yCenter, width: textLabelWidth, height: textLabelHeight)
-//            text.center = CGPoint(x: xCenter, y: yCenter)
-//            text.text = "\(label)"
-//            text.font = UIFont.boldSystemFont(ofSize: 10)
-//            self.addSubview(text)
-//            label -= 2
-//        }
+
     }
     
     /*
