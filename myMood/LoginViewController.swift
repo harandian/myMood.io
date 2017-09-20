@@ -117,7 +117,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         let sliderController = SliderMoodViewController()
                         //    self.navigationController?.show(SliderMoodViewController(), sender: self)
                         self.navigationController?.pushViewController(sliderController, animated: true)
-                        print(123)
+                        
                     }
                     
                     
@@ -238,7 +238,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         func registerUser() {
             let registerVC = RegisterViewController()
-            self.navigationController?.pushViewController(registerVC, animated: true)
+            
+            self.present(registerVC, animated: true, completion: nil)
+            
         }
         
         override var preferredStatusBarStyle: UIStatusBarStyle {

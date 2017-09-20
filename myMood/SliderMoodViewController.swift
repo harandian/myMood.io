@@ -151,7 +151,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         
         let touch = UITapGestureRecognizer(target: self, action: #selector(touchGesture))
         containerView.addGestureRecognizer(touch)
-        
+
         self.view.backgroundColor = UIColor.white
         
     }
@@ -450,6 +450,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         add.tintColor = UIColor.gray
         add.isEnabled = false
     }
+    
     func logoutUser()  {
         
         try! Auth.auth().signOut()

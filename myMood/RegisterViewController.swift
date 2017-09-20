@@ -109,16 +109,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                 
                 let alertController = UIAlertController(title: "Register", message: "Congratulations, user successfully saved ", preferredStyle: UIAlertControllerStyle.alert)
                 
-                alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
-                    
-                    self.present(self.sliderMoodViewController!, animated: true, completion: nil)
-                }))
-                    
-                self.present(alertController, animated: true, completion: nil)
+                alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 
-                let sliderMoodController = SliderMoodViewController()
-                self.present(sliderMoodController, animated: true, completion: nil)
-            
+                self.view.endEditing(true)
+                self.present(alertController, animated: true, completion: nil)
                 
                 print("Saved user successfully into Firebase database")
             })
