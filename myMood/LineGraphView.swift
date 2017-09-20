@@ -53,9 +53,7 @@ class LineGraphView: UIView {
         super.willMove(toWindow: newWindow)
         myScrollView = self.superview as! UIScrollView
         populateGraphPoints()
-        
-       // self.graphPoints.append(contentsOf: [1,-5,5,6,3,3,6,3,-3,4,-9,3,10])
-        
+     
         graphHeight = myScrollView.frame.height - (topBottomMargins*2)
         incrementVal = graphHeight / 10.0
         incrementWidth = UIScreen.main.bounds.width / 4
@@ -80,20 +78,22 @@ class LineGraphView: UIView {
     }
     
     func populateGraphPoints() {
-        var weekEntries:[Entry] = []
+        // CREATE GRAPH POINTS FOR AVERAGE OF THE WEEK
+        var currentDate:Date = Date()
+        var weekOfEntries:[Entry] = []
         for plots in FirebaseDBController.shared.get_allEntries().reversed() {
-            weekEntries.append(plots)
-            
-            if weekEntries.count == 7 {
-                self.graphPoints.append(weekEntries)
-                weekEntries.removeAll()
+            if !Calendar.current.isDate(Date(timeIntervalSince1970: plots.date), equalTo: currentDate, toGranularity: .weekOfYear){
+                self.graphPoints.append(weekOfEntries)
+                weekOfEntries.removeAll()
+                currentDate = Date(timeIntervalSince1970: plots.date)
             }
-        }
-        if weekEntries.count > 0 {
-            self.graphPoints.append(weekEntries)
+            weekOfEntries.append(plots)
         }
         
-
+        if weekOfEntries.count > 0 {
+            self.graphPoints.append(weekOfEntries)
+        }
+        
     }
 
     
@@ -219,7 +219,7 @@ class LineGraphView: UIView {
     }
     
     func tapWeek(sender: UIButton){
-        delegate?.passWeekEvent(e: self.graphPoints[sender.tag])
+        delegate?.passWeekEvent(e: self.graphPoints[sender.tag].reversed())
     }
     
     func drawBackgroundLayer() {
@@ -259,11 +259,37 @@ class LineGraphView: UIView {
     
     
     func averageEntry(_ e:[Entry]) -> CGFloat{
-        var average:CGFloat = 0
+        //Return average of the week
+        //Add up average for each day of the week
+        var week:[CGFloat] = [0,0,0,0,0,0,0,0]
+        var weekNumOfTimes:[CGFloat] = [0,0,0,0,0,0,0,0]
+
         for obj in e {
-            average += CGFloat(obj.mood)
+            let dayOfTheWeek = UnixToDate(date: obj.date)
+            week[dayOfTheWeek] += CGFloat(obj.mood)
+            weekNumOfTimes[dayOfTheWeek] += 1
         }
-        return average/CGFloat(e.count)
+        
+        var total:CGFloat = 0
+        var weekCount:CGFloat = 0
+        for index in 1...7 {
+            //Add up all the averages
+            if weekNumOfTimes[index] != 0{
+                total += week[index]/weekNumOfTimes[index]
+                weekCount += 1
+            }
+        }
+        
+        return CGFloat(total / weekCount)
+    }
+    
+    func UnixToDate(date: Double) -> Int {
+        let dateObj:Date = Date(timeIntervalSince1970: date)
+        
+        let calender = NSCalendar(calendarIdentifier: .gregorian)
+        let myComponent:Int = (calender?.component(.weekday, from: dateObj))!
+        
+        return myComponent
     }
     
     
