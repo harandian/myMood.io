@@ -44,9 +44,10 @@ class BarGraphView: UIView {
         textLabelHeight = incrementVal/2
         chartWidth = (self.frame.width - leftMargin - 5 - rightMargin-5)/7
         
-        var currentDate:Date = Date()
+        let allEntries:[Entry] = FirebaseDBController.shared.get_allEntries()
+        var currentDate:Date = Date(timeIntervalSince1970: (allEntries.first?.date)!)
         var dayOfEntries:[Entry] = []
-        for item in FirebaseDBController.shared.get_allEntries() {
+        for item in allEntries {
             //Store x amount of entries on the same day
             if !Calendar.current.isDate(Date(timeIntervalSince1970: item.date), inSameDayAs: currentDate)
             {
@@ -61,16 +62,17 @@ class BarGraphView: UIView {
             dayOfEntries.append(item)
         }
         
-        if dayOfEntries.count > 0 {
+        if self.graphArray.count < 7 && dayOfEntries.count > 0 {
             graphArray.append(dayOfEntries)
         }
     }    
     
     override func draw(_ rect: CGRect) {
-        for barIndex in graphArray.count-1...0 {
+        if graphArray.count > 0 {
+            for barIndex in 1...graphArray.count {
             
-            //addGraph(entry: graphArray[barIndex])
-            addGraph(index: barIndex)
+                addGraph(index: graphArray.count-barIndex)
+            }
         }
         self.chartLayer()
         self.chartAxis()

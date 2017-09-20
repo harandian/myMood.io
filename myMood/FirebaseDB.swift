@@ -51,6 +51,13 @@ final class FirebaseDBController {
     */
     //Call this to get all the entries
     func get_allEntries() ->[Entry] {
+        self.allEntries = self.allEntries.sorted(by: { (e1, e2) -> Bool in
+            if e1.date > e2.date {
+                return true
+            } else {
+                return false
+            }
+        })
         return self.allEntries
     }
     
