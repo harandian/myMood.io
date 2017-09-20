@@ -90,6 +90,10 @@ class LineGraphView: UIView {
             weekOfEntries.append(plots)
         }
         
+        if weekOfEntries.count > 0 {
+            self.graphPoints.append(weekOfEntries)
+        }
+        
     }
 
     

@@ -54,6 +54,10 @@ class BarGraphView: UIView {
             }
             dayOfEntries.append(item)
         }
+        
+        if dayOfEntries.count > 0 {
+            graphArray.append(dayOfEntries)
+        }
     }    
     
     override func draw(_ rect: CGRect) {

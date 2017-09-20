@@ -200,7 +200,9 @@ final class FirebaseDBController {
         var temp:[Entry] = []
         self.getAllEntries { (result) in
             for entry in result {
-                let dict:NSDictionary  = entry.value as! NSDictionary
+                guard let dict:NSDictionary  = entry.value as? NSDictionary else {
+                    return
+                }
                 
                 //Date, mood and ID are a must
                 //Convert UNIX time to date property
