@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     var sliderMoodViewController: SliderMoodViewController?
     
@@ -151,6 +151,19 @@ class RegisterViewController: UIViewController {
         
         sliderMoodViewController = SliderMoodViewController()
         
+        let tapBackground: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapBackground)
+        
+    }
+    
+    func dismissKeyboard() {
+        self.view.endEditing(true)
+    }
+    
+    // Dismiss keyboard when pressing 'Return'
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        dismissKeyboard()
+        return true
     }
     
 
