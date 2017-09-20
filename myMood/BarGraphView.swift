@@ -10,7 +10,7 @@ import UIKit
 
 class BarGraphView: UIView {
     
-    var graphArray: [Entry] = []
+    var graphArray: [[Entry]] = []
     
     var chartWidth: CGFloat = 40
     
@@ -37,28 +37,38 @@ class BarGraphView: UIView {
         incrementVal = graphHeight / 10.0
         textLabelHeight = incrementVal/2
         chartWidth = (self.frame.width - leftMargin - 5 - rightMargin-5)/7
-
+        
+        var currentDate:Double = Date().timeIntervalSince1970
+        var dayOfEntries:[Entry] = []
         for item in FirebaseDBController.shared.get_allEntries() {
-            self.graphArray.append(item)
-
-            if self.graphArray.count == 7 {
-                break
+            //Store x amount of entries on the same day
+            if UnixToDate(date: item.date) != UnixToDate(date: currentDate){
+                //New Day
+                graphArray.append(dayOfEntries)
+                if self.graphArray.count == 7 {
+                    break
+                }
+                currentDate = item.date
+                dayOfEntries.removeAll()
             }
+            dayOfEntries.append(item)
         }
     }    
     
     override func draw(_ rect: CGRect) {
-        
         for barItems in graphArray.reversed() {
-            addGraph(entry: barItems)
+            //Grab average
+            //Grab Date
+            
+            addGraph(height:  averageOfAllEntries(entries: barItems),date: barItems[0].date)
         }
         self.chartLayer()
         self.chartAxis()
         
     }
     
-    func addGraph(entry:Entry) {
-        let height:CGFloat = CGFloat(entry.mood)
+    func addGraph(height:CGFloat, date:Double) {
+       // let height:CGFloat = CGFloat(entry.mood)
         
         // Draws next bar
         //left margin + width of graph bar + barwidth/2 + (subviewCount * incrementalVal) + border
@@ -94,7 +104,7 @@ class BarGraphView: UIView {
         
         
         //Set up date - Label
-        let newDate:Double = entry.date + Double(barsOnGraph*86400) //DEBUG TODO
+        //let newDate:Double = date// + Double(barsOnGraph*86400) //DEBUG TODO
         let textLabel:UILabel = UILabel()
         textLabel.frame = CGRect(x: nextXOrigin-(chartWidth/10),
                                  y: self.frame.height/2-textLabelHeight/2,
@@ -105,7 +115,7 @@ class BarGraphView: UIView {
         textLabel.font = UIFont(name:"Roboto", size:textLabel.font.pointSize)
         
         textLabel.adjustsFontSizeToFitWidth = true
-        textLabel.text = UnixToDate(date: newDate)
+        textLabel.text = UnixToDate(date: date)
         
         
         //Change the Y position
@@ -209,6 +219,14 @@ class BarGraphView: UIView {
             linePath.lineWidth = 1
             linePath.stroke()
         }
+    }
+    
+    func averageOfAllEntries(entries:[Entry]) -> CGFloat {
+        var total:CGFloat = 0
+        for obj in entries {
+            total += CGFloat(obj.mood)
+        }
+        return total/CGFloat(entries.count)
     }
     
     
