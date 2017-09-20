@@ -24,7 +24,7 @@ class Colors {
         }
     }
     
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
         
         let colors = Colors()
         
@@ -162,11 +162,23 @@ class LoginViewController: UIViewController {
 //            setuplabelContraints()
             createAccountButtonConstraints()
             
+            let tapBackground: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+            view.addGestureRecognizer(tapBackground)
         }
         
         override func viewWillAppear(_ animated: Bool) {
             navigationController?.setNavigationBarHidden(true, animated: false)
         }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    // Dismiss keyboard when pressing 'Return'
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        dismissKeyboard()
+        return true
+    }
         
         func refresh() {
             view.backgroundColor = UIColor.clear
