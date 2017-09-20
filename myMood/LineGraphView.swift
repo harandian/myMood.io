@@ -219,7 +219,7 @@ class LineGraphView: UIView {
     }
     
     func tapWeek(sender: UIButton){
-        delegate?.passWeekEvent(e: self.graphPoints[sender.tag])
+        delegate?.passWeekEvent(e: self.graphPoints[sender.tag].reversed())
     }
     
     func drawBackgroundLayer() {
@@ -271,13 +271,16 @@ class LineGraphView: UIView {
         }
         
         var total:CGFloat = 0
+        var weekCount:CGFloat = 0
         for index in 1...7 {
             //Add up all the averages
             if weekNumOfTimes[index] != 0{
                 total += week[index]/weekNumOfTimes[index]
+                weekCount += 1
             }
         }
-        return CGFloat(total / 7)
+        
+        return CGFloat(total / weekCount)
     }
     
     func UnixToDate(date: Double) -> Int {

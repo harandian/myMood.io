@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 
-class HistoryListViewController: UIViewController, UITableViewDataSource,LineGraphViewDelegate {
+class HistoryListViewController: UIViewController, UITableViewDataSource,LineGraphViewDelegate, BarGraphViewDelegate {
     var scrollChartView = Bundle.main.loadNibNamed("ChartScrollView", owner: nil, options: nil)?.first! as! ChartScrollController
 
     @IBOutlet weak var historyListTableView: UITableView!
@@ -38,12 +38,18 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
         scrollChartView.frame = myScrollView.frame
         
         scrollChartView.lineChart.lineGraph.delegate = self
+        scrollChartView.barChart.delegate = self
         
         myScrollView.addSubview(scrollChartView)
         setupOverlay()
         
     }
     func passWeekEvent(e: [Entry]) {
+        entries = e
+        historyListTableView.reloadData()
+    }
+    
+    func passDayEntry(e: [Entry]) {
         entries = e
         historyListTableView.reloadData()
     }
