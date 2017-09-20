@@ -53,7 +53,7 @@ final class DummyData {
         for _ in 0...200 {
             //Set the date
             if arc4random() % 2 == 0 {
-                currentDate += 86400
+                currentDate -= 86400
             }
             entry = Entry(date: currentDate, mood: randomMood())
             entry?.entryDescription = randomEntry()
