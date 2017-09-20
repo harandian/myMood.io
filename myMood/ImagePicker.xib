@@ -16,9 +16,13 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="184"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cR-tE-UY0">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="184"/>
-                    <state key="normal" title="AddImage"/>
+                <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cR-tE-UY0">
+                    <rect key="frame" x="87.5" y="-8" width="200" height="200"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="L9N-5m-JX0"/>
+                        <constraint firstAttribute="height" constant="200" id="adC-JC-RfL"/>
+                    </constraints>
+                    <state key="normal" image="plusSignv2"/>
                     <connections>
                         <action selector="addImageAction:" destination="NAO-h3-At3" eventType="touchUpInside" id="GA3-dG-0dN"/>
                     </connections>
@@ -47,11 +51,9 @@
                 <constraint firstAttribute="bottom" secondItem="YvQ-We-PAj" secondAttribute="bottom" id="59r-7b-SbH"/>
                 <constraint firstAttribute="trailing" secondItem="YvQ-We-PAj" secondAttribute="trailing" id="5ca-qH-LTy"/>
                 <constraint firstItem="YvQ-We-PAj" firstAttribute="top" secondItem="NAO-h3-At3" secondAttribute="top" id="GiQ-By-Whz"/>
+                <constraint firstItem="8cR-tE-UY0" firstAttribute="centerY" secondItem="NAO-h3-At3" secondAttribute="centerY" id="LGu-td-Nqx"/>
                 <constraint firstAttribute="trailing" secondItem="g5L-Qn-13L" secondAttribute="trailing" id="ZCS-qq-Xng"/>
-                <constraint firstAttribute="bottom" secondItem="8cR-tE-UY0" secondAttribute="bottom" id="cJd-c3-zm6"/>
-                <constraint firstItem="8cR-tE-UY0" firstAttribute="leading" secondItem="NAO-h3-At3" secondAttribute="leading" id="rpl-fo-XUi"/>
-                <constraint firstItem="8cR-tE-UY0" firstAttribute="top" secondItem="NAO-h3-At3" secondAttribute="top" id="u1U-CN-iWz"/>
-                <constraint firstAttribute="trailing" secondItem="8cR-tE-UY0" secondAttribute="trailing" id="u6F-eO-bdA"/>
+                <constraint firstItem="8cR-tE-UY0" firstAttribute="centerX" secondItem="NAO-h3-At3" secondAttribute="centerX" id="cFv-1F-uCg"/>
                 <constraint firstItem="YvQ-We-PAj" firstAttribute="leading" secondItem="NAO-h3-At3" secondAttribute="leading" id="vH8-EU-yFe"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -63,4 +65,7 @@
             <point key="canvasLocation" x="-812.5" y="320"/>
         </view>
     </objects>
+    <resources>
+        <image name="plusSignv2" width="313" height="313"/>
+    </resources>
 </document>
