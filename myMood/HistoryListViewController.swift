@@ -83,7 +83,7 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
     }
     
     func tapChart(sender: UITapGestureRecognizer){
-        print(self.overlay.alpha)
+        //print(self.overlay.alpha)
         if self.overlay.frame == self.historyListTableView.frame{
             UIView.animate(withDuration: 0.25, animations: { 
                 self.overlay.backgroundColor = UIColor.clear
@@ -209,7 +209,7 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
                 allStrings.append(tempString)
             }
         }
-        print ("these are your strings",allStrings)
+       // print ("these are your strings",allStrings)
         return allStrings
     }
 

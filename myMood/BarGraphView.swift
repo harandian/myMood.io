@@ -38,17 +38,18 @@ class BarGraphView: UIView {
         textLabelHeight = incrementVal/2
         chartWidth = (self.frame.width - leftMargin - 5 - rightMargin-5)/7
         
-        var currentDate:Double = Date().timeIntervalSince1970
+        var currentDate:Date = Date()
         var dayOfEntries:[Entry] = []
         for item in FirebaseDBController.shared.get_allEntries() {
             //Store x amount of entries on the same day
-            if UnixToDate(date: item.date) != UnixToDate(date: currentDate){
+            if !Calendar.current.isDate(Date(timeIntervalSince1970: item.date), inSameDayAs: currentDate)
+            {
                 //New Day
                 graphArray.append(dayOfEntries)
                 if self.graphArray.count == 7 {
                     break
                 }
-                currentDate = item.date
+                currentDate = Date(timeIntervalSince1970: item.date)
                 dayOfEntries.removeAll()
             }
             dayOfEntries.append(item)
