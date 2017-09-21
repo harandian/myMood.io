@@ -39,7 +39,7 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
         setupFrames()
         var multiplier:CGFloat = 1
         if listOfitems.count > 0 {
-            multiplier = CGFloat(listOfitems.count)
+            multiplier = CGFloat(listOfitems.count+1)
         }
         content.frame = CGRect(x:0, y:0, width:myScrollView.frame.width * multiplier, height:myScrollView.frame.height)
         
@@ -54,42 +54,39 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
  
     
     func setupFrames() {
+        
+        let textEntry = UITextView()
+        textEntry.frame = myScrollView.frame
+        
+        textEntry.center = CGPoint(x:myScrollView.frame.width*0.5,
+                                   y: myScrollView.frame.height/2)
+        content.addSubview(textEntry)
+        textEntry.text = "Unfortunately there's no information here"
+        
         if entry?.entryDescription != nil {
-            let textEntry = UITextView()
-            textEntry.frame = myScrollView.frame
-            
-            textEntry.center = CGPoint(x:myScrollView.frame.width*(CGFloat(listOfitems.count)+0.5),
-                                       y: myScrollView.frame.height/2)
-            content.addSubview(textEntry)
             textEntry.text = entry!.entryDescription
-            content.addSubview(textEntry)
-            listOfitems.append("Text")
         }
         
         if entry?.photoURL != nil {
+            listOfitems.append("Photo")
             let url = URL(string: (entry?.photoURL)!)
             loadPhoto(website: url!)
-            listOfitems.append("Photo")
+            
         }
         
         if entry?.location != nil {
-            createMap(location: (entry?.location)!)
             listOfitems.append("Location")
+            createMap(location: (entry?.location)!)
+            
         }
-        if listOfitems.count == 0 {
-            let text = UILabel(frame: myScrollView.frame)
-            text.center = myScrollView.center
-            text.text = "Unfortunately there's nothing here"
-            content.addSubview(text)
-            return
-        }
+
         
     }
     
     func createMap(location:CLLocation){
         let myMap = MKMapView(frame:myScrollView.frame)
         
-        myMap.center = CGPoint(x:myScrollView.frame.width*(CGFloat(listOfitems.count-1)+0.5),
+        myMap.center = CGPoint(x:myScrollView.frame.width*(CGFloat(listOfitems.count)+0.5),
                                     y: myScrollView.frame.height/2)
         content.addSubview(myMap)
         
@@ -130,7 +127,7 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
                             //Get the photo and update the image and put it into the frame
                             let photoFrame = UIImageView(frame: self.myScrollView.frame)
                             photoFrame.image = image
-                            photoFrame.center = CGPoint(x:self.myScrollView.frame.width*(CGFloat(self.listOfitems.count-1)+0.5),
+                            photoFrame.center = CGPoint(x:self.myScrollView.frame.width*(CGFloat(self.listOfitems.count)+0.5),
                                                        y: self.myScrollView.frame.height/2)
                             self.content.addSubview(photoFrame)
                         }
