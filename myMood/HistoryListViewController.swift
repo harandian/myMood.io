@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 
-class HistoryListViewController: UIViewController, UITableViewDataSource,LineGraphViewDelegate, BarGraphViewDelegate {
+class HistoryListViewController: UIViewController, UITableViewDataSource,LineGraphViewDelegate, BarGraphViewDelegate, UINavigationControllerDelegate {
     var scrollChartView = Bundle.main.loadNibNamed("ChartScrollView", owner: nil, options: nil)?.first! as! ChartScrollController
 
     @IBOutlet weak var historyListTableView: UITableView!
@@ -43,6 +43,8 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
         myScrollView.addSubview(scrollChartView)
         setupOverlay()
         
+        navigationController?.delegate = self
+        
     }
     func passWeekEvent(e: [Entry]) {
         entries = e
@@ -60,8 +62,14 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
         let stringArray = scrollChartView.wordCount(s: tempString)
         
         scrollChartView.wordCloudLayout.setupLabel(word: stringArray)
-        
     }
+    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        if let controller = viewController as? SliderMoodViewController {
+            controller.cancelButtonPressed() // If 'Back' button pressed in HistoryListViewController, act as if 'Cancel' button in SliderMoodViewController was activated.
+        }
+    }
+    
     /*
  
      Gesture Setup
