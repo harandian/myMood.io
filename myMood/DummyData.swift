@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 
 final class DummyData {
@@ -42,7 +43,7 @@ final class DummyData {
     static let shared = DummyData()
 
     private init(){
-       // insertDummyData()
+        insertDummyData()
     }
     
     private func insertDummyData() {
@@ -55,8 +56,18 @@ final class DummyData {
             if arc4random() % 2 == 0 {
                 currentDate -= 86400
             }
+            
             entry = Entry(date: currentDate, mood: randomMood())
             entry?.entryDescription = randomEntry()
+            
+            let lat = 49.32695054 + Double((arc4random_uniform(10)*arc4random_uniform(6))/1000000)
+            let lon = -123.09059988 + Double((arc4random_uniform(10)*arc4random_uniform(3))/1000000)
+            
+            let location:CLLocation = CLLocation(latitude: lat, longitude: lon)
+            
+       
+            entry?.location = location
+         
             
             FirebaseDBController.shared.insertEntry(entry: entry!)
         }
