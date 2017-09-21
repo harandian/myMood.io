@@ -167,7 +167,7 @@
         <!--Entry Popup View Controller-->
         <scene sceneID="Ba4-SD-1Ed">
             <objects>
-                <viewController storyboardIdentifier="entryPopupVC" id="MST-aZ-Co7" customClass="EntryPopupViewController" customModule="myMood" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="entryPopupVC" automaticallyAdjustsScrollViewInsets="NO" id="MST-aZ-Co7" customClass="EntryPopupViewController" customModule="myMood" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FCh-DH-c9k"/>
                         <viewControllerLayoutGuide type="bottom" id="03A-yp-xhD"/>

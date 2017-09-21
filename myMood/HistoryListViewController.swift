@@ -60,7 +60,6 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
         let stringArray = scrollChartView.wordCount(s: tempString)
         
         scrollChartView.wordCloudLayout.setupLabel(word: stringArray)
-        
     }
     /*
  
@@ -192,7 +191,8 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
         entryPopup.entry = self.entries[indexPath.row]
         
         self.addChildViewController(entryPopup)
-        entryPopup.view.frame = self.view.frame
+//        entryPopup.view.frame = self.view.frame
+        entryPopup.modalPresentationStyle = .overCurrentContext
         self.view.addSubview(entryPopup.view)
         entryPopup.didMove(toParentViewController: self)
         
@@ -206,6 +206,7 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
             }
         }
     }
+    
     func logoutUser()  {
         
         try! Auth.auth().signOut()

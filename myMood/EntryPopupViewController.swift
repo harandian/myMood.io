@@ -30,6 +30,7 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
         let tappedOutside = UITapGestureRecognizer(target: self, action: #selector(removeAnimate))
         self.view.addGestureRecognizer(tappedOutside)
         
+        self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
         
     }
     
