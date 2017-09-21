@@ -184,6 +184,7 @@ final class FirebaseDBController {
                 let downloadLink:String = metaData!.downloadURL()!.absoluteString
                 entry.photo!.photoURL = metaData!.downloadURL()!.absoluteString
                 self.ref.child("Entries").child(entry.ID!).updateChildValues(["PhotoURL":downloadLink])
+                self.allEntries.first?.photoURL = downloadLink
             }
         }
     }
