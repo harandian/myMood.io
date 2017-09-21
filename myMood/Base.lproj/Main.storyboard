@@ -164,6 +164,40 @@
             </objects>
             <point key="canvasLocation" x="2464.8000000000002" y="814.54272863568224"/>
         </scene>
+        <!--Entry Popup View Controller-->
+        <scene sceneID="Ba4-SD-1Ed">
+            <objects>
+                <viewController storyboardIdentifier="entryPopupVC" id="MST-aZ-Co7" customClass="EntryPopupViewController" customModule="myMood" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FCh-DH-c9k"/>
+                        <viewControllerLayoutGuide type="bottom" id="03A-yp-xhD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hfv-wU-JAs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sr8-l0-yLJ">
+                                <rect key="frame" x="16" y="180" width="343" height="306"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="343" id="XYr-6H-ZWv"/>
+                                    <constraint firstAttribute="height" constant="306" id="ZcL-Lg-crJ"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Sr8-l0-yLJ" firstAttribute="centerY" secondItem="hfv-wU-JAs" secondAttribute="centerY" id="OIR-pR-40Z"/>
+                            <constraint firstItem="Sr8-l0-yLJ" firstAttribute="centerX" secondItem="hfv-wU-JAs" secondAttribute="centerX" id="z8G-1H-YYC"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="myScrollView" destination="Sr8-l0-yLJ" id="vK9-mF-WZK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3eQ-cA-ksX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4264.8000000000002" y="849.62518740629696"/>
+        </scene>
         <!--Journal Form View Controller-->
         <scene sceneID="zMD-Y9-8Oh">
             <objects>
@@ -238,6 +272,7 @@
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="A5h-BO-PMw" id="5UJ-M4-fHt"/>
+                                    <outlet property="delegate" destination="A5h-BO-PMw" id="HBS-8f-fMJ"/>
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ICJ-rR-rP1">
