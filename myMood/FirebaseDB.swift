@@ -118,6 +118,8 @@ final class FirebaseDBController {
         //Image
         if entry.photo != nil {
             insertPhoto(entry: entry)
+        }else {
+            allEntries.insert(entry, at: 0)
         }
         
         //Change location to string
@@ -125,7 +127,6 @@ final class FirebaseDBController {
             ref.child("Entries").child(entry.ID!).child("Location").updateChildValues(["Latitude":loc.coordinate.latitude,
                                                                                        "Longitude":loc.coordinate.longitude])
         }
-        allEntries.insert(entry, at: 0)
     }
     
     //Update the given Properties
@@ -183,6 +184,8 @@ final class FirebaseDBController {
                 let downloadLink:String = metaData!.downloadURL()!.absoluteString
                 entry.photo!.photoURL = metaData!.downloadURL()!.absoluteString
                 self.ref.child("Entries").child(entry.ID!).updateChildValues(["PhotoURL":downloadLink])
+                
+                self.allEntries.insert(entry, at: 0)
             }
         }
     }

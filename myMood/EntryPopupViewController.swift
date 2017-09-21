@@ -25,7 +25,7 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         
     
-        //showAnimate()
+        showAnimate()
         
         let tappedOutside = UITapGestureRecognizer(target: self, action: #selector(removeAnimate))
         self.view.addGestureRecognizer(tappedOutside)
@@ -37,7 +37,11 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         
         setupFrames()
-        content.frame = CGRect(x:0, y:0, width:myScrollView.frame.width*(CGFloat(listOfitems.count+1)), height:myScrollView.frame.height)
+        var multiplier:CGFloat = 1
+        if listOfitems.count > 0 {
+            multiplier = CGFloat(listOfitems.count)
+        }
+        content.frame = CGRect(x:0, y:0, width:myScrollView.frame.width * multiplier, height:myScrollView.frame.height)
         
         
         myScrollView.contentMode = UIViewContentMode.scaleAspectFit
@@ -85,7 +89,7 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
     func createMap(location:CLLocation){
         let myMap = MKMapView(frame:myScrollView.frame)
         
-        myMap.center = CGPoint(x:myScrollView.frame.width*(CGFloat(listOfitems.count)+0.5),
+        myMap.center = CGPoint(x:myScrollView.frame.width*(CGFloat(listOfitems.count-1)+0.5),
                                     y: myScrollView.frame.height/2)
         content.addSubview(myMap)
         
@@ -101,6 +105,9 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
         annotation.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
                                                        longitude:  location.coordinate.longitude)
         myMap.addAnnotation(annotation)
+        myMap.isUserInteractionEnabled  = false
+        myMap.isZoomEnabled = false
+        myMap.isScrollEnabled = false
         
     }
     
@@ -110,12 +117,12 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
         let downloadPicTask = session.dataTask(with: website) { (data, response, error) in
             // The download has finished.
             if let e = error {
-                print("Error downloading cat picture: \(e)")
+                print("Error downloading picture: \(e)")
             } else {
                 // No errors found.
                 // It would be weird if we didn't have a response, so check for that too.
                 if let res = response as? HTTPURLResponse {
-                    print("Downloaded cat picture with response code \(res.statusCode)")
+                    print("Downloaded picture with response code \(res.statusCode)")
                     if let imageData = data {
                         // Finally convert that Data into an image and do what you wish with it.
                         let image = UIImage(data: imageData)
@@ -123,7 +130,7 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
                             //Get the photo and update the image and put it into the frame
                             let photoFrame = UIImageView(frame: self.myScrollView.frame)
                             photoFrame.image = image
-                            photoFrame.center = CGPoint(x:self.myScrollView.frame.width*(CGFloat(self.listOfitems.count)+0.5),
+                            photoFrame.center = CGPoint(x:self.myScrollView.frame.width*(CGFloat(self.listOfitems.count-1)+0.5),
                                                        y: self.myScrollView.frame.height/2)
                             self.content.addSubview(photoFrame)
                         }
