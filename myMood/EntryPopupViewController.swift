@@ -25,7 +25,7 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         
     
-        showAnimate()
+        //showAnimate()
         
         let tappedOutside = UITapGestureRecognizer(target: self, action: #selector(removeAnimate))
         self.view.addGestureRecognizer(tappedOutside)
@@ -36,7 +36,7 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         
         setupFrames()
-        content.frame = CGRect(x:0, y:0, width:myScrollView.frame.width, height:myScrollView.frame.height)
+        content.frame = CGRect(x:0, y:0, width:myScrollView.frame.width*(CGFloat(listOfitems.count+1)), height:myScrollView.frame.height)
         
         
         myScrollView.contentMode = UIViewContentMode.scaleAspectFit
@@ -49,20 +49,12 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
  
     
     func setupFrames() {
-        
-        if listOfitems.count == 0 {
-            let text = UILabel(frame: myScrollView.frame)
-            text.center = myScrollView.center
-            text.text = "Unfortunately there's nothing here"
-            content.addSubview(text)
-            return
-        }
-        
         if entry?.entryDescription != nil {
-            let textEntry = UITextView(frame: myScrollView.frame)
+            let textEntry = UITextView()
+            textEntry.frame = myScrollView.frame
             
             textEntry.center = CGPoint(x:myScrollView.frame.width*(CGFloat(listOfitems.count)+0.5),
-                                       y: myScrollView.center.y)
+                                       y: myScrollView.frame.height/2)
             content.addSubview(textEntry)
             textEntry.text = entry!.entryDescription
             content.addSubview(textEntry)
@@ -79,6 +71,13 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
             createMap(location: (entry?.location)!)
             listOfitems.append("Location")
         }
+        if listOfitems.count == 0 {
+            let text = UILabel(frame: myScrollView.frame)
+            text.center = myScrollView.center
+            text.text = "Unfortunately there's nothing here"
+            content.addSubview(text)
+            return
+        }
         
     }
     
@@ -86,7 +85,7 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
         let myMap = MKMapView(frame:myScrollView.frame)
         
         myMap.center = CGPoint(x:myScrollView.frame.width*(CGFloat(listOfitems.count)+0.5),
-                                    y: myScrollView.center.y)
+                                    y: myScrollView.frame.height/2)
         content.addSubview(myMap)
         
         //Zoom value
@@ -124,7 +123,7 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
                             let photoFrame = UIImageView(frame: self.myScrollView.frame)
                             photoFrame.image = image
                             photoFrame.center = CGPoint(x:self.myScrollView.frame.width*(CGFloat(self.listOfitems.count)+0.5),
-                                                       y: self.myScrollView.center.y)
+                                                       y: self.myScrollView.frame.height/2)
                             self.content.addSubview(photoFrame)
                         }
                         
