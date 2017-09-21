@@ -45,7 +45,11 @@ class BarGraphView: UIView {
         chartWidth = (self.frame.width - leftMargin - 5 - rightMargin-5)/7
         
         let allEntries:[Entry] = FirebaseDBController.shared.get_allEntries()
-        var currentDate:Date = Date(timeIntervalSince1970: (allEntries.first?.date)!)
+        var currentDate:Date = Date()
+        if !allEntries.isEmpty {
+            currentDate = Date(timeIntervalSince1970: (allEntries.first?.date)!)
+        }
+        
         var dayOfEntries:[Entry] = []
         for item in allEntries {
             //Store x amount of entries on the same day
