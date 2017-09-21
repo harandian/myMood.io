@@ -149,7 +149,7 @@ class LineGraphView: UIView {
             //Add Line
             linePath.addLine(to: point)
             
-            let color = UIColor(red: 105/255, green: 105/255, blue: 105/255, alpha: 0.5)
+            let color = UIColor(red: 105/255, green: 105/255, blue: 105/255, alpha: 1.0)
             color.setStroke()
             
             linePath.stroke()

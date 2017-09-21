@@ -67,6 +67,12 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
             textEntry.text = entry!.entryDescription
         }
         
+        if entry?.location != nil {
+            listOfitems.append("Location")
+            createMap(location: (entry?.location)!)
+            
+        }
+        
         if entry?.photoURL != nil {
             listOfitems.append("Photo")
             let url = URL(string: (entry?.photoURL)!)
@@ -74,11 +80,7 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
             
         }
         
-        if entry?.location != nil {
-            listOfitems.append("Location")
-            createMap(location: (entry?.location)!)
-            
-        }
+        
 
         
     }
