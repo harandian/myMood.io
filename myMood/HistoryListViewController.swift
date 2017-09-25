@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 
-class HistoryListViewController: UIViewController, UITableViewDataSource,LineGraphViewDelegate, BarGraphViewDelegate, UINavigationControllerDelegate {
+class HistoryListViewController: UIViewController, UITableViewDataSource,LineGraphViewDelegate, BarGraphViewDelegate, UITableViewDelegate {
     var scrollChartView = Bundle.main.loadNibNamed("ChartScrollView", owner: nil, options: nil)?.first! as! ChartScrollController
 
     @IBOutlet weak var historyListTableView: UITableView!
@@ -42,8 +42,6 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
         
         myScrollView.addSubview(scrollChartView)
         setupOverlay()
-        
-        navigationController?.delegate = self
         
     }
     func passWeekEvent(e: [Entry]) {
@@ -176,6 +174,7 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
         cell.moodLabel.text = "Mood: \(String(entry.mood))"
         cell.dateLabel.text = convertDateFromUnix(unixDate: entry.date) //String(entry.date)
         
+        
         return cell
     }
     
@@ -192,7 +191,17 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
     // MARK: - Navigation
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "Journal", sender: entries[indexPath.row])
+//        performSegue(withIdentifier: "Journal", sender: entries[indexPath.row])
+        
+        self.automaticallyAdjustsScrollViewInsets = false
+        let entryPopup = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "entryPopupVC") as! EntryPopupViewController
+        entryPopup.entry = self.entries[indexPath.row]
+        
+        self.addChildViewController(entryPopup)
+//        entryPopup.view.frame = self.view.frame
+        entryPopup.modalPresentationStyle = .overCurrentContext
+        self.view.addSubview(entryPopup.view)
+        entryPopup.didMove(toParentViewController: self)
         
     }
     
@@ -204,6 +213,7 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
             }
         }
     }
+    
     func logoutUser()  {
         
         try! Auth.auth().signOut()
@@ -226,5 +236,7 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
        // print ("these are your strings",allStrings)
         return allStrings
     }
+    
+    
 
 }

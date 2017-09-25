@@ -123,7 +123,6 @@ class LineGraphView: UIView {
         
         //First Position
         let firstPoint = CGPoint(x: leftMargin, y: yPoint)
-        
         linePath.move(to: firstPoint)
         
         //loop through the rest of the points
@@ -149,7 +148,7 @@ class LineGraphView: UIView {
             //Add Line
             linePath.addLine(to: point)
             
-            let color = UIColor(red: 105/255, green: 105/255, blue: 105/255, alpha: 0.5)
+            let color = UIColor(red: 105/255, green: 105/255, blue: 105/255, alpha: 1.0)
             color.setStroke()
             
             linePath.stroke()
@@ -279,8 +278,11 @@ class LineGraphView: UIView {
                 weekCount += 1
             }
         }
-        
-        return CGFloat(total / weekCount)
+        if weekCount == 0 {
+            return 0
+        } else {
+            return CGFloat(total / weekCount)
+        }
     }
     
     func UnixToDate(date: Double) -> Int {

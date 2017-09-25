@@ -118,6 +118,7 @@ final class FirebaseDBController {
         //Image
         if entry.photo != nil {
             insertPhoto(entry: entry)
+            sleep(1)
         }
         
         //Change location to string
@@ -183,6 +184,7 @@ final class FirebaseDBController {
                 let downloadLink:String = metaData!.downloadURL()!.absoluteString
                 entry.photo!.photoURL = metaData!.downloadURL()!.absoluteString
                 self.ref.child("Entries").child(entry.ID!).updateChildValues(["PhotoURL":downloadLink])
+                self.allEntries.first?.photoURL = downloadLink
             }
         }
     }

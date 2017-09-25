@@ -50,7 +50,7 @@ class TextEntry: UIView, UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        self.delegate?.updateEventWithText(journalEntry: textView.text)
+        self.delegate?.updateEventWithText(journalEntry: "\(textView.text!)\(text)")
         if(text == "\n")
         {
             self.endEditing(true)

@@ -20,6 +20,8 @@
 		5BAAC1EF1F607C2B00A8D331 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAAC1EE1F607C2B00A8D331 /* Entry.swift */; };
 		5BAE234D1F6C6A16000E9F1E /* ChartScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAE234C1F6C6A16000E9F1E /* ChartScrollView.xib */; };
 		5BAE234F1F6C6DC7000E9F1E /* ChartScrollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAE234E1F6C6DC7000E9F1E /* ChartScrollController.swift */; };
+		5BD27D9F1F731138002CFB28 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD27D9E1F731138002CFB28 /* DummyData.swift */; };
+		5BD27DA11F732634002CFB28 /* EntryPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD27DA01F732634002CFB28 /* EntryPopupViewController.swift */; };
 		5BE217F01F6724C40009A050 /* map.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE217EF1F6724C40009A050 /* map.xib */; };
 		5BE217F91F6728F60009A050 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BE217F81F6728F60009A050 /* MapKit.framework */; };
 		6A3579451F6C72AF00DD1D90 /* JournalPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3579441F6C72AF00DD1D90 /* JournalPopupViewController.swift */; };
@@ -69,6 +71,8 @@
 		5BAAC1EE1F607C2B00A8D331 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		5BAE234C1F6C6A16000E9F1E /* ChartScrollView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChartScrollView.xib; sourceTree = "<group>"; };
 		5BAE234E1F6C6DC7000E9F1E /* ChartScrollController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartScrollController.swift; sourceTree = "<group>"; };
+		5BD27D9E1F731138002CFB28 /* DummyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
+		5BD27DA01F732634002CFB28 /* EntryPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryPopupViewController.swift; sourceTree = "<group>"; };
 		5BE217EF1F6724C40009A050 /* map.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = map.xib; sourceTree = "<group>"; };
 		5BE217F41F6727720009A050 /* MapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		5BE217F81F6728F60009A050 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -149,6 +153,7 @@
 				5B7AC8881F5F659C008A70DE /* FirebaseDB.swift */,
 				5BAAC1EE1F607C2B00A8D331 /* Entry.swift */,
 				6A5EB1521F5F626F00D1375A /* Photo.swift */,
+				5BD27D9E1F731138002CFB28 /* DummyData.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -208,6 +213,7 @@
 				725C2DDF1F675F5700FC279E /* HistoryViewController.swift */,
 				725C2DE11F6764F000FC279E /* HistoryListViewController.swift */,
 				6AF38C1B1F68D6AB008B8E42 /* HistoryTableViewCell.swift */,
+				5BD27DA01F732634002CFB28 /* EntryPopupViewController.swift */,
 				725C2DDA1F673B3900FC279E /* JournalFormViews */,
 				723BC5291F5F26000022ADF8 /* Assets.xcassets */,
 				723BC52B1F5F26000022ADF8 /* LaunchScreen.storyboard */,
@@ -511,6 +517,7 @@
 				5BAAC1EF1F607C2B00A8D331 /* Entry.swift in Sources */,
 				5BA050D61F6B4118000EB4EC /* BarGraphView.swift in Sources */,
 				725C2DE01F675F5800FC279E /* HistoryViewController.swift in Sources */,
+				5BD27DA11F732634002CFB28 /* EntryPopupViewController.swift in Sources */,
 				110045E51F6C849900D6AA60 /* RegisterViewController.swift in Sources */,
 				6A5EB1531F5F626F00D1375A /* Photo.swift in Sources */,
 				5BAE234F1F6C6DC7000E9F1E /* ChartScrollController.swift in Sources */,
@@ -527,6 +534,7 @@
 				72020F611F6B402C00B5B587 /* MapController.swift in Sources */,
 				72FD94191F61D0F400391818 /* wordCloudLayoutGenerator.swift in Sources */,
 				6A3579451F6C72AF00DD1D90 /* JournalPopupViewController.swift in Sources */,
+				5BD27D9F1F731138002CFB28 /* DummyData.swift in Sources */,
 				725C2DDC1F673B6700FC279E /* TextEntry.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -48,7 +48,7 @@ class ChartScrollController:UIView, UIScrollViewDelegate {
         let words:Array = myString.components(separatedBy: .whitespaces).map { (word) -> String in
             return word.trimmingCharacters(in: .punctuationCharacters)
         }
-        let wordToIngore:Array = ["is","your", "a","i","in","to","it", "as", "on", "blah", "had", "the", "am", "of"]
+        let wordToIngore:Array = ["is","your", "a","i","in","to","it", "as", "on", "blah", "had", "the", "am", "of", "this", "that", "and", "or","for","be", "an"]
         let filterdWords = words.filter { (string) -> Bool in
             if wordToIngore.contains(string) {
                 return false
