@@ -217,7 +217,7 @@ class LineGraphView: UIView {
         }
     }
     
-    func tapWeek(sender: UIButton){
+    @objc func tapWeek(sender: UIButton){
         delegate?.passWeekEvent(e: self.graphPoints[sender.tag].reversed())
     }
     

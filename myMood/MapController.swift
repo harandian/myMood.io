@@ -63,7 +63,7 @@ class MapController:UIView, CLLocationManagerDelegate{
     }
     
     //Make map appear and update map
-    func createMap(sender: UIGestureRecognizer) {
+    @objc func createMap(sender: UIGestureRecognizer) {
         mapView.isHidden = false
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest

@@ -73,11 +73,14 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
             
         }
         
-        if entry?.photoURL != nil {
+        if entry?.photo != nil {
+            //Get the photo and update the image and put it into the frame
+            setPhoto(image: (entry!.photo?.photoObject)!)
+            
+        }else if entry?.photoURL != nil {
             listOfitems.append("Photo")
             let url = URL(string: (entry?.photoURL)!)
             loadPhoto(website: url!)
-            
         }
         
         
@@ -124,15 +127,9 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
                     print("Downloaded picture with response code \(res.statusCode)")
                     if let imageData = data {
                         // Finally convert that Data into an image and do what you wish with it.
-                        let image = UIImage(data: imageData)
-                        DispatchQueue.main.async {
-                            //Get the photo and update the image and put it into the frame
-                            let photoFrame = UIImageView(frame: self.myScrollView.frame)
-                            photoFrame.image = image
-                            photoFrame.center = CGPoint(x:self.myScrollView.frame.width*(CGFloat(self.listOfitems.count)+0.5),
-                                                       y: self.myScrollView.frame.height/2)
-                            self.content.addSubview(photoFrame)
-                        }
+                        let downloadedImage = UIImage(data: imageData)
+                        self.entry?.photo = Photo(photo: downloadedImage!)
+                        self.setPhoto(image:downloadedImage!)
                         
                     } else {
                         print("Couldn't get image: Image is nil")
@@ -147,6 +144,17 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
         
     }
     
+    func setPhoto(image: UIImage) {
+        DispatchQueue.main.async {
+            //Get the photo and update the image and put it into the frame
+            let photoFrame = UIImageView(frame: self.myScrollView.frame)
+            photoFrame.image = image
+            photoFrame.center = CGPoint(x:self.myScrollView.frame.width*(CGFloat(self.listOfitems.count)+0.5),
+                                        y: self.myScrollView.frame.height/2)
+            self.content.addSubview(photoFrame)
+        }
+    }
+    
     
     
     func showAnimate() {
@@ -158,7 +166,7 @@ class EntryPopupViewController: UIViewController, UIScrollViewDelegate {
         });
     }
     
-    func removeAnimate() {
+    @objc func removeAnimate() {
         UIView.animate(withDuration: 0.25, animations: {
             self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
             self.view.alpha = 0.0

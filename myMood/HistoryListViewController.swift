@@ -94,7 +94,7 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
         self.view.addSubview(overlay)
     }
     
-    func tapChart(sender: UITapGestureRecognizer){
+    @objc func tapChart(sender: UITapGestureRecognizer){
         //print(self.overlay.alpha)
         if self.overlay.frame == self.historyListTableView.frame{
             UIView.animate(withDuration: 0.25, animations: { 
@@ -110,7 +110,7 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
         }
     }
     
-    func swipeLeft(sender: UISwipeGestureRecognizer) {
+    @objc func swipeLeft(sender: UISwipeGestureRecognizer) {
         let scrollView:UIScrollView = scrollChartView.chartScrollView
         var xVal = scrollView.contentOffset.x + scrollView.frame.width
         if xVal == scrollView.frame.width*3 {
@@ -124,7 +124,7 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
         changePageControl(scrollView: scrollChartView, xValue:xVal)
     }
     
-    func swipeRight(sender:UISwipeGestureRecognizer){
+    @objc func swipeRight(sender:UISwipeGestureRecognizer){
         let scrollView:UIScrollView = scrollChartView.chartScrollView
         var xVal = scrollView.contentOffset.x - scrollView.frame.width
         if xVal == -scrollView.frame.width {
@@ -205,16 +205,7 @@ class HistoryListViewController: UIViewController, UITableViewDataSource,LineGra
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Journal" {
-            if let indexPath = historyListTableView.indexPathForSelectedRow {
-                let journalVC = segue.destination as! JournalFormViewController
-                journalVC.entry = entries[indexPath.row]
-            }
-        }
-    }
-    
-    func logoutUser()  {
+    @objc func logoutUser()  {
         
         try! Auth.auth().signOut()
         

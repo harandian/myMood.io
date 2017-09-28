@@ -236,13 +236,13 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
     }
     
     
-    func saveButtonPressed () {
+    @objc func saveButtonPressed () {
         FirebaseDBController.shared.insertEntry(entry: self.entry!)
         //******** Go to JournalView ********
         performSegue(withIdentifier: "Journal", sender: self)
     }
 
-    func cancelButtonPressed() {
+    @objc func cancelButtonPressed() {
         
         tapLocation = CGFloat(containerView.frame.height/2)
         setupSliders(tapLocation: tapLocation)
@@ -259,7 +259,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
     
     // GESTURE RECGONIZERS
     
-    func panGesture (sender: UIPanGestureRecognizer) {
+    @objc func panGesture (sender: UIPanGestureRecognizer) {
         
         tapLocation = sender.location(in: containerView).y
         setupSliders(tapLocation: tapLocation)
@@ -308,7 +308,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
     }
     
     
-    func touchGesture(sender: UITapGestureRecognizer)  {
+    @objc func touchGesture(sender: UITapGestureRecognizer)  {
         let tapLocation:CGFloat = sender.location(in: containerView).y
         saveButton.isEnabled = true
         saveButton.backgroundColor = UIColor.green
@@ -424,7 +424,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
     
     //MARK: - Journal Entry Popup
     
-    func popupJournalEntry() {
+    @objc func popupJournalEntry() {
         
         let popupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "popupvc") as! JournalPopupViewController
         //Set up the entry incase there is already inserted info
@@ -454,7 +454,7 @@ class SliderMoodViewController: UIViewController , UIGestureRecognizerDelegate, 
         add.isEnabled = false
     }
     
-    func logoutUser()  {
+    @objc func logoutUser()  {
         
         try! Auth.auth().signOut()
         

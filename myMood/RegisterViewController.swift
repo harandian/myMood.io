@@ -82,7 +82,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     
     
-    func handleRegister() {
+    @objc func handleRegister() {
         guard let email = emailTextField.text , let password = passwordTextField.text , let name = nameTextField.text
             else {
                 print("form is not valid")
@@ -150,7 +150,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         self.view.endEditing(true)
     }
     

@@ -35,7 +35,6 @@
 		723BC52A1F5F26000022ADF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 723BC5291F5F26000022ADF8 /* Assets.xcassets */; };
 		723BC52D1F5F26000022ADF8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 723BC52B1F5F26000022ADF8 /* LaunchScreen.storyboard */; };
 		723BC5381F5F26000022ADF8 /* myMoodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723BC5371F5F26000022ADF8 /* myMoodTests.swift */; };
-		725C2DD61F6731C600FC279E /* JournalFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725C2DD51F6731C600FC279E /* JournalFormViewController.swift */; };
 		725C2DD91F673ACC00FC279E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725C2DD81F673ACC00FC279E /* ImagePicker.swift */; };
 		725C2DDC1F673B6700FC279E /* TextEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725C2DDB1F673B6700FC279E /* TextEntry.swift */; };
 		725C2DDE1F673B9D00FC279E /* textEntry.xib in Resources */ = {isa = PBXBuildFile; fileRef = 725C2DDD1F673B9D00FC279E /* textEntry.xib */; };
@@ -89,7 +88,6 @@
 		723BC5331F5F26000022ADF8 /* myMoodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = myMoodTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		723BC5371F5F26000022ADF8 /* myMoodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myMoodTests.swift; sourceTree = "<group>"; };
 		723BC5391F5F26010022ADF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		725C2DD51F6731C600FC279E /* JournalFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JournalFormViewController.swift; path = myMood/JournalFormViewController.swift; sourceTree = "<group>"; };
 		725C2DD81F673ACC00FC279E /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		725C2DDB1F673B6700FC279E /* TextEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextEntry.swift; path = myMood/TextEntry.swift; sourceTree = "<group>"; };
 		725C2DDD1F673B9D00FC279E /* textEntry.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = textEntry.xib; sourceTree = "<group>"; };
@@ -243,7 +241,6 @@
 			children = (
 				725C2DDB1F673B6700FC279E /* TextEntry.swift */,
 				725C2DDD1F673B9D00FC279E /* textEntry.xib */,
-				725C2DD51F6731C600FC279E /* JournalFormViewController.swift */,
 				6A3579441F6C72AF00DD1D90 /* JournalPopupViewController.swift */,
 			);
 			name = JournalFormViews;
@@ -332,12 +329,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = Hirad;
 				TargetAttributes = {
 					723BC51B1F5F26000022ADF8 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = HC9D6ZVXMN;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -351,6 +349,7 @@
 					723BC5321F5F26000022ADF8 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 4RY874B8U2;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 723BC51B1F5F26000022ADF8;
 					};
@@ -518,7 +517,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				725C2DD61F6731C600FC279E /* JournalFormViewController.swift in Sources */,
 				5BAAC1EF1F607C2B00A8D331 /* Entry.swift in Sources */,
 				5BA050D61F6B4118000EB4EC /* BarGraphView.swift in Sources */,
 				5BD27DA11F732634002CFB28 /* EntryPopupViewController.swift in Sources */,
@@ -591,7 +589,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -599,7 +599,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -642,7 +646,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -650,7 +656,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -686,7 +696,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.mymood;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -700,7 +711,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.mymood;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -715,7 +727,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Hirad.myMoodTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/myMood.app/myMood";
 			};
 			name = Debug;
@@ -731,7 +744,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Hirad.myMoodTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/myMood.app/myMood";
 			};
 			name = Release;

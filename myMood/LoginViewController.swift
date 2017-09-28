@@ -98,7 +98,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         // Login User
         
-        func handleLogin() {
+        @objc func handleLogin() {
             
             guard let email = emailTextField.text , let password = passwordTextField.text, !(emailTextField.text?.isEmpty)!
                 else {
@@ -170,7 +170,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             navigationController?.setNavigationBarHidden(true, animated: false)
         }
     
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
@@ -236,7 +236,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             
         }
         
-        func registerUser() {
+        @objc func registerUser() {
             let registerVC = RegisterViewController()
             
             self.present(registerVC, animated: true, completion: nil)

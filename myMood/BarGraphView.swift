@@ -164,7 +164,7 @@ class BarGraphView: UIView {
         barsOnGraph += 1
     }
     
-    func clickAction(sender:UIButton) {
+    @objc func clickAction(sender:UIButton) {
        self.delegate?.passDayEntry(e: self.graphArray[sender.tag].reversed())
     }
     

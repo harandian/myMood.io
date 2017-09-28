@@ -79,7 +79,7 @@ class JournalPopupViewController: UIViewController, TextEntryDelegate {
         });
     }
     
-    func removeAnimate() {
+    @objc func removeAnimate() {
         if entryDescription != nil {
             self.delegate?.passBackEntry(journalEntry: entryDescription!)
         }
